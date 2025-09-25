@@ -3,12 +3,12 @@ import { cn } from "@/lib/utils";
 
 const buttonVariants = {
   default:
-    "bg-gradient-to-r from-[#7c5bff] via-[#6366f1] to-[#22d3ee] text-white shadow-[0_18px_40px_-20px_rgba(99,102,241,0.9)] hover:brightness-110",
+    "bg-[var(--accent)] text-white shadow-sm transition hover:bg-[#1d4ed8] focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-white",
   outline:
-    "border border-white/15 bg-transparent text-slate-100 hover:bg-white/10 hover:border-white/30",
-  ghost: "bg-transparent text-slate-300 hover:bg-white/10",
+    "border border-[var(--border)] bg-white text-[var(--foreground)] shadow-sm hover:border-[#94a3b8] hover:bg-slate-50",
+  ghost: "bg-transparent text-[var(--foreground)] hover:bg-slate-100",
   subtle:
-    "bg-white/10 text-white hover:bg-white/20",
+    "bg-[var(--accent-soft)] text-[var(--accent)] hover:bg-[#c7d2fe]",
 };
 
 const buttonSizes = {
@@ -27,7 +27,7 @@ export const Button = forwardRef(function Button(
     <Component
       ref={ref}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-full font-medium transition focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-[var(--ring)] disabled:cursor-not-allowed disabled:opacity-60",
+        "inline-flex items-center justify-center gap-2 rounded-full font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-60",
         buttonVariants[variant] ?? buttonVariants.default,
         buttonSizes[size] ?? buttonSizes.default,
         className,

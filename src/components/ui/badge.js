@@ -2,10 +2,9 @@ import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
 const badgeVariants = {
-  default:
-    "border-transparent bg-gradient-to-r from-[#5f5be0]/40 to-[#3fb6f1]/30 text-sky-100 backdrop-blur", 
-  outline: "border-white/20 text-slate-200",
-  subtle: "border-transparent bg-white/5 text-slate-200",
+  default: "border border-transparent bg-[var(--accent-soft)] text-[var(--accent)]",
+  outline: "border-[var(--border)] text-[var(--muted)]",
+  subtle: "border-transparent bg-slate-100 text-[var(--foreground)]",
 };
 
 export const Badge = forwardRef(function Badge(

@@ -1,25 +1,24 @@
 import { SectionHeader } from "@/components/section-header";
-import { Card } from "@/components/ui/card";
-import { LayoutTemplate, ShoppingCart, Workflow } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const services = [
   {
-    title: "Advanced Web Applications",
+    title: "Product-ready web apps",
     description:
-      "Deliver complex, data-heavy apps with robust business logic, real-time UX, and scalable backends.",
-    icon: Workflow,
+      "From scoping to deployment, I plan and build full-stack applications that stay maintainable as your roadmap grows.",
+    points: ["Responsive, accessible interfaces", "Robust APIs and testing", "Deployment pipelines and monitoring"],
   },
   {
-    title: "Custom Ecommerce Platforms",
+    title: "Ecommerce experiences",
     description:
-      "Craft tailored storefronts with custom catalogs, checkout flows, and integrations beyond off-the-shelf themes.",
-    icon: ShoppingCart,
+      "Custom storefronts and checkout flows tailored to your catalogue, integrations, and analytics needs.",
+    points: ["Headless or traditional builds", "Conversion-focused UX", "Inventory and payment integrations"],
   },
   {
-    title: "WordPress Experience Sites",
+    title: "Content-driven sites",
     description:
-      "Design and build WordPress themes and blocks that stay fast, secure, and simple for teams to update.",
-    icon: LayoutTemplate,
+      "Marketing and editorial sites powered by WordPress or modern CMS solutions, optimised for speed and SEO.",
+    points: ["Reusable blocks and themes", "Author-friendly editing", "Performance and schema best practices"],
   },
 ];
 
@@ -27,22 +26,27 @@ export function ServicesSection() {
   return (
     <section id="services" className="space-y-8">
       <SectionHeader
-        eyebrow="SERVICES"
-        title="How I can help"
-        description="End-to-end delivery for startups and teams that need polished apps, ecommerce experiences, and WordPress builds."
+        eyebrow="Services"
+        title="Ways I partner with teams"
+        description="Practical engagements that combine strategy, design empathy, and dependable engineering."
       />
-      <div className="grid gap-5 md:grid-cols-3">
-        {services.map(({ title, description, icon: Icon }) => (
-          <Card key={title} className="h-full border-white/10 bg-white/[0.04] p-6">
-            <div className="flex h-full flex-col gap-5">
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-sky-400/10 text-sky-400">
-                <Icon className="h-6 w-6" aria-hidden />
-              </span>
-              <div className="space-y-2">
-                <h3 className="text-lg font-semibold text-white">{title}</h3>
-                <p className="text-sm text-slate-300">{description}</p>
-              </div>
-            </div>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {services.map(({ title, description, points }) => (
+          <Card key={title}>
+            <CardHeader className="gap-3">
+              <CardTitle className="text-xl">{title}</CardTitle>
+              <p className="text-sm text-[var(--muted)]">{description}</p>
+            </CardHeader>
+            <CardContent className="gap-2">
+              <ul className="space-y-2 text-sm text-[var(--muted)]">
+                {points.map((point) => (
+                  <li key={point} className="flex items-start gap-2">
+                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" aria-hidden />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
           </Card>
         ))}
       </div>
