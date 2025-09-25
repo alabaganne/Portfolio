@@ -1,21 +1,22 @@
 import { cn } from "@/lib/utils";
-import { Badge } from "./ui/badge";
 
 export function SectionHeader({ eyebrow, title, description, className }) {
   return (
-    <div className={cn("space-y-3", className)}>
+    <div className={cn("space-y-4", className)}>
       {eyebrow ? (
-        <Badge
-          variant="outline"
-        >
+        <p className="text-xs font-semibold uppercase tracking-[0.4em] text-slate-400">
           {eyebrow}
-        </Badge>
+        </p>
       ) : null}
       {title ? (
-        <h2 className="text-2xl font-semibold text-white md:text-3xl">{title}</h2>
+        <h2 className="text-3xl font-semibold leading-tight text-white md:text-4xl">
+          {title}
+        </h2>
       ) : null}
       {description ? (
-        <p className="max-w-2xl text-sm text-slate-300 md:text-base">{description}</p>
+        <p className="max-w-2xl text-base text-slate-300">
+          {description}
+        </p>
       ) : null}
     </div>
   );

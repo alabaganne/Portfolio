@@ -9,6 +9,7 @@ import {
   ServicesSection,
   SkillsSection,
 } from "@/components/home";
+import { Button } from "@/components/ui/button";
 
 const navLinks = [
   { href: "#about", label: "About" },
@@ -24,39 +25,60 @@ const navLinks = [
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.2),_rgba(3,7,18,0.95))] pb-20 text-slate-100">
+    <main className="relative min-h-screen overflow-hidden pb-24 text-slate-100">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(600px_circle_at_20%_20%,rgba(37,99,235,0.18),transparent),radial-gradient(400px_circle_at_80%_10%,rgba(59,130,246,0.12),transparent)]"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(480px_circle_at_15%_20%,rgba(124,92,255,0.35),transparent),radial-gradient(460px_circle_at_85%_15%,rgba(45,212,191,0.18),transparent)]"
       />
-      <div className="relative mx-auto flex w-full max-w-5xl flex-col gap-16 px-6 pt-16 md:px-10 md:pt-24 lg:gap-20">
-        <nav
-          aria-label="Primary"
-          className="sticky top-4 z-10 mb-4 overflow-x-auto rounded-full border border-white/10 bg-white/5 px-4 py-3 backdrop-blur"
-        >
-          <ul className="flex items-center justify-center gap-4 text-sm text-slate-200">
+      <div className="relative mx-auto w-full max-w-6xl px-6 pt-12 md:px-10 lg:px-16">
+        <header className="flex flex-col gap-8 pb-12 md:flex-row md:items-center md:justify-between">
+          <div className="flex items-center gap-4">
+            <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-lg font-semibold text-white shadow-[0_12px_40px_-18px_rgba(129,140,248,0.75)]">
+              AB
+            </span>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-slate-300">
+                Portfolio 2025
+              </p>
+              <p className="text-base font-medium text-white/90">
+                Ala Baganne · Full-Stack Developer
+              </p>
+            </div>
+          </div>
+          <nav
+            aria-label="Primary"
+            className="flex flex-wrap items-center gap-3 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm backdrop-blur-lg md:px-6"
+          >
             {navLinks.map((link) => (
-              <li key={link.href}>
-                <a
-                  className="rounded-full px-3 py-1 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
-                  href={link.href}
-                >
-                  {link.label}
-                </a>
-              </li>
+              <a
+                key={link.href}
+                className="rounded-full px-4 py-2 text-slate-200 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ring)]"
+                href={link.href}
+              >
+                {link.label}
+              </a>
             ))}
-          </ul>
-        </nav>
-        <HeroSection />
-        <AboutSection />
-        <ExperienceSection />
-        <ServicesSection />
-        <ProjectsSection />
-        <SkillsSection />
-        <LanguagesSection />
-        <EducationSection />
-        <ContactSection />
-        <footer className="border-t border-white/5 py-10 text-sm text-slate-500">
+            <Button
+              href="#contact"
+              size="sm"
+              className="whitespace-nowrap bg-gradient-to-r from-[#6b63ff] to-[#22d3ee] px-5 text-xs font-semibold uppercase tracking-[0.25em]"
+            >
+              Let's talk
+            </Button>
+          </nav>
+        </header>
+        <div className="flex flex-col gap-24">
+          <HeroSection />
+          <AboutSection />
+          <ExperienceSection />
+          <ServicesSection />
+          <ProjectsSection />
+          <SkillsSection />
+          <LanguagesSection />
+          <EducationSection />
+          <ContactSection />
+        </div>
+        <footer className="mt-24 border-t border-white/10 py-10 text-sm text-slate-500">
           <p>
             Crafted with curiosity and care · © {new Date().getFullYear()} Ala Baganne
           </p>

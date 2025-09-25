@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 const badgeVariants = {
   default:
-    "border-sky-500/40 bg-sky-500/15 text-sky-200",
+    "border-transparent bg-gradient-to-r from-[#5f5be0]/40 to-[#3fb6f1]/30 text-sky-100 backdrop-blur", 
   outline: "border-white/20 text-slate-200",
   subtle: "border-transparent bg-white/5 text-slate-200",
 };
