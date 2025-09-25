@@ -1,31 +1,56 @@
 @import "tailwindcss";
 
 :root {
-  color-scheme: dark;
-  --background: #030712;
-  --foreground: #f8fafc;
-  --muted: rgba(15, 23, 42, 0.7);
-  --accent: rgba(56, 189, 248, 0.12);
-  --border: rgba(51, 65, 85, 0.6);
-  --ring: rgba(56, 189, 248, 0.45);
+  color-scheme: light;
+  --background: #f9fafb;
+  --foreground: #0f172a;
+  --muted: #475569;
+  --accent: #2563eb;
+  --accent-soft: #e0e7ff;
+  --border: #e2e8f0;
+  --card: #ffffff;
+  --ring: #2563eb;
+  --font-base: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  --font-heading: "Outfit", "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-base);
+  --font-mono: var(--font-mono);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   min-height: 100vh;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 60%, #f1f5f9 100%);
+  color: var(--foreground);
+  font-family: var(--font-base);
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 a {
-  color: inherit;
+  color: var(--accent);
+}
+
+a:hover,
+a:focus-visible {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading), var(--font-sans);
+  letter-spacing: -0.01em;
+  color: var(--foreground);
 }
 
 .mdx-content {
@@ -40,62 +65,47 @@ a {
 .mdx-content h5,
 .mdx-content h6 {
   font-weight: 600;
-  color: #e2e8f0;
-}
-
-.mdx-content h2 {
-  font-size: clamp(1.5rem, 2vw + 1rem, 2rem);
-  margin-top: 1.75rem;
-}
-
-.mdx-content h3 {
-  font-size: clamp(1.25rem, 1.6vw + 0.9rem, 1.5rem);
-  margin-top: 1.5rem;
+  color: var(--foreground);
 }
 
 .mdx-content p {
   line-height: 1.8;
-  color: #cbd5f5;
+  color: var(--muted);
 }
 
 .mdx-content ul,
 .mdx-content ol {
   display: grid;
   gap: 0.75rem;
-  padding-left: 1.5rem;
-  color: #cbd5f5;
-}
-
-.mdx-content li {
-  line-height: 1.7;
+  padding-left: 1.25rem;
+  color: var(--muted);
 }
 
 .mdx-content a {
-  color: #38bdf8;
+  color: var(--accent);
   text-decoration: underline;
-  text-decoration-color: rgba(56, 189, 248, 0.4);
   text-underline-offset: 4px;
 }
 
 .mdx-content blockquote {
-  border-left: 3px solid rgba(56, 189, 248, 0.5);
+  border-left: 3px solid var(--accent-soft);
   padding-left: 1.25rem;
-  color: #f1f5f9;
+  color: var(--muted);
   font-style: italic;
 }
 
 .mdx-content pre {
-  background: rgba(15, 23, 42, 0.85);
-  border-radius: 1rem;
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 0.75rem;
   padding: 1.5rem;
   overflow-x: auto;
-  font-size: 0.9rem;
-  border: 1px solid rgba(148, 163, 184, 0.2);
+  font-size: 0.95rem;
 }
 
 .mdx-content code {
-  background: rgba(148, 163, 184, 0.1);
+  background: rgba(148, 163, 184, 0.15);
   padding: 0.2rem 0.4rem;
-  border-radius: 0.5rem;
+  border-radius: 0.4rem;
   font-family: var(--font-mono);
 }

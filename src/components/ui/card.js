@@ -6,7 +6,7 @@ export const Card = forwardRef(function Card({ className, ...props }, ref) {
     <div
       ref={ref}
       className={cn(
-        "group/card relative overflow-hidden rounded-2xl border border-white/5 bg-white/[0.03] p-6 shadow-[0_20px_60px_-28px_rgba(15,23,42,0.75)] backdrop-blur transition hover:border-white/10",
+        "group/card relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] p-8 shadow-sm transition hover:shadow-md",
         className,
       )}
       {...props}
@@ -34,7 +34,7 @@ export const CardTitle = forwardRef(function CardTitle(
   return (
     <h3
       ref={ref}
-      className={cn("text-lg font-semibold tracking-tight text-white", className)}
+      className={cn("text-lg font-semibold tracking-tight text-[var(--foreground)]", className)}
       {...props}
     />
   );
@@ -47,7 +47,7 @@ export const CardDescription = forwardRef(function CardDescription(
   return (
     <p
       ref={ref}
-      className={cn("text-sm text-slate-400", className)}
+      className={cn("text-sm text-[var(--muted)]", className)}
       {...props}
     />
   );
@@ -60,7 +60,7 @@ export const CardContent = forwardRef(function CardContent(
   return (
     <div
       ref={ref}
-      className={cn("mt-0 flex flex-col gap-4 text-sm text-slate-300", className)}
+      className={cn("mt-0 flex flex-col gap-4 text-sm text-[var(--muted)]", className)}
       {...props}
     />
   );

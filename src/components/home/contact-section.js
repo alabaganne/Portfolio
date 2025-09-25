@@ -34,32 +34,32 @@ export function ContactSection() {
   return (
     <section id="contact" className="space-y-8">
       <SectionHeader
-        eyebrow="CONNECT"
+        eyebrow="Contact"
         title="Let’s collaborate"
-        description="Open to full-stack roles, freelance engagements, and conversations about scalable web platforms."
+        description="Open to full-stack roles, freelance engagements, and conversations about building sustainable products."
       />
-      <Card className="border-white/10 bg-white/[0.05]">
-        <CardContent className="gap-6 text-sm text-slate-200">
+      <Card>
+        <CardContent className="gap-6 text-[var(--muted)]">
           <p>
-            Reach out by email, phone, or social links below. I reply within two business days and enjoy connecting with teams building impactful products.
+            Share a short brief about your idea or request a copy of my résumé. I respond to every message within two business days.
           </p>
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
             {contactLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
                 target={link.href.startsWith("http") ? "_blank" : undefined}
                 rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-                className="group flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.02] p-4 transition hover:border-sky-400/50 hover:bg-white/[0.08]"
+                className="flex items-center gap-3 rounded-xl border border-[var(--border)] bg-white p-4 transition hover:border-[var(--accent)] hover:shadow-md"
               >
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/[0.06] text-sky-200">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent)]">
                   <link.Icon className="h-5 w-5" aria-hidden />
                 </span>
                 <span className="flex flex-col">
-                  <span className="text-xs uppercase tracking-[0.2em] text-slate-400">
+                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
                     {link.label}
                   </span>
-                  <span className="text-sm font-medium text-white">
+                  <span className="text-sm font-medium text-[var(--foreground)]">
                     {link.description}
                   </span>
                 </span>
