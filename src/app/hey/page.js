@@ -12,23 +12,20 @@ export default function HeyPage() {
   const noBtnRef = useRef(null);
   const containerRef = useRef(null);
 
-  const submitAnswer = useCallback(
-    async (answer) => {
-      setAnswered(answer);
-      if (submitted) return;
-      try {
-        await fetch("/api/hey/responses", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name: name || "Anonymous", answer }),
-        });
-        setSubmitted(true);
-      } catch {
-        // silently fail — don't ruin the moment
-      }
-    },
-    [name, submitted]
-  );
+  const handleYes = useCallback(async () => {
+    setAnswered("yes");
+    if (submitted) return;
+    try {
+      await fetch("/api/hey/responses", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: name || "Anonymous" }),
+      });
+      setSubmitted(true);
+    } catch {
+      // silently fail — don't ruin the moment
+    }
+  }, [name, submitted]);
 
   const moveNoButton = useCallback(() => {
     const btn = noBtnRef.current;
@@ -111,7 +108,7 @@ export default function HeyPage() {
         </p>
         <div className="flex items-center justify-center gap-4">
           <button
-            onClick={() => submitAnswer("yes")}
+            onClick={handleYes}
             className="px-8 py-3 bg-pink-500 text-white rounded-full font-semibold text-lg hover:bg-pink-600 hover:scale-110 transition-all cursor-pointer shadow-lg shadow-pink-300"
           >
             Yes! 😊
@@ -120,7 +117,7 @@ export default function HeyPage() {
             ref={noBtnRef}
             onMouseEnter={moveNoButton}
             onTouchStart={moveNoButton}
-            onClick={() => submitAnswer("no")}
+            onClick={() => setAnswered("no")}
             className="px-8 py-3 bg-white text-pink-400 rounded-full font-semibold text-lg border-2 border-pink-300 hover:border-pink-400 transition-all cursor-pointer"
           >
             No 😐

@@ -19,21 +19,18 @@ async function writeResponses(responses) {
   await fs.writeFile(dataFilePath, JSON.stringify(responses, null, 2));
 }
 
-async function sendEmailNotification(entry) {
-  const emoji = entry.answer === "yes" ? "💕" : "😐";
-  const subject = `${emoji} ${entry.name} answered "${entry.answer}" on /hey`;
-
+async function sendEmailNotification(name) {
   await resend.emails.send({
     from: "Hey Page <onboarding@resend.dev>",
     to: "alabaganne9@gmail.com",
-    subject,
+    subject: `💕 ${name} said Yes!`,
     html: `
       <div style="font-family: sans-serif; max-width: 480px; margin: 0 auto; padding: 32px; background: linear-gradient(135deg, #fce7f3, #ffffff, #fce7f3); border-radius: 24px;">
-        <h1 style="color: #db2777; text-align: center; font-size: 24px;">New Response on /hey!</h1>
+        <h1 style="color: #db2777; text-align: center; font-size: 28px;">Someone said Yes! 🎉</h1>
         <div style="background: white; border-radius: 16px; padding: 24px; border: 2px solid #fbcfe8; text-align: center;">
-          <p style="font-size: 48px; margin: 0;">${emoji}</p>
-          <p style="color: #ec4899; font-size: 18px;"><strong>${entry.name}</strong> said <strong>"${entry.answer}"</strong></p>
-          <p style="color: #f472b6; font-size: 14px;">${new Date(entry.timestamp).toLocaleString()}</p>
+          <p style="font-size: 56px; margin: 0;">💕</p>
+          <p style="color: #ec4899; font-size: 20px; margin: 16px 0 4px;"><strong>${name}</strong> said Yes!</p>
+          <p style="color: #f9a8d4; font-size: 14px; margin: 0;">Time to celebrate 🥳</p>
         </div>
       </div>
     `,
@@ -47,15 +44,11 @@ export async function GET() {
 
 export async function POST(request) {
   const body = await request.json();
-  const { name, answer } = body;
-
-  if (!answer || (answer !== "yes" && answer !== "no")) {
-    return Response.json({ error: "Invalid answer" }, { status: 400 });
-  }
+  const { name } = body;
 
   const entry = {
     name: name || "Anonymous",
-    answer,
+    answer: "yes",
     timestamp: new Date().toISOString(),
   };
 
@@ -64,7 +57,7 @@ export async function POST(request) {
   await writeResponses(responses);
 
   // Send email in the background — don't block the response
-  sendEmailNotification(entry).catch(() => {});
+  sendEmailNotification(entry.name).catch(() => {});
 
   return Response.json(entry, { status: 201 });
 }
