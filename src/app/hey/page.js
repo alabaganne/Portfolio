@@ -1,11 +1,34 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function HeyPage() {
+  const searchParams = useSearchParams();
+  const name = searchParams.get("name");
+
   const [answered, setAnswered] = useState(null); // null | "yes" | "no"
+  const [submitted, setSubmitted] = useState(false);
   const noBtnRef = useRef(null);
   const containerRef = useRef(null);
+
+  const submitAnswer = useCallback(
+    async (answer) => {
+      setAnswered(answer);
+      if (submitted) return;
+      try {
+        await fetch("/api/hey/responses", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: name || "Anonymous", answer }),
+        });
+        setSubmitted(true);
+      } catch {
+        // silently fail — don't ruin the moment
+      }
+    },
+    [name, submitted]
+  );
 
   const moveNoButton = useCallback(() => {
     const btn = noBtnRef.current;
@@ -26,16 +49,17 @@ export default function HeyPage() {
     btn.style.top = `${randomY}px`;
   }, []);
 
+  const displayName = name || "you";
+
   if (answered === "yes") {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 via-white to-pink-200 p-4">
         <div className="bg-white rounded-3xl shadow-2xl p-10 max-w-md w-full text-center border-2 border-pink-200">
           <div className="text-7xl mb-6 animate-bounce">🥰</div>
-          <h1 className="text-3xl font-bold text-pink-600 mb-3">
-            Yaaay!
-          </h1>
+          <h1 className="text-3xl font-bold text-pink-600 mb-3">Yaaay!</h1>
           <p className="text-pink-500 text-lg">
-            I knew you&apos;d say yes! You just made me the happiest person ever 🎉
+            I knew you&apos;d say yes{name ? `, ${name}` : ""}! You just made me
+            the happiest person ever 🎉
           </p>
           <p className="text-pink-400 mt-4 text-sm">
             Can&apos;t wait to see you! 💐
@@ -54,7 +78,8 @@ export default function HeyPage() {
             Wrong answer!
           </h1>
           <p className="text-pink-500 text-lg">
-            That wasn&apos;t even a real option... nice try though 😏
+            That wasn&apos;t even a real option
+            {name ? `, ${name}` : ""}... nice try though 😏
           </p>
           <button
             onClick={() => setAnswered(null)}
@@ -75,7 +100,7 @@ export default function HeyPage() {
       <div className="bg-white rounded-3xl shadow-2xl p-10 max-w-md w-full text-center border-2 border-pink-200 z-10">
         <div className="text-7xl mb-6">👉👈</div>
         <h1 className="text-3xl font-bold text-pink-600 mb-3">
-          Hey you!
+          Hey {displayName}!
         </h1>
         <p className="text-pink-500 text-lg mb-8">
           Sooo... I&apos;ve been meaning to ask you something...
@@ -86,7 +111,7 @@ export default function HeyPage() {
         </p>
         <div className="flex items-center justify-center gap-4">
           <button
-            onClick={() => setAnswered("yes")}
+            onClick={() => submitAnswer("yes")}
             className="px-8 py-3 bg-pink-500 text-white rounded-full font-semibold text-lg hover:bg-pink-600 hover:scale-110 transition-all cursor-pointer shadow-lg shadow-pink-300"
           >
             Yes! 😊
@@ -95,7 +120,7 @@ export default function HeyPage() {
             ref={noBtnRef}
             onMouseEnter={moveNoButton}
             onTouchStart={moveNoButton}
-            onClick={() => setAnswered("no")}
+            onClick={() => submitAnswer("no")}
             className="px-8 py-3 bg-white text-pink-400 rounded-full font-semibold text-lg border-2 border-pink-300 hover:border-pink-400 transition-all cursor-pointer"
           >
             No 😐
