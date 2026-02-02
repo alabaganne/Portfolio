@@ -19,18 +19,30 @@ async function writeResponses(responses) {
   await fs.writeFile(dataFilePath, JSON.stringify(responses, null, 2));
 }
 
-async function sendEmailNotification(name) {
+async function sendEmailNotification(name, answer) {
+  const isYes = answer === "yes";
+  const emoji = isYes ? "💕" : "😬";
+  const subject = isYes
+    ? `💕 ${name} said Yes!`
+    : `😬 ${name} said No...`;
+  const heading = isYes
+    ? `${name} said Yes! 🎉`
+    : `${name} said No... 😅`;
+  const subtext = isYes
+    ? "Time to celebrate 🥳"
+    : "They actually managed to click it...";
+
   await resend.emails.send({
     from: "Hey Page <onboarding@resend.dev>",
     to: "alabaganne9@gmail.com",
-    subject: `💕 ${name} said Yes!`,
+    subject,
     html: `
       <div style="font-family: sans-serif; max-width: 480px; margin: 0 auto; padding: 32px; background: linear-gradient(135deg, #fce7f3, #ffffff, #fce7f3); border-radius: 24px;">
-        <h1 style="color: #db2777; text-align: center; font-size: 28px;">Someone said Yes! 🎉</h1>
+        <h1 style="color: #db2777; text-align: center; font-size: 28px;">New Response on /hey</h1>
         <div style="background: white; border-radius: 16px; padding: 24px; border: 2px solid #fbcfe8; text-align: center;">
-          <p style="font-size: 56px; margin: 0;">💕</p>
-          <p style="color: #ec4899; font-size: 20px; margin: 16px 0 4px;"><strong>${name}</strong> said Yes!</p>
-          <p style="color: #f9a8d4; font-size: 14px; margin: 0;">Time to celebrate 🥳</p>
+          <p style="font-size: 56px; margin: 0;">${emoji}</p>
+          <p style="color: #ec4899; font-size: 20px; margin: 16px 0 4px;"><strong>${heading}</strong></p>
+          <p style="color: #f9a8d4; font-size: 14px; margin: 0;">${subtext}</p>
         </div>
       </div>
     `,
@@ -44,11 +56,15 @@ export async function GET() {
 
 export async function POST(request) {
   const body = await request.json();
-  const { name } = body;
+  const { name, answer } = body;
+
+  if (!answer || (answer !== "yes" && answer !== "no")) {
+    return Response.json({ error: "Invalid answer" }, { status: 400 });
+  }
 
   const entry = {
     name: name || "Anonymous",
-    answer: "yes",
+    answer,
     timestamp: new Date().toISOString(),
   };
 
@@ -57,7 +73,7 @@ export async function POST(request) {
   await writeResponses(responses);
 
   // Send email in the background — don't block the response
-  sendEmailNotification(entry.name).catch(() => {});
+  sendEmailNotification(entry.name, entry.answer).catch(() => {});
 
   return Response.json(entry, { status: 201 });
 }
