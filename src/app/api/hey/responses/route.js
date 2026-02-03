@@ -1,23 +1,6 @@
-import { promises as fs } from "fs";
-import path from "path";
 import { Resend } from "resend";
 
-const dataFilePath = path.join(process.cwd(), "data", "responses.json");
 const resend = new Resend(process.env.RESEND_API_KEY);
-
-async function readResponses() {
-  try {
-    const data = await fs.readFile(dataFilePath, "utf-8");
-    return JSON.parse(data);
-  } catch {
-    return [];
-  }
-}
-
-async function writeResponses(responses) {
-  await fs.mkdir(path.dirname(dataFilePath), { recursive: true });
-  await fs.writeFile(dataFilePath, JSON.stringify(responses, null, 2));
-}
 
 async function sendEmailNotification(name, answer) {
   const isYes = answer === "yes";
@@ -50,8 +33,8 @@ async function sendEmailNotification(name, answer) {
 }
 
 export async function GET() {
-  const responses = await readResponses();
-  return Response.json(responses);
+  // No persistence needed - responses are sent via email
+  return Response.json({ message: "Responses are sent via email" }, { status: 200 });
 }
 
 function capitalizeName(str) {
@@ -69,18 +52,19 @@ export async function POST(request) {
     return Response.json({ error: "Invalid answer" }, { status: 400 });
   }
 
-  const entry = {
-    name: name ? capitalizeName(name.trim()) : "Someone",
+  const displayName = name ? capitalizeName(name.trim()) : "Someone";
+
+  // Send email notification
+  try {
+    await sendEmailNotification(displayName, answer);
+  } catch (error) {
+    console.error("Failed to send email:", error);
+    // Continue even if email fails
+  }
+
+  return Response.json({
+    name: displayName,
     answer,
-    timestamp: new Date().toISOString(),
-  };
-
-  const responses = await readResponses();
-  responses.push(entry);
-  await writeResponses(responses);
-
-  // Send email in the background — don't block the response
-  sendEmailNotification(entry.name, entry.answer).catch(() => {});
-
-  return Response.json(entry, { status: 201 });
+    timestamp: new Date().toISOString()
+  }, { status: 201 });
 }
