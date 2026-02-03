@@ -363,7 +363,7 @@ function SorryPageContent() {
                 need you to know how deeply sorry I am.
               </p>
               <p>
-                I was careless with your heart &mdash; the most precious thing
+                I was careless with your heart; the most precious thing
                 I&apos;ve ever been trusted with. I took your love for granted
                 when I should have been cherishing every single moment with you.
               </p>
@@ -374,8 +374,8 @@ function SorryPageContent() {
               </p>
               <p>
                 I&apos;m not asking you to forget the pain. I&apos;m asking for a
-                chance to prove that I can be the man you deserve. That I can
-                spend every day of my life making it right.
+                chance to show you that I can do better. I promise to do my best
+                to make things right.
               </p>
               <p>
                 You are my everything, Eya. Without you, this world is just
