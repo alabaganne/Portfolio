@@ -79,22 +79,18 @@ function MusicButton() {
 }
 
 const coupleImages = [
-  "/sorry/1.jpg",  // Bathroom mirror - kiss
-  "/sorry/2.jpg",  // Bedroom mirror - hug
-  "/sorry/3.jpg",  // Bathroom mirror - standing
-  "/sorry/4.jpg",  // Car - her smiling
-  "/sorry/5.jpg",  // Video call
-  "/sorry/6.jpg",  // Kitchen - playful
-  "/sorry/7.jpg",  // Car - both together
-  "/sorry/8.jpg",  // Elevator mirror
-  "/sorry/9.jpg",  // Restaurant dinner
-  "/sorry/1.jpg",  // Repeat for grid fill
-  "/sorry/2.jpg",
-  "/sorry/3.jpg",
-  "/sorry/4.jpg",
-  "/sorry/5.jpg",
-  "/sorry/6.jpg",
-  "/sorry/7.jpg",
+  "/sorry/0ee625e2be41cca5.jpg",
+  "/sorry/a45b8c7ab1ab5b6e.jpg",
+  "/sorry/57274fdd3207438b.jpg",
+  "/sorry/3ad43e5eb87fb9f9.jpg",
+  "/sorry/4e2a6faac5612380.jpeg",
+  "/sorry/a6a9ed83b4f338b6.jpg",
+  "/sorry/0afc55c82c6c3a84.jpg",
+  "/sorry/6e1d45473ce9be1a.jpg",
+  "/sorry/3746d5b3509e2aee.jpg",
+  "/sorry/eaf1d9f6e6c4772f.jpg",
+  "/sorry/946101b2c4581a7f.jpg",
+  "/sorry/749806d079eee5a0.jpeg",
 ];
 
 const frameRotations = [-5, 3, -3, 7, -2, 4, -6, 2, -4, 5, -7, 3, -3, 6, -5, 4];
@@ -130,7 +126,7 @@ function Raindrops() {
 function PictureFrames() {
   return (
     <div className="fixed inset-0 z-0 overflow-hidden">
-      <div className="grid grid-cols-3 md:grid-cols-4 gap-3 md:gap-4 p-3 md:p-4 h-full auto-rows-[160px] md:auto-rows-[200px] lg:auto-rows-[240px]">
+      <div className="grid grid-cols-3 md:grid-cols-4 gap-3 md:gap-4 p-3 md:p-4 h-full auto-rows-[200px] md:auto-rows-[280px] lg:auto-rows-[340px] xl:auto-rows-[400px]">
         {coupleImages.map((img, i) => (
           <div
             key={i}
