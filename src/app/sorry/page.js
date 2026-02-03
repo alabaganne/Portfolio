@@ -173,7 +173,7 @@ function NotificationCard({ onOpenLetter }) {
               You have received
             </p>
             <h1 className="text-2xl md:text-3xl font-bold text-[#a5b4fc] mb-3">
-              A Letter from Ala
+              A letter from Ala
             </h1>
             <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#4f46e5] to-transparent mx-auto mb-4" />
             <p className="text-[#93a3c0] text-base">
