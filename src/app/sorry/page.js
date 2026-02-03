@@ -84,7 +84,7 @@ export default function SorryPage() {
   const [submitted, setSubmitted] = useState(false);
   const escapeCountRef = useRef(0);
   const noBtnRef = useRef(null);
-  const btnContainerRef = useRef(null);
+  const containerRef = useRef(null);
 
   const submitAnswer = useCallback(
     async (answer) => {
@@ -109,17 +109,17 @@ export default function SorryPage() {
     escapeCountRef.current += 1;
 
     const btn = noBtnRef.current;
-    const container = btnContainerRef.current;
+    const container = containerRef.current;
     if (!btn || !container) return;
 
     const containerRect = container.getBoundingClientRect();
     const btnRect = btn.getBoundingClientRect();
 
-    const maxX = containerRect.width - btnRect.width - 10;
-    const maxY = containerRect.height - btnRect.height - 10;
+    const maxX = containerRect.width - btnRect.width - 20;
+    const maxY = containerRect.height - btnRect.height - 20;
 
-    const randomX = Math.floor(Math.random() * Math.max(maxX, 50)) + 5;
-    const randomY = Math.floor(Math.random() * Math.max(maxY, 30)) + 5;
+    const randomX = Math.floor(Math.random() * maxX) + 10;
+    const randomY = Math.floor(Math.random() * maxY) + 10;
 
     btn.style.position = "absolute";
     btn.style.left = `${randomX}px`;
@@ -187,7 +187,10 @@ export default function SorryPage() {
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#0a0e1a] via-[#111827] to-[#0a0e1a]">
+    <div
+      ref={containerRef}
+      className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#0a0e1a] via-[#111827] to-[#0a0e1a]"
+    >
       <style>{sorryStyles}</style>
       <Raindrops />
       <PictureFrames />
@@ -256,10 +259,7 @@ export default function SorryPage() {
               </p>
 
               {/* Buttons */}
-              <div
-                ref={btnContainerRef}
-                className="relative min-h-[80px] flex items-center justify-center gap-4"
-              >
+              <div className="flex items-center justify-center gap-4">
                 <button
                   onClick={() => submitAnswer("yes")}
                   className="px-8 py-3 bg-[#4338ca] text-white rounded-full font-semibold text-xl hover:bg-[#4f46e5] hover:scale-110 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)] transition-all cursor-pointer z-10"
@@ -271,7 +271,7 @@ export default function SorryPage() {
                   onMouseEnter={moveNoButton}
                   onTouchStart={moveNoButton}
                   onClick={() => submitAnswer("no")}
-                  className="px-8 py-3 bg-transparent text-[#6b7ca0] rounded-full font-semibold text-xl border-2 border-[#1e2a4a] hover:border-[#312e81] transition-all cursor-pointer z-10"
+                  className="px-8 py-3 bg-[#0d1225] text-[#6b7ca0] rounded-full font-semibold text-xl border-2 border-[#1e2a4a] hover:border-[#312e81] transition-all cursor-pointer z-50"
                 >
                   No 😔
                 </button>
