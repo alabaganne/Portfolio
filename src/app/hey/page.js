@@ -47,13 +47,25 @@ function MusicPlayer() {
   return (
     <>
       <audio ref={audioRef} src="/clair-de-lune.mp3" loop preload="auto" />
-      <button
-        onClick={toggleMusic}
-        aria-label={isPlaying ? "Pause music" : "Play music"}
-        className="fixed bottom-5 right-5 z-50 w-12 h-12 rounded-full bg-white/80 backdrop-blur-sm border-2 border-pink-300 shadow-lg flex items-center justify-center text-xl hover:scale-110 hover:bg-pink-50 transition-all cursor-pointer"
-      >
-        {isPlaying ? "🎵" : "🔇"}
-      </button>
+      <div className="fixed bottom-5 right-5 z-50 flex items-center gap-2">
+        {!isPlaying && (
+          <div className="flex items-center animate-pulse">
+            <span className="text-pink-500 font-semibold text-sm mr-1">Play me</span>
+            <span className="text-pink-500 text-xl animate-bounce">→</span>
+          </div>
+        )}
+        <button
+          onClick={toggleMusic}
+          aria-label={isPlaying ? "Pause music" : "Play music"}
+          className={`w-14 h-14 rounded-full bg-white border-2 shadow-xl flex items-center justify-center text-2xl hover:scale-110 transition-all cursor-pointer ${
+            isPlaying
+              ? "border-pink-400 shadow-pink-200"
+              : "border-pink-500 shadow-pink-300 animate-pulse"
+          }`}
+        >
+          {isPlaying ? "🎵" : "🔇"}
+        </button>
+      </div>
     </>
   );
 }
