@@ -150,7 +150,7 @@ function NotificationCard({ onOpenMessage, name }) {
             </h1>
             <div className="w-16 h-[2px] bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto mb-4" />
             <p className="text-zinc-400 text-lg tracking-wide">
-              Someone wants to watch a movie with you... 🎬
+              Ala wants to watch a movie with you... 🎬
             </p>
           </div>
 
