@@ -1,6 +1,83 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect } from "react";
+import {
+  useState,
+  useRef,
+  useCallback,
+  useEffect,
+  createContext,
+  useContext,
+} from "react";
+
+const MusicContext = createContext(null);
+
+function MusicProvider({ children }) {
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.volume = 0.35;
+
+    const tryAutoplay = async () => {
+      try {
+        await audio.play();
+        setIsPlaying(true);
+      } catch {
+        setIsPlaying(false);
+      }
+    };
+
+    tryAutoplay();
+  }, []);
+
+  const toggleMusic = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isPlaying) {
+      audio.pause();
+      setIsPlaying(false);
+    } else {
+      try {
+        await audio.play();
+        setIsPlaying(true);
+      } catch {
+        // playback failed
+      }
+    }
+  };
+
+  return (
+    <MusicContext.Provider value={{ isPlaying, toggleMusic }}>
+      <audio ref={audioRef} src="/clair-de-lune.mp3" loop preload="auto" />
+      {children}
+    </MusicContext.Provider>
+  );
+}
+
+function MusicButton() {
+  const { isPlaying, toggleMusic } = useContext(MusicContext);
+
+  return (
+    <button
+      onClick={toggleMusic}
+      aria-label={isPlaying ? "Pause music" : "Play music"}
+      className={`flex items-center gap-2 px-5 py-3 rounded-full border-2 shadow-lg transition-all cursor-pointer hover:scale-105 ${
+        isPlaying
+          ? "bg-[#1e2a4a]/80 border-[#4338ca] shadow-[#4338ca]/20"
+          : "bg-[#0d1225] border-[#4f46e5] shadow-[#4f46e5]/30 animate-pulse"
+      }`}
+    >
+      <span className="text-2xl">{isPlaying ? "🎵" : "🔇"}</span>
+      <span className="text-[#a5b4fc] font-semibold">
+        {isPlaying ? "Playing..." : "Play song"}
+      </span>
+    </button>
+  );
+}
 
 const coupleImages = [
   "https://images.pexels.com/photos/4873580/pexels-photo-4873580.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -79,7 +156,7 @@ function PictureFrames() {
   );
 }
 
-export default function SorryPage() {
+function SorryPageContent() {
   const [answered, setAnswered] = useState(null);
   const [submitted, setSubmitted] = useState(false);
   const escapeCountRef = useRef(0);
@@ -135,6 +212,9 @@ export default function SorryPage() {
         <Raindrops />
         <div className="relative z-10 max-w-lg w-full text-center sorry-fade-in">
           <div className="bg-[#0d1225]/90 backdrop-blur-sm rounded-2xl p-10 border border-[#1e2a4a] shadow-[0_0_60px_rgba(99,102,241,0.15)]">
+            <div className="flex justify-center mb-6">
+              <MusicButton />
+            </div>
             <div className="text-7xl mb-6 sorry-pulse">💍</div>
             <h1 className="text-4xl font-bold text-[#a5b4fc] mb-4">Eya...</h1>
             <p className="text-[#93a3c0] text-lg leading-relaxed mb-4">
@@ -162,6 +242,9 @@ export default function SorryPage() {
         <Raindrops />
         <div className="relative z-10 max-w-lg w-full text-center sorry-fade-in">
           <div className="bg-[#0d1225]/90 backdrop-blur-sm rounded-2xl p-10 border border-[#1e2a4a] shadow-[0_0_60px_rgba(99,102,241,0.15)]">
+            <div className="flex justify-center mb-6">
+              <MusicButton />
+            </div>
             <div className="text-7xl mb-6">💔</div>
             <h1 className="text-4xl font-bold text-[#a5b4fc] mb-4">
               I understand...
@@ -201,6 +284,11 @@ export default function SorryPage() {
       <div className="z-10 flex items-center justify-center min-h-screen p-4 py-12">
         <div className="max-w-xl w-full sorry-fade-in">
           <div className="bg-[#0d1225]/90 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-[#1e2a4a] shadow-[0_0_80px_rgba(99,102,241,0.1)]">
+            {/* Music Button */}
+            <div className="flex justify-center mb-6">
+              <MusicButton />
+            </div>
+
             {/* Header */}
             <div className="text-center mb-8">
               <div className="text-6xl mb-4">🥀</div>
@@ -283,6 +371,14 @@ export default function SorryPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function SorryPage() {
+  return (
+    <MusicProvider>
+      <SorryPageContent />
+    </MusicProvider>
   );
 }
 
