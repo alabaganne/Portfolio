@@ -88,26 +88,26 @@ function NotificationCard({ onOpenMessage, name }) {
         <div className="text-7xl mb-4 animate-bounce">💕</div>
 
         {/* Notification text */}
-        <p className="text-pink-400 text-sm uppercase tracking-widest mb-2">
+        <p className="text-pink-400 text-base uppercase tracking-widest mb-2">
           New message
         </p>
-        <h1 className="text-2xl md:text-3xl font-bold text-pink-600 mb-3">
+        <h1 className="text-3xl md:text-4xl font-bold text-pink-600 mb-3">
           Ala sent you a message{name ? `, ${name}` : ""}!
         </h1>
-        <p className="text-pink-400 text-base mb-6">
+        <p className="text-pink-400 text-lg mb-6">
           He seems nervous about something... 👀
         </p>
 
         {/* Open button */}
         <button
           onClick={onOpenMessage}
-          className="px-8 py-4 bg-gradient-to-r from-pink-400 to-pink-500 text-white rounded-full font-semibold text-lg hover:from-pink-500 hover:to-pink-600 hover:scale-105 hover:shadow-lg hover:shadow-pink-300 transition-all cursor-pointer"
+          className="px-8 py-4 bg-gradient-to-r from-pink-400 to-pink-500 text-white rounded-full font-semibold text-xl hover:from-pink-500 hover:to-pink-600 hover:scale-105 hover:shadow-lg hover:shadow-pink-300 transition-all cursor-pointer"
         >
           Open Message 💌
         </button>
 
         {/* Subtle footer */}
-        <p className="text-pink-300 text-xs mt-6 italic">
+        <p className="text-pink-300 text-sm mt-6 italic">
           Go ahead, don&apos;t be shy~
         </p>
       </div>
