@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function HeyPage() {
+function HeyPageContent() {
   const searchParams = useSearchParams();
   const name = searchParams.get("name");
 
@@ -128,5 +128,19 @@ export default function HeyPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function HeyPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 via-white to-pink-200">
+          <div className="text-pink-500">Loading...</div>
+        </div>
+      }
+    >
+      <HeyPageContent />
+    </Suspense>
   );
 }
