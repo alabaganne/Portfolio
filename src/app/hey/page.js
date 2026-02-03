@@ -1,7 +1,62 @@
 "use client";
 
-import { useState, useRef, useCallback, Suspense } from "react";
+import { useState, useRef, useCallback, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+
+function MusicPlayer() {
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.volume = 0.35;
+
+    // Attempt autoplay — browsers may block this
+    const tryAutoplay = async () => {
+      try {
+        await audio.play();
+        setIsPlaying(true);
+      } catch {
+        // Autoplay blocked — user must click the button
+        setIsPlaying(false);
+      }
+    };
+
+    tryAutoplay();
+  }, []);
+
+  const toggleMusic = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isPlaying) {
+      audio.pause();
+      setIsPlaying(false);
+    } else {
+      try {
+        await audio.play();
+        setIsPlaying(true);
+      } catch {
+        // playback failed
+      }
+    }
+  };
+
+  return (
+    <>
+      <audio ref={audioRef} src="/clair-de-lune.mp3" loop preload="auto" />
+      <button
+        onClick={toggleMusic}
+        aria-label={isPlaying ? "Pause music" : "Play music"}
+        className="fixed bottom-5 right-5 z-50 w-12 h-12 rounded-full bg-white/80 backdrop-blur-sm border-2 border-pink-300 shadow-lg flex items-center justify-center text-xl hover:scale-110 hover:bg-pink-50 transition-all cursor-pointer"
+      >
+        {isPlaying ? "🎵" : "🔇"}
+      </button>
+    </>
+  );
+}
 
 function HeyPageContent() {
   const searchParams = useSearchParams();
@@ -140,14 +195,17 @@ function HeyPageContent() {
 
 export default function HeyPage() {
   return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 via-white to-pink-200">
-          <div className="text-pink-500">Loading...</div>
-        </div>
-      }
-    >
-      <HeyPageContent />
-    </Suspense>
+    <>
+      <MusicPlayer />
+      <Suspense
+        fallback={
+          <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 via-white to-pink-200">
+            <div className="text-pink-500">Loading...</div>
+          </div>
+        }
+      >
+        <HeyPageContent />
+      </Suspense>
+    </>
   );
 }
