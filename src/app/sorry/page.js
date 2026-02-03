@@ -79,22 +79,18 @@ function MusicButton() {
 }
 
 const coupleImages = [
-  "https://images.pexels.com/photos/4873580/pexels-photo-4873580.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/7698567/pexels-photo-7698567.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/14106978/pexels-photo-14106978.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/3967023/pexels-photo-3967023.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/6338488/pexels-photo-6338488.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/4884002/pexels-photo-4884002.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/4015089/pexels-photo-4015089.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/7173030/pexels-photo-7173030.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/9306097/pexels-photo-9306097.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/285938/pexels-photo-285938.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/8685288/pexels-photo-8685288.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/1024960/pexels-photo-1024960.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/2549003/pexels-photo-2549003.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/6324269/pexels-photo-6324269.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/7643577/pexels-photo-7643577.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/4884002/pexels-photo-4884002.jpeg?auto=compress&cs=tinysrgb&w=600",
+  "/sorry/0ee625e2be41cca5.jpg",
+  "/sorry/a45b8c7ab1ab5b6e.jpg",
+  "/sorry/57274fdd3207438b.jpg",
+  "/sorry/3ad43e5eb87fb9f9.jpg",
+  "/sorry/4e2a6faac5612380.jpeg",
+  "/sorry/a6a9ed83b4f338b6.jpg",
+  "/sorry/0afc55c82c6c3a84.jpg",
+  "/sorry/6e1d45473ce9be1a.jpg",
+  "/sorry/3746d5b3509e2aee.jpg",
+  "/sorry/eaf1d9f6e6c4772f.jpg",
+  "/sorry/946101b2c4581a7f.jpg",
+  "/sorry/749806d079eee5a0.jpeg",
 ];
 
 const frameRotations = [-5, 3, -3, 7, -2, 4, -6, 2, -4, 5, -7, 3, -3, 6, -5, 4];
@@ -130,7 +126,7 @@ function Raindrops() {
 function PictureFrames() {
   return (
     <div className="fixed inset-0 z-0 overflow-hidden">
-      <div className="grid grid-cols-3 md:grid-cols-4 gap-3 md:gap-4 p-3 md:p-4 h-full auto-rows-[160px] md:auto-rows-[200px] lg:auto-rows-[240px]">
+      <div className="grid grid-cols-3 md:grid-cols-4 gap-3 md:gap-4 p-3 md:p-4 h-full auto-rows-[200px] md:auto-rows-[280px] lg:auto-rows-[340px] xl:auto-rows-[400px]">
         {coupleImages.map((img, i) => (
           <div
             key={i}
