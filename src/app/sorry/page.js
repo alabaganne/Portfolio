@@ -115,11 +115,13 @@ export default function SorryPage() {
     const containerRect = container.getBoundingClientRect();
     const btnRect = btn.getBoundingClientRect();
 
-    const maxX = containerRect.width - btnRect.width - 20;
-    const maxY = containerRect.height - btnRect.height - 20;
+    // Keep button within viewport with padding
+    const padding = 20;
+    const maxX = containerRect.width - btnRect.width - padding;
+    const maxY = containerRect.height - btnRect.height - padding;
 
-    const randomX = Math.floor(Math.random() * maxX) + 10;
-    const randomY = Math.floor(Math.random() * maxY) + 10;
+    const randomX = Math.floor(Math.random() * Math.max(maxX - padding, 100)) + padding;
+    const randomY = Math.floor(Math.random() * Math.max(maxY - padding, 100)) + padding;
 
     btn.style.position = "absolute";
     btn.style.left = `${randomX}px`;
@@ -196,7 +198,7 @@ export default function SorryPage() {
       <PictureFrames />
 
       {/* Main content */}
-      <div className="relative z-10 flex items-center justify-center min-h-screen p-4 py-12">
+      <div className="z-10 flex items-center justify-center min-h-screen p-4 py-12">
         <div className="max-w-xl w-full sorry-fade-in">
           <div className="bg-[#0d1225]/90 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-[#1e2a4a] shadow-[0_0_80px_rgba(99,102,241,0.1)]">
             {/* Header */}
@@ -271,7 +273,7 @@ export default function SorryPage() {
                   onMouseEnter={moveNoButton}
                   onTouchStart={moveNoButton}
                   onClick={() => submitAnswer("no")}
-                  className="px-8 py-3 bg-[#0d1225] text-[#6b7ca0] rounded-full font-semibold text-xl border-2 border-[#1e2a4a] hover:border-[#312e81] transition-all cursor-pointer z-50"
+                  className="px-8 py-3 bg-[#0d1225] text-[#6b7ca0] rounded-full font-semibold text-xl border-2 border-[#1e2a4a] hover:border-[#312e81] transition-all cursor-pointer z-50 shrink-0 whitespace-nowrap"
                 >
                   No 😔
                 </button>
