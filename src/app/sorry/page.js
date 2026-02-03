@@ -236,25 +236,11 @@ function SorryPageContent() {
     const btn = noBtnRef.current;
     if (!btn) return;
 
-    const btnRect = btn.getBoundingClientRect();
+    // Alternate between moving left and right within the card
+    const direction = escapeCountRef.current % 2 === 1 ? -1 : 1;
+    const translateX = direction * (80 + Math.random() * 40); // Move 80-120px left or right
 
-    // Use actual viewport dimensions instead of container
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-
-    // Keep button within visible viewport with padding
-    const padding = 20;
-
-    const maxX = Math.max(viewportWidth - btnRect.width - padding, padding);
-    const maxY = Math.max(viewportHeight - btnRect.height - padding, padding);
-
-    const randomX = Math.floor(Math.random() * (maxX - padding)) + padding;
-    const randomY = Math.floor(Math.random() * (maxY - padding)) + padding;
-
-    // Use fixed positioning to stay within viewport regardless of scroll
-    btn.style.position = "fixed";
-    btn.style.left = `${randomX}px`;
-    btn.style.top = `${randomY}px`;
+    btn.style.transform = `translateX(${translateX}px)`;
   }, []);
 
   // Show notification card first
@@ -418,7 +404,7 @@ function SorryPageContent() {
                   onMouseEnter={moveNoButton}
                   onTouchStart={moveNoButton}
                   onClick={() => submitAnswer("no")}
-                  className="px-8 py-3 bg-[#0d1225] text-[#6b7ca0] rounded-full font-semibold text-xl border-2 border-[#1e2a4a] hover:border-[#312e81] transition-all cursor-pointer z-50 shrink-0 whitespace-nowrap"
+                  className="px-8 py-3 bg-[#0d1225] text-[#6b7ca0] rounded-full font-semibold text-xl border-2 border-[#1e2a4a] hover:border-[#312e81] transition-transform duration-300 cursor-pointer z-50 shrink-0 whitespace-nowrap"
                 >
                   No 😔
                 </button>
