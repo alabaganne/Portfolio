@@ -351,7 +351,7 @@ function MoviePageContent() {
                 </div>
               </div>
               <p className="text-2xl md:text-3xl text-white font-bold">
-                with me? 🍿
+                with me this weekend? 🍿
               </p>
             </div>
 
