@@ -317,7 +317,7 @@ function SorryPageContent() {
   return (
     <div
       ref={containerRef}
-      className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#0a0e1a] via-[#111827] to-[#0a0e1a]"
+      className="min-h-screen relative overflow-x-hidden bg-gradient-to-b from-[#0a0e1a] via-[#111827] to-[#0a0e1a]"
     >
       <style>{sorryStyles}</style>
       <Raindrops />
