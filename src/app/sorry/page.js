@@ -238,26 +238,25 @@ function SorryPageContent() {
     escapeCountRef.current += 1;
 
     const btn = noBtnRef.current;
-    const container = containerRef.current;
-    if (!btn || !container) return;
+    if (!btn) return;
 
-    const containerRect = container.getBoundingClientRect();
     const btnRect = btn.getBoundingClientRect();
 
-    // Keep button within viewport with padding
+    // Use actual viewport dimensions instead of container
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    // Keep button within visible viewport with padding
     const padding = 20;
 
-    // Calculate safe bounds - ensure button stays fully visible
-    const minX = padding;
-    const minY = padding;
-    const maxX = Math.max(containerRect.width - btnRect.width - padding, minX);
-    const maxY = Math.max(containerRect.height - btnRect.height - padding, minY);
+    const maxX = Math.max(viewportWidth - btnRect.width - padding, padding);
+    const maxY = Math.max(viewportHeight - btnRect.height - padding, padding);
 
-    // Generate random position within safe bounds
-    const randomX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
-    const randomY = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
+    const randomX = Math.floor(Math.random() * (maxX - padding)) + padding;
+    const randomY = Math.floor(Math.random() * (maxY - padding)) + padding;
 
-    btn.style.position = "absolute";
+    // Use fixed positioning to stay within viewport regardless of scroll
+    btn.style.position = "fixed";
     btn.style.left = `${randomX}px`;
     btn.style.top = `${randomY}px`;
   }, []);
