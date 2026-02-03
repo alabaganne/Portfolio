@@ -246,11 +246,16 @@ function SorryPageContent() {
 
     // Keep button within viewport with padding
     const padding = 20;
-    const maxX = containerRect.width - btnRect.width - padding;
-    const maxY = containerRect.height - btnRect.height - padding;
 
-    const randomX = Math.floor(Math.random() * Math.max(maxX - padding, 100)) + padding;
-    const randomY = Math.floor(Math.random() * Math.max(maxY - padding, 100)) + padding;
+    // Calculate safe bounds - ensure button stays fully visible
+    const minX = padding;
+    const minY = padding;
+    const maxX = Math.max(containerRect.width - btnRect.width - padding, minX);
+    const maxY = Math.max(containerRect.height - btnRect.height - padding, minY);
+
+    // Generate random position within safe bounds
+    const randomX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+    const randomY = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
 
     btn.style.position = "absolute";
     btn.style.left = `${randomX}px`;
