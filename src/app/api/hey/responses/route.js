@@ -54,6 +54,13 @@ export async function GET() {
   return Response.json(responses);
 }
 
+function capitalizeName(str) {
+  return str
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+}
+
 export async function POST(request) {
   const body = await request.json();
   const { name, answer } = body;
@@ -63,7 +70,7 @@ export async function POST(request) {
   }
 
   const entry = {
-    name: name || "Anonymous",
+    name: name ? capitalizeName(name.trim()) : "Someone",
     answer,
     timestamp: new Date().toISOString(),
   };

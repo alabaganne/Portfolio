@@ -5,7 +5,14 @@ import { useSearchParams } from "next/navigation";
 
 function HeyPageContent() {
   const searchParams = useSearchParams();
-  const name = searchParams.get("name");
+  const rawName = searchParams.get("name");
+  const name = rawName
+    ? rawName
+        .trim()
+        .split(" ")
+        .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+        .join(" ")
+    : null;
 
   const [answered, setAnswered] = useState(null); // null | "yes" | "no"
   const [submitted, setSubmitted] = useState(false);
