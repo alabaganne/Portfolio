@@ -18,20 +18,19 @@ function MusicProvider({ children }) {
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-
     audio.volume = 0.35;
-
-    const tryAutoplay = async () => {
-      try {
-        await audio.play();
-        setIsPlaying(true);
-      } catch {
-        setIsPlaying(false);
-      }
-    };
-
-    tryAutoplay();
   }, []);
+
+  const playMusic = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    try {
+      await audio.play();
+      setIsPlaying(true);
+    } catch {
+      // playback failed
+    }
+  };
 
   const toggleMusic = async () => {
     const audio = audioRef.current;
@@ -51,7 +50,7 @@ function MusicProvider({ children }) {
   };
 
   return (
-    <MusicContext.Provider value={{ isPlaying, toggleMusic }}>
+    <MusicContext.Provider value={{ isPlaying, toggleMusic, playMusic }}>
       <audio ref={audioRef} src="/clair-de-lune.mp3" loop preload="auto" />
       {children}
     </MusicContext.Provider>
@@ -156,12 +155,65 @@ function PictureFrames() {
   );
 }
 
+function NotificationCard({ onOpenLetter }) {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#0a0e1a] via-[#111827] to-[#0a0e1a] p-4">
+      <style>{sorryStyles}</style>
+      <Raindrops />
+      <div className="relative z-10 max-w-md w-full sorry-fade-in">
+        <div className="bg-[#0d1225]/95 backdrop-blur-sm rounded-2xl p-8 md:p-10 border border-[#1e2a4a] shadow-[0_0_80px_rgba(99,102,241,0.15)]">
+          {/* Envelope icon */}
+          <div className="text-center mb-6">
+            <div className="text-7xl mb-4 sorry-pulse">💌</div>
+          </div>
+
+          {/* Notification text */}
+          <div className="text-center mb-8">
+            <p className="text-[#6b7ca0] text-sm uppercase tracking-widest mb-2">
+              You have received
+            </p>
+            <h1 className="text-2xl md:text-3xl font-bold text-[#a5b4fc] mb-3">
+              A Letter from Ala
+            </h1>
+            <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#4f46e5] to-transparent mx-auto mb-4" />
+            <p className="text-[#93a3c0] text-base">
+              He has something important to tell you...
+            </p>
+          </div>
+
+          {/* Open button */}
+          <div className="text-center">
+            <button
+              onClick={onOpenLetter}
+              className="px-8 py-4 bg-gradient-to-r from-[#4338ca] to-[#6366f1] text-white rounded-full font-semibold text-lg hover:from-[#4f46e5] hover:to-[#818cf8] hover:scale-105 hover:shadow-[0_0_40px_rgba(99,102,241,0.4)] transition-all cursor-pointer"
+            >
+              Open Letter 💌
+            </button>
+          </div>
+
+          {/* Subtle footer */}
+          <p className="text-center text-[#4a5568] text-xs mt-6 italic">
+            Take your time...
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function SorryPageContent() {
+  const [showLetter, setShowLetter] = useState(false);
   const [answered, setAnswered] = useState(null);
   const [submitted, setSubmitted] = useState(false);
   const escapeCountRef = useRef(0);
   const noBtnRef = useRef(null);
   const containerRef = useRef(null);
+  const { playMusic } = useContext(MusicContext);
+
+  const handleOpenLetter = () => {
+    playMusic();
+    setShowLetter(true);
+  };
 
   const submitAnswer = useCallback(
     async (answer) => {
@@ -204,6 +256,11 @@ function SorryPageContent() {
     btn.style.left = `${randomX}px`;
     btn.style.top = `${randomY}px`;
   }, []);
+
+  // Show notification card first
+  if (!showLetter) {
+    return <NotificationCard onOpenLetter={handleOpenLetter} />;
+  }
 
   if (answered === "yes") {
     return (

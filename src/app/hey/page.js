@@ -20,20 +20,19 @@ function MusicProvider({ children }) {
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-
     audio.volume = 0.35;
-
-    const tryAutoplay = async () => {
-      try {
-        await audio.play();
-        setIsPlaying(true);
-      } catch {
-        setIsPlaying(false);
-      }
-    };
-
-    tryAutoplay();
   }, []);
+
+  const playMusic = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    try {
+      await audio.play();
+      setIsPlaying(true);
+    } catch {
+      // playback failed
+    }
+  };
 
   const toggleMusic = async () => {
     const audio = audioRef.current;
@@ -53,7 +52,7 @@ function MusicProvider({ children }) {
   };
 
   return (
-    <MusicContext.Provider value={{ isPlaying, toggleMusic }}>
+    <MusicContext.Provider value={{ isPlaying, toggleMusic, playMusic }}>
       <audio ref={audioRef} src="/clair-de-lune.mp3" loop preload="auto" />
       {children}
     </MusicContext.Provider>
@@ -81,6 +80,51 @@ function MusicButton() {
   );
 }
 
+function NotificationCard({ onOpenMessage, name }) {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 via-white to-pink-200 p-4">
+      <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-10 max-w-sm w-full text-center border-2 border-pink-200 animate-fade-in">
+        {/* Heart icon */}
+        <div className="text-7xl mb-4 animate-bounce">💕</div>
+
+        {/* Notification text */}
+        <p className="text-pink-400 text-sm uppercase tracking-widest mb-2">
+          New message
+        </p>
+        <h1 className="text-2xl md:text-3xl font-bold text-pink-600 mb-3">
+          Ala sent you a message{name ? `, ${name}` : ""}!
+        </h1>
+        <p className="text-pink-400 text-base mb-6">
+          He seems nervous about something... 👀
+        </p>
+
+        {/* Open button */}
+        <button
+          onClick={onOpenMessage}
+          className="px-8 py-4 bg-gradient-to-r from-pink-400 to-pink-500 text-white rounded-full font-semibold text-lg hover:from-pink-500 hover:to-pink-600 hover:scale-105 hover:shadow-lg hover:shadow-pink-300 transition-all cursor-pointer"
+        >
+          Open Message 💌
+        </button>
+
+        {/* Subtle footer */}
+        <p className="text-pink-300 text-xs mt-6 italic">
+          Go ahead, don&apos;t be shy~
+        </p>
+      </div>
+
+      <style jsx>{`
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+          animation: fade-in 0.6s ease-out;
+        }
+      `}</style>
+    </div>
+  );
+}
+
 function HeyPageContent() {
   const searchParams = useSearchParams();
   const rawName = searchParams.get("name");
@@ -92,10 +136,17 @@ function HeyPageContent() {
         .join(" ")
     : null;
 
+  const [showMessage, setShowMessage] = useState(false);
   const [answered, setAnswered] = useState(null); // null | "yes" | "no"
   const [submitted, setSubmitted] = useState(false);
   const noBtnRef = useRef(null);
   const containerRef = useRef(null);
+  const { playMusic } = useContext(MusicContext);
+
+  const handleOpenMessage = () => {
+    playMusic();
+    setShowMessage(true);
+  };
 
   const submitAnswer = useCallback(
     async (answer) => {
@@ -135,6 +186,11 @@ function HeyPageContent() {
   }, []);
 
   const displayName = name || "you";
+
+  // Show notification card first
+  if (!showMessage) {
+    return <NotificationCard onOpenMessage={handleOpenMessage} name={name} />;
+  }
 
   if (answered === "yes") {
     return (
