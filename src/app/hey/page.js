@@ -1,9 +1,19 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect, Suspense } from "react";
+import {
+  useState,
+  useRef,
+  useCallback,
+  useEffect,
+  createContext,
+  useContext,
+  Suspense,
+} from "react";
 import { useSearchParams } from "next/navigation";
 
-function MusicPlayer() {
+const MusicContext = createContext(null);
+
+function MusicProvider({ children }) {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -13,13 +23,11 @@ function MusicPlayer() {
 
     audio.volume = 0.35;
 
-    // Attempt autoplay — browsers may block this
     const tryAutoplay = async () => {
       try {
         await audio.play();
         setIsPlaying(true);
       } catch {
-        // Autoplay blocked — user must click the button
         setIsPlaying(false);
       }
     };
@@ -45,28 +53,31 @@ function MusicPlayer() {
   };
 
   return (
-    <>
+    <MusicContext.Provider value={{ isPlaying, toggleMusic }}>
       <audio ref={audioRef} src="/clair-de-lune.mp3" loop preload="auto" />
-      <div className="fixed bottom-5 right-5 z-50 flex items-center gap-2">
-        {!isPlaying && (
-          <div className="flex items-center animate-pulse">
-            <span className="text-pink-500 font-semibold text-sm mr-1">Play me</span>
-            <span className="text-pink-500 text-xl animate-bounce">→</span>
-          </div>
-        )}
-        <button
-          onClick={toggleMusic}
-          aria-label={isPlaying ? "Pause music" : "Play music"}
-          className={`w-14 h-14 rounded-full bg-white border-2 shadow-xl flex items-center justify-center text-2xl hover:scale-110 transition-all cursor-pointer ${
-            isPlaying
-              ? "border-pink-400 shadow-pink-200"
-              : "border-pink-500 shadow-pink-300 animate-pulse"
-          }`}
-        >
-          {isPlaying ? "🎵" : "🔇"}
-        </button>
-      </div>
-    </>
+      {children}
+    </MusicContext.Provider>
+  );
+}
+
+function MusicButton() {
+  const { isPlaying, toggleMusic } = useContext(MusicContext);
+
+  return (
+    <button
+      onClick={toggleMusic}
+      aria-label={isPlaying ? "Pause music" : "Play music"}
+      className={`flex items-center gap-2 px-5 py-3 rounded-full border-2 shadow-lg transition-all cursor-pointer hover:scale-105 ${
+        isPlaying
+          ? "bg-pink-50 border-pink-400 shadow-pink-200"
+          : "bg-white border-pink-500 shadow-pink-300 animate-pulse"
+      }`}
+    >
+      <span className="text-2xl">{isPlaying ? "🎵" : "🔇"}</span>
+      <span className="text-pink-600 font-semibold">
+        {isPlaying ? "Playing..." : "Play song"}
+      </span>
+    </button>
   );
 }
 
@@ -129,6 +140,9 @@ function HeyPageContent() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 via-white to-pink-200 p-4">
         <div className="bg-white rounded-3xl shadow-2xl p-10 max-w-md w-full text-center border-2 border-pink-200">
+          <div className="flex justify-center mb-6">
+            <MusicButton />
+          </div>
           <div className="text-8xl mb-6 animate-bounce">🥰</div>
           <h1 className="text-5xl font-bold text-pink-600 mb-4">Yaaay!</h1>
           <p className="text-pink-500 text-2xl">
@@ -147,6 +161,9 @@ function HeyPageContent() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 via-white to-pink-200 p-4">
         <div className="bg-white rounded-3xl shadow-2xl p-10 max-w-md w-full text-center border-2 border-pink-200">
+          <div className="flex justify-center mb-6">
+            <MusicButton />
+          </div>
           <div className="text-8xl mb-6">🤨</div>
           <h1 className="text-5xl font-bold text-pink-600 mb-4">
             Wrong answer!
@@ -172,6 +189,9 @@ function HeyPageContent() {
       className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 via-white to-pink-200 relative overflow-hidden p-4"
     >
       <div className="bg-white rounded-3xl shadow-2xl p-10 max-w-md w-full text-center border-2 border-pink-200 z-10">
+        <div className="flex justify-center mb-6">
+          <MusicButton />
+        </div>
         <div className="text-8xl mb-6">👉👈</div>
         <h1 className="text-5xl font-bold text-pink-600 mb-4">
           Hey {displayName}!
@@ -207,8 +227,7 @@ function HeyPageContent() {
 
 export default function HeyPage() {
   return (
-    <>
-      <MusicPlayer />
+    <MusicProvider>
       <Suspense
         fallback={
           <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 via-white to-pink-200">
@@ -218,6 +237,6 @@ export default function HeyPage() {
       >
         <HeyPageContent />
       </Suspense>
-    </>
+    </MusicProvider>
   );
 }
