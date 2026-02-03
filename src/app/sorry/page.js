@@ -238,21 +238,25 @@ function SorryPageContent() {
     escapeCountRef.current += 1;
 
     const btn = noBtnRef.current;
-    const container = containerRef.current;
-    if (!btn || !container) return;
+    if (!btn) return;
 
-    const containerRect = container.getBoundingClientRect();
     const btnRect = btn.getBoundingClientRect();
 
-    // Keep button within viewport with padding
+    // Use actual viewport dimensions instead of container
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    // Keep button within visible viewport with padding
     const padding = 20;
-    const maxX = containerRect.width - btnRect.width - padding;
-    const maxY = containerRect.height - btnRect.height - padding;
 
-    const randomX = Math.floor(Math.random() * Math.max(maxX - padding, 100)) + padding;
-    const randomY = Math.floor(Math.random() * Math.max(maxY - padding, 100)) + padding;
+    const maxX = Math.max(viewportWidth - btnRect.width - padding, padding);
+    const maxY = Math.max(viewportHeight - btnRect.height - padding, padding);
 
-    btn.style.position = "absolute";
+    const randomX = Math.floor(Math.random() * (maxX - padding)) + padding;
+    const randomY = Math.floor(Math.random() * (maxY - padding)) + padding;
+
+    // Use fixed positioning to stay within viewport regardless of scroll
+    btn.style.position = "fixed";
     btn.style.left = `${randomX}px`;
     btn.style.top = `${randomY}px`;
   }, []);
