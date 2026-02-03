@@ -79,22 +79,22 @@ function MusicButton() {
 }
 
 const coupleImages = [
-  "https://images.pexels.com/photos/4873580/pexels-photo-4873580.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/7698567/pexels-photo-7698567.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/14106978/pexels-photo-14106978.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/3967023/pexels-photo-3967023.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/6338488/pexels-photo-6338488.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/4884002/pexels-photo-4884002.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/4015089/pexels-photo-4015089.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/7173030/pexels-photo-7173030.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/9306097/pexels-photo-9306097.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/285938/pexels-photo-285938.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/8685288/pexels-photo-8685288.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/1024960/pexels-photo-1024960.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/2549003/pexels-photo-2549003.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/6324269/pexels-photo-6324269.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/7643577/pexels-photo-7643577.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/4884002/pexels-photo-4884002.jpeg?auto=compress&cs=tinysrgb&w=600",
+  "/sorry/1.jpg",  // Bathroom mirror - kiss
+  "/sorry/2.jpg",  // Bedroom mirror - hug
+  "/sorry/3.jpg",  // Bathroom mirror - standing
+  "/sorry/4.jpg",  // Car - her smiling
+  "/sorry/5.jpg",  // Video call
+  "/sorry/6.jpg",  // Kitchen - playful
+  "/sorry/7.jpg",  // Car - both together
+  "/sorry/8.jpg",  // Elevator mirror
+  "/sorry/9.jpg",  // Restaurant dinner
+  "/sorry/1.jpg",  // Repeat for grid fill
+  "/sorry/2.jpg",
+  "/sorry/3.jpg",
+  "/sorry/4.jpg",
+  "/sorry/5.jpg",
+  "/sorry/6.jpg",
+  "/sorry/7.jpg",
 ];
 
 const frameRotations = [-5, 3, -3, 7, -2, 4, -6, 2, -4, 5, -7, 3, -3, 6, -5, 4];
