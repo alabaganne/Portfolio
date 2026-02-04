@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import { capitalizeName } from "@/lib/utils";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -26,13 +27,6 @@ async function sendVisitNotification(name) {
 
 export async function GET() {
   return Response.json({ message: "Birthday visit notifications are sent via email" }, { status: 200 });
-}
-
-function capitalizeName(str) {
-  return str
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    .join(" ");
 }
 
 export async function POST(request) {

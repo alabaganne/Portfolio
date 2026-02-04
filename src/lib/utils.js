@@ -1,3 +1,10 @@
+export function capitalizeName(str) {
+  return str
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+}
+
 export function cn(...inputs) {
   return inputs
     .flatMap((input) => {
