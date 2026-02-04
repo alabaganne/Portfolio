@@ -234,20 +234,6 @@ function BirthdayPageContent() {
 
   const [showMessage, setShowMessage] = useState(false);
   const { playMusic } = useContext(MusicContext);
-  const notifiedRef = useRef(false);
-
-  useEffect(() => {
-    if (notifiedRef.current) return;
-    notifiedRef.current = true;
-
-    fetch("/api/birthday/visit", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: name || null }),
-    }).catch(() => {
-      // silently fail
-    });
-  }, [name]);
 
   const handleOpenMessage = () => {
     playMusic();
