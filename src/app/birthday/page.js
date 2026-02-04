@@ -9,6 +9,7 @@ import {
   Suspense,
 } from "react";
 import { useSearchParams } from "next/navigation";
+import { capitalizeName } from "@/lib/utils";
 
 const MusicContext = createContext(null);
 
@@ -229,16 +230,24 @@ function NotificationCard({ onOpenMessage, name }) {
 function BirthdayPageContent() {
   const searchParams = useSearchParams();
   const rawName = searchParams.get("name");
-  const name = rawName
-    ? rawName
-        .trim()
-        .split(" ")
-        .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
-        .join(" ")
-    : null;
+  const name = rawName ? capitalizeName(rawName.trim()) : null;
 
   const [showMessage, setShowMessage] = useState(false);
   const { playMusic } = useContext(MusicContext);
+  const notifiedRef = useRef(false);
+
+  useEffect(() => {
+    if (notifiedRef.current) return;
+    notifiedRef.current = true;
+
+    fetch("/api/birthday/visit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: name || null }),
+    }).catch(() => {
+      // silently fail
+    });
+  }, [name]);
 
   const handleOpenMessage = () => {
     playMusic();
