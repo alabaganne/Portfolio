@@ -10,6 +10,7 @@ import {
   Suspense,
 } from "react";
 import { useSearchParams } from "next/navigation";
+import { resolveNameParam } from "@/lib/utils";
 
 const MusicContext = createContext(null);
 
@@ -127,14 +128,7 @@ function NotificationCard({ onOpenMessage, name }) {
 
 function HeyPageContent() {
   const searchParams = useSearchParams();
-  const rawName = searchParams.get("name");
-  const name = rawName
-    ? rawName
-        .trim()
-        .split(" ")
-        .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
-        .join(" ")
-    : null;
+  const name = resolveNameParam(searchParams);
 
   const [showMessage, setShowMessage] = useState(false);
   const [answered, setAnswered] = useState(null); // null | "yes" | "no"
