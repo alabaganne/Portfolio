@@ -9,7 +9,7 @@ import {
   Suspense,
 } from "react";
 import { useSearchParams } from "next/navigation";
-import { capitalizeName } from "@/lib/utils";
+import { resolveNameParam } from "@/lib/utils";
 
 const MusicContext = createContext(null);
 
@@ -229,8 +229,7 @@ function NotificationCard({ onOpenMessage, name }) {
 
 function BirthdayPageContent() {
   const searchParams = useSearchParams();
-  const rawName = searchParams.get("name");
-  const name = rawName ? capitalizeName(rawName.trim()) : null;
+  const name = resolveNameParam(searchParams);
 
   const [showMessage, setShowMessage] = useState(false);
   const { playMusic } = useContext(MusicContext);
