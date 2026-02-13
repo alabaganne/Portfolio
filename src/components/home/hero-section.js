@@ -1,107 +1,77 @@
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { ArrowUpRight, Download, Mail, MapPin, Phone } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Mail, MapPin, Phone } from "lucide-react";
 
 const profile = {
   name: "Ala Baganne",
-  role: "Full-Stack Developer",
-  experience: "5+ Years Experience",
-  location: "Jemmel, Monastir, Tunisia",
-  headline: "Ala Baganne builds dependable full-stack web applications.",
+  role: "Full-stack developer",
   summary:
-    "Hands-on with Vue, React, Laravel, and Node.js to ship responsive interfaces and reliable backends for healthcare, real estate, and education teams.",
+    "I help product teams launch dependable web applications that balance polished interfaces with maintainable architecture. From discovery to deployment, I focus on clear communication, accessible design, and measurable results.",
+  location: "Jemmel, Monastir, Tunisia",
   email: "alabaganne9@gmail.com",
   phone: "+21650101959",
   phoneDisplay: "+216 50 101 959",
 };
 
-const stats = [
-  {
-    value: "5+",
-    label: "Years building full-stack apps",
-    detail: "End-to-end ownership from architecture to rollout.",
-  },
-  {
-    value: "10+",
-    label: "Production launches",
-    detail: "Healthcare, real estate, and internship platforms shipped.",
-  },
-  {
-    value: "E2E",
-    label: "Testing & performance",
-    detail: "From automated coverage to database optimisation.",
-  },
+const highlights = [
+  { label: "Years of hands-on experience", value: "5+" },
+  { label: "Production launches delivered", value: "10+" },
+  { label: "Time zones supported", value: "EMEA · US" },
 ];
 
 export function HeroSection() {
   return (
-    <section className="space-y-10">
-      <div className="flex flex-wrap items-center gap-4">
-        <Badge className="rounded-full bg-white/10 text-xs uppercase tracking-[0.35em] text-slate-200">
-          {profile.role} · {profile.experience}
-        </Badge>
-        <p className="flex items-center gap-2 text-sm text-slate-400">
-          <MapPin className="h-4 w-4" aria-hidden />
-          Based in {profile.location}
-        </p>
-      </div>
+    <section id="top" className="grid gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:items-start">
       <div className="space-y-6">
-        <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-          {profile.headline}
+        <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[var(--accent)]">Welcome</p>
+        <h1 className="text-4xl font-semibold leading-tight md:text-5xl">
+          {profile.name} · {profile.role}
         </h1>
-        <p className="max-w-3xl text-lg leading-relaxed text-slate-300">{profile.summary}</p>
+        <p className="max-w-2xl text-lg text-[var(--muted)]">{profile.summary}</p>
+        <div className="flex flex-wrap gap-3">
+          <Button href="#projects">Browse recent work</Button>
+          <Button href={`mailto:${profile.email}`} variant="outline">
+            Email me
+          </Button>
+          <Button href="/Ala_Baganne_Resume.pdf" variant="subtle" download>
+            Download résumé
+          </Button>
+        </div>
       </div>
-      <div className="flex flex-wrap gap-3">
-        <Button href={`mailto:${profile.email}`} className="shadow-[0_15px_30px_-20px_rgba(56,189,248,0.8)]">
-          <Mail className="h-4 w-4" aria-hidden />
-          Email Ala
-        </Button>
-        <Button href={`tel:${profile.phone}`} variant="outline" className="backdrop-blur">
-          <Phone className="h-4 w-4" aria-hidden />
-          Call {profile.phoneDisplay}
-        </Button>
-        <Button
-          href="/Ala_Baganne_Resume.pdf"
-          variant="outline"
-          download
-          className="backdrop-blur"
-        >
-          <Download className="h-4 w-4" aria-hidden />
-          Download Resume
-        </Button>
-        <Button href="#projects" variant="outline" className="text-slate-300 hover:text-white">
-          See recent projects
-          <ArrowUpRight className="h-4 w-4" aria-hidden />
-        </Button>
-        <Button href="/blog" variant="subtle" className="backdrop-blur text-slate-100">
-          Read the blog
-          <ArrowUpRight className="h-4 w-4" aria-hidden />
-        </Button>
-      </div>
-      <div className="grid gap-4 md:grid-cols-3">
-        {stats.map((stat) => (
-          <Card key={stat.label} className="border-white/10 bg-white/[0.04]">
-            <CardHeader className="mb-3 gap-2">
-              <CardTitle className="text-3xl font-semibold text-white">
-                {stat.value}
-              </CardTitle>
-              <CardDescription className="text-slate-300">
-                {stat.label}
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="text-sm leading-relaxed text-slate-300">
-              {stat.detail}
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      <aside className="grid gap-4">
+        <Card>
+          <CardHeader className="gap-1">
+            <CardTitle>Project snapshot</CardTitle>
+            <p className="text-sm text-[var(--muted)]">
+              Combining product thinking with modern JavaScript frameworks to build performant experiences.
+            </p>
+          </CardHeader>
+          <CardContent className="gap-6">
+            <dl className="grid gap-4">
+              {highlights.map((item) => (
+                <div key={item.label} className="flex items-baseline justify-between gap-3">
+                  <dt className="text-sm text-[var(--muted)]">{item.label}</dt>
+                  <dd className="text-xl font-semibold text-[var(--foreground)]">{item.value}</dd>
+                </div>
+              ))}
+            </dl>
+            <div className="space-y-2 text-sm text-[var(--muted)]">
+              <p className="flex items-center gap-2">
+                <MapPin className="h-4 w-4" aria-hidden />
+                {profile.location}
+              </p>
+              <a className="flex items-center gap-2" href={`mailto:${profile.email}`}>
+                <Mail className="h-4 w-4" aria-hidden />
+                {profile.email}
+              </a>
+              <a className="flex items-center gap-2" href={`tel:${profile.phone}`}>
+                <Phone className="h-4 w-4" aria-hidden />
+                {profile.phoneDisplay}
+              </a>
+            </div>
+          </CardContent>
+        </Card>
+      </aside>
     </section>
   );
 }

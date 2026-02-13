@@ -1,34 +1,25 @@
 import { SectionHeader } from "@/components/section-header";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { ArrowUpRight } from "lucide-react";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 const projects = [
   {
     name: "MenuMate",
     tagline: "Digital menus for restaurants",
     description:
-      "Platform for restaurants to create and manage QR-powered menus with live updates and Supabase auth.",
+      "A conversion-focused platform for restaurants to publish QR menus, manage pricing in real time, and capture diner feedback.",
     impact:
-      "Gives diners QR access to menus and lets restaurants capture online orders without extra hardware.",
+      "Reduced menu update time from days to minutes while increasing upsell opportunities.",
     tech: ["Next.js", "React", "Supabase", "Tailwind CSS", "React PDF"],
     links: {
       project: "https://www.menumate.net",
-      // source: "https://github.com/alabaganne/MenuMate",
     },
   },
   {
     name: "ATS Resume Builder",
     tagline: "Automated resume generation",
     description:
-      "ATS-friendly resume builder with live previews, PDF export, and reusable templates.",
+      "ATS-friendly resume builder with live previews, PDF export, and reusable templates for rapid iteration.",
     impact: "Helps candidates create polished resumes in minutes.",
     tech: ["Next.js", "React", "React PDF", "TypeScript"],
     links: {
@@ -45,68 +36,71 @@ const projects = [
       "Streamlined internship applications with tracking dashboards and document sharing.",
     tech: ["Laravel", "Vue.js", "Tailwind CSS", "MySQL"],
     links: {
-      project: null,
       source: "https://github.com/alabaganne/GoStage.tn",
+    },
+  },
+  {
+    name: "Atlas Learning",
+    tagline: "Immersive education analytics",
+    description:
+      "Analytics dashboards and cohort insights for an EdTech SaaS with fine-grained permissions and guided onboarding.",
+    impact:
+      "Delivered actionable insights for 20k+ learners with sub-second reporting latency.",
+    tech: ["Vue", "Laravel", "Inertia", "Tailwind CSS"],
+    links: {
+      project: null,
     },
   },
 ];
 
 export function ProjectsSection() {
   return (
-    <section id="projects" className="space-y-8">
+    <section id="projects" className="space-y-10">
       <SectionHeader
-        eyebrow="PROJECTS"
+        eyebrow="Projects"
         title="Selected work"
-        description="Platforms spanning restaurant tech, resume automation, and student internships."
+        description="Examples of products and platforms I have helped launch or grow."
       />
       <div className="grid gap-6 md:grid-cols-2">
         {projects.map((project) => (
-          <Card key={project.name} className="border-white/10 bg-white/[0.04] flex flex-col">
-            <CardHeader className="mb-4 gap-2">
-              <Badge className="w-fit bg-white/10 text-[0.65rem] tracking-[0.3em]">
+          <Card key={project.name}>
+            <CardHeader className="gap-3">
+              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--accent)]">
                 {project.tagline}
-              </Badge>
-              <CardTitle className="text-2xl text-white">{project.name}</CardTitle>
+              </span>
+              <CardTitle className="text-2xl">{project.name}</CardTitle>
+              <p className="text-sm text-[var(--muted)]">{project.description}</p>
             </CardHeader>
-            <CardContent className="gap-4 text-sm text-slate-200">
-              <p className="leading-relaxed text-slate-300">
-                {project.description}
-              </p>
-              <p className="text-sm text-slate-400">{project.impact}</p>
+            <CardContent className="gap-4">
+              <p className="text-sm text-[var(--muted)]">{project.impact}</p>
+              <div className="flex flex-wrap gap-2">
+                {project.tech.map((tech) => (
+                  <span
+                    key={tech}
+                    className="rounded-full border border-[var(--border)] bg-slate-50 px-3 py-1 text-xs font-medium text-[var(--muted)]"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </CardContent>
-            <CardFooter className="mt-6 mb-4 flex flex-wrap gap-3">
-              {project.tech.map((tech) => (
-                <Badge key={tech} variant="subtle">
-                  {tech}
-                </Badge>
-              ))}
+            <CardFooter className="justify-between">
+              <span className="text-sm text-[var(--muted)]">
+                {project.links?.project ? "Live product" : "Open source"}
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {project.links?.project ? (
+                  <Button href={project.links.project} target="_blank" rel="noreferrer">
+                    Visit site
+                  </Button>
+                ) : null}
+                {project.links?.source ? (
+                  <Button href={project.links.source} target="_blank" rel="noreferrer" variant="outline">
+                    View code
+                  </Button>
+                ) : null}
+              </div>
             </CardFooter>
-            <div className="mt-auto flex flex-wrap gap-3">
-              {project.links?.project ? (
-                <Button
-                  href={project.links.project}
-                  target="_blank"
-                  rel="noreferrer"
-                  variant="outline"
-                  className="px-0 text-sky-300 hover:text-white"
-                >
-                  View project
-                  <ArrowUpRight className="h-4 w-4" aria-hidden />
-                </Button>
-              ) : null}
-              {project.links?.source ? (
-                <Button
-                  href={project.links.source}
-                  target="_blank"
-                  rel="noreferrer"
-                  variant="outline"
-                  className="px-0 text-sky-300 hover:text-white"
-                >
-                  View source code
-                  <ArrowUpRight className="h-4 w-4" aria-hidden />
-                </Button>
-              ) : null}
-            </div>
           </Card>
         ))}
       </div>
