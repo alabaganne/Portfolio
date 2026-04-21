@@ -1,6 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+
+function MusicButton({ isPlaying, onToggle }) {
+  return (
+    <button
+      onClick={onToggle}
+      aria-label={isPlaying ? "Pause music" : "Play music"}
+      className={`flex items-center gap-2 px-5 py-3 rounded-full border-2 shadow-lg transition-all cursor-pointer hover:scale-105 mx-auto ${
+        isPlaying
+          ? "bg-pink-500/20 border-pink-400 shadow-pink-400/20"
+          : "bg-white/20 border-pink-300 shadow-pink-300/30 animate-pulse"
+      }`}
+    >
+      <span className="text-2xl">{isPlaying ? "🎵" : "🔇"}</span>
+      <span className="text-white font-semibold">
+        {isPlaying ? "Playing..." : "Play song"}
+      </span>
+    </button>
+  );
+}
 
 const letters = {
   sad: {
@@ -52,11 +72,57 @@ function NotificationCard({ onOpen }) {
 }
 
 export default function EyaPage() {
+  const audioRef = useRef(null);
   const [opened, setOpened] = useState(false);
   const [activeLetter, setActiveLetter] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.volume = 0.4;
+  }, []);
+
+  const playMusic = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    try {
+      await audio.play();
+      setIsPlaying(true);
+    } catch {
+      // playback failed
+    }
+  };
+
+  const toggleMusic = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isPlaying) {
+      audio.pause();
+      setIsPlaying(false);
+    } else {
+      try {
+        await audio.play();
+        setIsPlaying(true);
+      } catch {
+        // playback failed
+      }
+    }
+  };
+
+  const handleOpen = () => {
+    playMusic();
+    setOpened(true);
+  };
 
   if (!opened) {
-    return <NotificationCard onOpen={() => setOpened(true)} />;
+    return (
+      <>
+        <audio ref={audioRef} src="/happy-birthday.mp3" loop preload="auto" />
+        <NotificationCard onOpen={handleOpen} />
+      </>
+    );
   }
 
   return (
@@ -65,6 +131,11 @@ export default function EyaPage() {
 
       <div className="max-w-2xl mx-auto eya-fade-in">
         <div className="bg-white/15 backdrop-blur-md rounded-3xl p-8 md:p-12 border border-white/30 shadow-[0_0_80px_rgba(255,255,255,0.15)]">
+          <audio ref={audioRef} src="/happy-birthday.mp3" loop preload="auto" />
+          <div className="mb-6">
+            <MusicButton isPlaying={isPlaying} onToggle={toggleMusic} />
+          </div>
+
           <div className="text-center mb-8">
             <div className="text-6xl md:text-7xl mb-4 eya-bounce">🎉</div>
             <h1 className="text-4xl md:text-5xl font-bold text-white eya-glow mb-3">
