@@ -71,8 +71,9 @@ export default function EyaPage() {
               Happy Birthday Eya!
             </h1>
             <p className="text-white/85 text-lg md:text-xl leading-relaxed">
-              My love, thank you for the best 2 years of my life. You make every
-              day brighter, softer, and more beautiful.
+              My love, thank you for the best 2 years of my life. Thank you for
+              teaching me about love. You make every day brighter, softer, and
+              more beautiful.
             </p>
             <p className="text-pink-100 text-xl mt-4">With love, Ala 💖</p>
           </div>
