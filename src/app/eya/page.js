@@ -111,85 +111,82 @@ export default function EyaPage() {
     }
   };
 
-  const handleOpen = () => {
-    playMusic();
+  const handleOpen = async () => {
+    await playMusic();
     setOpened(true);
   };
 
-  if (!opened) {
-    return (
-      <>
-        <audio ref={audioRef} src="/happy-birthday.mp3" loop preload="auto" />
-        <NotificationCard onOpen={handleOpen} />
-      </>
-    );
-  }
-
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-600 p-4 py-12">
-      <style>{eyaStyles}</style>
+    <>
+      <audio ref={audioRef} src="/happy-birthday.mp3" loop preload="auto" />
+      {!opened ? (
+        <NotificationCard onOpen={handleOpen} />
+      ) : (
+        <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-600 p-4 py-12">
+          <style>{eyaStyles}</style>
 
-      <div className="max-w-2xl mx-auto eya-fade-in">
-        <div className="bg-white/15 backdrop-blur-md rounded-3xl p-8 md:p-12 border border-white/30 shadow-[0_0_80px_rgba(255,255,255,0.15)]">
-          <audio ref={audioRef} src="/happy-birthday.mp3" loop preload="auto" />
-          <div className="mb-6">
-            <MusicButton isPlaying={isPlaying} onToggle={toggleMusic} />
-          </div>
-
-          <div className="text-center mb-8">
-            <div className="text-6xl md:text-7xl mb-4 eya-bounce">🎉</div>
-            <h1 className="text-4xl md:text-5xl font-bold text-white eya-glow mb-3">
-              Happy Birthday Eya!
-            </h1>
-            <p className="text-white/85 text-lg md:text-xl leading-relaxed">
-              My love, thank you for the best 2 years of my life. Thank you for
-              teaching me about love. You make every day brighter, softer, and
-              more beautiful.
-            </p>
-            <p className="text-pink-100 text-xl mt-4">With love, Ala 💖</p>
-          </div>
-
-          <div className="pt-6 border-t border-white/25">
-            <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-6">
-              Open When Letters 💌
-            </h2>
-
-            <div className="grid gap-3">
-              <button
-                onClick={() => setActiveLetter("sad")}
-                className="w-full text-left px-5 py-4 rounded-2xl bg-white/20 text-white font-semibold hover:bg-white/30 transition-colors cursor-pointer border border-white/30"
-              >
-                Open when you’re sad
-              </button>
-              <button
-                onClick={() => setActiveLetter("miss")}
-                className="w-full text-left px-5 py-4 rounded-2xl bg-white/20 text-white font-semibold hover:bg-white/30 transition-colors cursor-pointer border border-white/30"
-              >
-                Open when you miss me
-              </button>
-              <button
-                onClick={() => setActiveLetter("sleep")}
-                className="w-full text-left px-5 py-4 rounded-2xl bg-white/20 text-white font-semibold hover:bg-white/30 transition-colors cursor-pointer border border-white/30"
-              >
-                Open when you can’t sleep
-              </button>
-            </div>
-
-            {activeLetter && (
-              <div className="mt-6 rounded-2xl bg-white/20 border border-white/30 p-6 eya-letter-in">
-                <p className="text-3xl mb-2">{letters[activeLetter].emoji}</p>
-                <h3 className="text-2xl font-bold text-white mb-3">
-                  {letters[activeLetter].title}
-                </h3>
-                <p className="text-white/90 text-lg leading-relaxed">
-                  {letters[activeLetter].message}
-                </p>
+          <div className="max-w-2xl mx-auto eya-fade-in">
+            <div className="bg-white/15 backdrop-blur-md rounded-3xl p-8 md:p-12 border border-white/30 shadow-[0_0_80px_rgba(255,255,255,0.15)]">
+              <div className="mb-6">
+                <MusicButton isPlaying={isPlaying} onToggle={toggleMusic} />
               </div>
-            )}
+
+              <div className="text-center mb-8">
+                <div className="text-6xl md:text-7xl mb-4 eya-bounce">🎉</div>
+                <h1 className="text-4xl md:text-5xl font-bold text-white eya-glow mb-3">
+                  Happy Birthday Eya!
+                </h1>
+                <p className="text-white/85 text-lg md:text-xl leading-relaxed">
+                  My love, thank you for the best 2 years of my life. Thank you
+                  for teaching me about love. You make every day brighter,
+                  softer, and more beautiful.
+                </p>
+                <p className="text-pink-100 text-xl mt-4">With love, Ala 💖</p>
+              </div>
+
+              <div className="pt-6 border-t border-white/25">
+                <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-6">
+                  Open When Letters 💌
+                </h2>
+
+                <div className="grid gap-3">
+                  <button
+                    onClick={() => setActiveLetter("sad")}
+                    className="w-full text-left px-5 py-4 rounded-2xl bg-white/20 text-white font-semibold hover:bg-white/30 transition-colors cursor-pointer border border-white/30"
+                  >
+                    Open when you’re sad
+                  </button>
+                  <button
+                    onClick={() => setActiveLetter("miss")}
+                    className="w-full text-left px-5 py-4 rounded-2xl bg-white/20 text-white font-semibold hover:bg-white/30 transition-colors cursor-pointer border border-white/30"
+                  >
+                    Open when you miss me
+                  </button>
+                  <button
+                    onClick={() => setActiveLetter("sleep")}
+                    className="w-full text-left px-5 py-4 rounded-2xl bg-white/20 text-white font-semibold hover:bg-white/30 transition-colors cursor-pointer border border-white/30"
+                  >
+                    Open when you can’t sleep
+                  </button>
+                </div>
+
+                {activeLetter && (
+                  <div className="mt-6 rounded-2xl bg-white/20 border border-white/30 p-6 eya-letter-in">
+                    <p className="text-3xl mb-2">{letters[activeLetter].emoji}</p>
+                    <h3 className="text-2xl font-bold text-white mb-3">
+                      {letters[activeLetter].title}
+                    </h3>
+                    <p className="text-white/90 text-lg leading-relaxed">
+                      {letters[activeLetter].message}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 
