@@ -10,11 +10,11 @@ const skillCategories = [
     skills: ["LLM Integration", "RAG Systems", "DSPy", "OpenAI API", "Vertex AI", "Vector DBs", "OCR", "Apache Tika", "AI Agents"],
   },
   {
-    name: "Frontend",
+    name: "Frontend & Storefronts",
     icon: Layers,
     description:
-      "Production React apps, design-system-driven UI, responsive and accessible.",
-    skills: ["React.js", "Next.js", "TypeScript", "Vue.js", "AngularJS", "Tailwind CSS", "Shadcn UI", "React Native"],
+      "Responsive applications, custom Shopify themes, e-commerce stores, and landing pages.",
+    skills: ["React.js", "Next.js", "TypeScript", "Shopify", "Custom Themes", "WordPress", "Vue.js", "AngularJS", "Tailwind CSS", "Shadcn UI", "React Native"],
   },
   {
     name: "Backend & Databases",

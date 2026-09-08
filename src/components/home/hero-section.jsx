@@ -3,14 +3,14 @@ import { ArrowUpRight, Download, Mail, MapPin, MonitorSmartphone } from "lucide-
 const profile = {
   location: "Monastir, Tunisia",
   summary:
-    "I build web apps with React, Next.js, Node, and Python. Over the last 5+ years, I’ve worked on healthcare, legal tech, and SaaS products used by real teams and customers.",
+    "I build full-stack applications, AI features, custom Shopify themes, e-commerce stores, and landing pages for individuals and businesses. 5+ years delivering software for international clients.",
   email: "alabaganne9@gmail.com",
   website: "alabaganne.com",
 };
 
 const stats = [
   { value: "5+", label: "Years of experience" },
-  { value: "25K+", label: "Users impacted" },
+  { value: "25K+", label: "Users on a platform I help build" },
   { value: "100%", label: "Upwork job success" },
   { value: "10+", label: "Production projects" },
 ];
@@ -36,7 +36,7 @@ export function HeroSection() {
         <h1 className="mt-8 max-w-5xl font-display text-4xl font-semibold leading-[1.08] tracking-[-0.035em] text-white sm:text-6xl sm:leading-[1.02] lg:text-7xl">
           Full-Stack engineer building{" "}
           <span className="bg-gradient-to-r from-blue-300 via-blue-200 to-white bg-clip-text text-transparent">
-            production web apps
+            web apps, online stores
           </span>{" "}
           & AI systems.
         </h1>
@@ -67,9 +67,9 @@ export function HeroSection() {
           </a>
           <a
             className="inline-flex h-12 items-center gap-2 rounded-full border border-white/15 bg-white/[0.08] px-6 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/[0.14]"
-            href="/blog"
+            href="#contact"
           >
-            Read the blog
+            Discuss a project
             <ArrowUpRight className="h-4 w-4" aria-hidden />
           </a>
           <a

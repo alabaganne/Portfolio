@@ -45,7 +45,7 @@ export function ContactSection() {
         </h2>
         <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-slate-300 md:text-lg">
           {/* I&apos;m open to senior full-stack roles, AI-product work, and select freelance engagements. The fastest way to reach me is email. */}
-          I build web apps, AI features, and e-commerce platforms for teams that need them shipped properly. The fastest way to reach me is email.
+          I work with individuals and businesses on Shopify themes, e-commerce, landing pages, and full-stack applications. I&apos;m open to freelance projects, part-time contracts, and full-time roles. Email me about your project or opportunity.
         </p>
         <div className="mt-9 flex flex-wrap justify-center gap-3">
           {contactLinks.map(({ href, label, Icon, primary }) => (

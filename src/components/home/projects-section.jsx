@@ -22,12 +22,24 @@ const projects = [
     image: "/projects/menumate-demo.png",
   },
   {
+    name: "Martinez Auto Detail",
+    domain: "booking.martinezautodetailwa.com",
+    href: "https://booking.martinezautodetailwa.com/",
+    category: ["Web", "Freelance"],
+    badge: "Freelance",
+    tag: "Booking system",
+    description:
+      "Custom booking system with service selection, dynamic pricing, date/time picking, Square-powered card storage for no-show protection, and an owner dashboard.",
+    tech: ["Next.js", "React", "Tailwind", "Square API"],
+    accent: "#0f172a",
+    image: "/projects/martinez-demo.png",
+  },
+  {
     name: "LeBonBureau",
     domain: "lebonbureau.alabaganne.com",
     href: "https://lebonbureau.alabaganne.com",
     image: "/projects/lebonbureau-demo.jpg",
     category: ["Web", "Founder"],
-    topPick: true,
     badge: "Founder",
     tag: "E-commerce store",
     description:
@@ -67,6 +79,7 @@ const projects = [
     domain: "hr-management.alabaganne.com",
     href: "http://hr-management.alabaganne.com",
     category: ["Web", "Internship"],
+    topPick: true,
     badge: "Internship · satoripop",
     tag: "HR platform",
     description:
@@ -80,6 +93,7 @@ const projects = [
     domain: "socialura.alabaganne.com",
     href: "http://socialura.alabaganne.com",
     category: ["Web", "Freelance"],
+    topPick: true,
     badge: "Freelance · Upwork",
     tag: "E-commerce",
     description:
@@ -109,7 +123,7 @@ const projects = [
     badge: "Open",
     tag: "PDF export",
     description:
-      "Builder that helps users create ATS-optimized resumes that pass automated tracking systems with real-time preview and one-click PDF export.",
+      "Resume builder with structured templates, real-time preview, and one-click PDF export.",
     tech: ["Next.js", "React", "Tailwind", "jsPDF"],
     accent: "#2563eb",
     image: "/projects/ats-resume-builder-demo.png",
@@ -126,19 +140,6 @@ const projects = [
     tech: ["HTML", "CSS", "JavaScript", "Bootstrap"],
     accent: "#0ea5e9",
     image: "/projects/eyedeal-demo.png",
-  },
-  {
-    name: "Martinez Auto Detail",
-    domain: "booking.martinezautodetailwa.com",
-    href: "https://booking.martinezautodetailwa.com/",
-    category: ["Web", "Freelance"],
-    badge: "Freelance",
-    tag: "Booking system",
-    description:
-      "Custom booking system surpassing off-the-shelf solutions with service selection, date/time picking, secure card storage for no-show protection, and an owner dashboard.",
-    tech: ["Next.js", "React", "Tailwind", "Square API"],
-    accent: "#0f172a",
-    image: "/projects/martinez-demo.png",
   },
 ];
 
@@ -209,7 +210,7 @@ export function ProjectsSection() {
         <SectionHeader
           eyebrow="03 · Projects"
           title="Selected work, shipped."
-          description="A mix of full-time, freelance, founder and academic work across SaaS, AI-adjacent systems, and production web platforms."
+          description="Selected freelance, founder, internship, and academic work across SaaS, e-commerce, and web applications."
         />
         <div className="mt-10 flex flex-wrap gap-2">
           {categories.map((category) => (

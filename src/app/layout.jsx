@@ -26,7 +26,7 @@ export const metadata = {
   metadataBase: new URL(siteUrl),
   title: "Ala Baganne | Full-Stack Software Engineer",
   description:
-    "Ala Baganne is a full-stack software engineer building production web apps, AI document systems, and SaaS products with React, Next.js, Node.js, FastAPI, and Supabase.",
+    "Ala Baganne builds full-stack applications, AI features, custom Shopify themes, e-commerce stores, and landing pages for individuals and businesses.",
   keywords: [
     "Ala Baganne",
     "full-stack software engineer",
@@ -37,7 +37,10 @@ export const metadata = {
     "Supabase",
     "Node.js",
     "SaaS developer",
-    "web developer"
+    "web developer",
+    "custom Shopify themes",
+    "e-commerce developer",
+    "landing page developer"
   ],
   alternates: {
     canonical: "/",
@@ -47,7 +50,7 @@ export const metadata = {
     url: siteUrl,
     title: "Ala Baganne | Full-Stack Software Engineer",
     description:
-      "Explore Ala Baganne's portfolio of production web apps, AI document systems, SaaS products, and full-stack engineering work.",
+      "Explore Ala Baganne's web applications, SaaS products, AI work, e-commerce stores, and landing pages. Custom Shopify theme development available.",
     siteName: "Ala Baganne Portfolio",
     locale: "en_US",
     images: [
@@ -63,7 +66,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Ala Baganne | Full-Stack Software Engineer",
     description:
-      "Explore Ala Baganne's portfolio of production web apps, AI document systems, SaaS products, and full-stack engineering work.",
+      "Explore Ala Baganne's web applications, SaaS products, AI work, e-commerce stores, and landing pages. Custom Shopify theme development available.",
     images: [
       {
         url: "/og-image.png",
@@ -98,7 +101,7 @@ export default function RootLayout({ children }) {
                 addressCountry: "TN",
               },
               description:
-                "Full-stack software engineer with 5+ years of experience building production web applications, AI document systems, and SaaS products.",
+                "Full-stack software engineer with 5+ years of experience building web applications, AI systems, custom Shopify themes, e-commerce stores, and landing pages.",
               sameAs: [
                 "https://www.linkedin.com/in/alabaganne/",
                 "https://github.com/alabaganne",

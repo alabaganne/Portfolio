@@ -3,10 +3,10 @@ import { Mail } from "lucide-react";
 
 const paragraphs = [
   <>
-    I&apos;m a <strong>Full-Stack Software Engineer</strong> with 5+ years of professional experience building web applications across healthcare, legal tech, and SaaS. I care about clean architecture, good UX, and shipping things that hold up in production.
+    I&apos;m a <strong>Full-Stack Software Engineer</strong> with 5+ years of professional experience. I build SaaS products and AI applications, design custom Shopify themes, and create e-commerce stores and landing pages for individuals and businesses. I work across frontend, backend, integrations, and deployment.
   </>,
   <>
-    Currently I&apos;m a core contributor to <strong>RetainYourBrain</strong> at Retain Health, a digital health platform with <strong>25,000+ users</strong> that helps reduce Alzheimer&apos;s risk. In parallel I work on <strong>NORA</strong> at Wequity, an AI-powered legal document automation platform built with FastAPI, Supabase, GCP, and Vertex AI.
+    I work part-time at <strong>Retain Health</strong>, contributing to RetainYourBrain, a digital health platform with <strong>25,000+ users</strong>. From October 2025 to May 2026, I also worked part-time at <strong>Wequity</strong> on NORA, an AI-powered legal document automation platform built with FastAPI, Supabase, GCP, and Vertex AI.
   </>,
   <>
     On the side, I run my own products. <strong>MenuMate</strong> is a SaaS I designed, built and launched for restaurants to manage digital menus, QR codes, and real-time orders. I&apos;m <strong>Top Rated on Upwork</strong> with a 100% Job Success Score.
@@ -17,6 +17,9 @@ const services = [
   "Web Development",
   "Application Development",
   "AI Integration",
+  "Custom Shopify Themes",
+  "E-commerce",
+  "Landing Pages",
   "Database Development",
   "Mobile Apps",
   "Custom Software",
@@ -41,7 +44,7 @@ export function AboutSection() {
               I build software that <span className="text-blue-600">holds up</span> in production.
             </>
           }
-          description="From a 25,000-user health platform to AI-powered legal document automation, I care about clean architecture, good UX, and shipping real things."
+          description="From custom storefronts and personal websites to SaaS products and AI workflows, I turn requirements into working software."
         />
         <div className="mt-14 grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-14">
           <div className="space-y-5 text-[1.05rem] leading-8 text-slate-600">

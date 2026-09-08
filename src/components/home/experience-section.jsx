@@ -5,17 +5,17 @@ const experiences = [
   {
     role: "Software Engineer",
     company: "Retain Health, Inc.",
-    type: "Contract",
+    type: "Part-time contract",
     location: "Boston, MA",
     mode: "Remote",
     period: "Aug 2021 — Present",
     summary:
-      "Healthcare platform with 25,000+ active users focused on Alzheimer's prevention through personalized lifestyle interventions.",
+      "Healthcare platform with 25,000+ users focused on Alzheimer's prevention through personalized lifestyle interventions.",
     achievements: [
-      "Core contributor to RetainYourBrain, achieving a 22% user retention rate over 4+ years of continuous shipping.",
+      "Core contributor to RetainYourBrain, building and maintaining production features since August 2021.",
       "Built core features full-stack on AngularJS, Express.js, Next.js, Node.js, TypeScript and MySQL.",
       "Designed a dynamic form system with complex conditional logic powering personalized routines and topic recommendations.",
-      "Created reusable AngularJS services with DI to reduce redundant API calls and improve frontend performance by 50%+.",
+      "Created reusable AngularJS services with dependency injection to reduce redundant API calls and improve frontend performance.",
       "Introduced automated testing with Jest, Cypress, Mocha, Supertest, Karma, Protractor, plus GA4/GTM analytics.",
     ],
     tech: ["AngularJS", "Express.js", "React Native", "TypeScript", "MySQL", "AWS", "Google Analytics"],
@@ -24,14 +24,14 @@ const experiences = [
   {
     role: "Full-Stack & AI Engineer",
     company: "Wequity",
-    type: "Contract",
+    type: "Part-time contract",
     location: "Brussels, Belgium",
     mode: "Remote",
     period: "Oct 2025 — May 2026",
     summary:
       "Legal tech company building AI-powered tools for law firms and notaries across Belgium and the Netherlands.",
     achievements: [
-      "Architected NORA, an AI-powered legal document processing platform handling EN/FR/NL documents on React, FastAPI and Supabase with 224+ DB tables.",
+      "Built full-stack features for NORA, an AI-powered legal document processing platform handling English, French, and Dutch documents on React, FastAPI, and Supabase.",
       "Built a Smart Processing module that learns document transformation patterns from example pairs using LLM APIs and DSPy.",
       "Developed a RAG-based Knowledge Base where users query uploaded legal documents and get AI-generated answers with source citations.",
       "Integrated DeepL API for legal document translation across English, French and Dutch.",
@@ -46,15 +46,15 @@ const experiences = [
     type: "Self-employed",
     location: "Worldwide",
     mode: "Remote",
-    period: "Oct 2024 — Present",
+    period: "Aug 2024 - Present",
     summary:
-      "Top Rated freelancer with a 100% Job Success Score, building modern, scalable, high-performance web applications.",
+      "Top Rated freelancer with a 100% Job Success Score, building web applications, custom Shopify themes, e-commerce stores, and landing pages for individuals and businesses.",
     achievements: [
-      "Delivered 3+ full-stack projects with a 100% Job Success Score.",
+      "Completed seven Upwork contracts, each rated five stars.",
       "Built the Martinez Auto Detail booking system with dynamic pricing and secure card storage.",
-      "Developed Socialura for a client, an e-commerce platform with Stripe payment integration for digital service sales.",
+      "Developed Socialura for a client, a WordPress website with Stripe checkout for digital service sales.",
     ],
-    tech: ["Next.js", "React", "Node.js", "Tailwind", "Supabase", "Stripe", "Square"],
+    tech: ["Next.js", "React", "Node.js", "Tailwind", "Supabase", "Shopify", "WordPress", "Stripe", "Square"],
     links: [
       {
         label: "Upwork profile",
@@ -89,7 +89,7 @@ const experiences = [
     summary:
       "Built an admin dashboard for a real estate intelligence platform, working directly with the CTO via weekly milestones.",
     achievements: [
-      "Built admin dashboard with Vue.js and Node.js, improving data management efficiency by 35%.",
+      "Built an admin dashboard with Vue.js and Node.js to manage and visualize property data.",
       "Delivered enhanced data visualization and reporting through weekly milestone reviews with the CTO.",
     ],
     tech: ["Vue.js", "Quasar", "Node.js", "Feathers.js", "MongoDB", "SCSS"],
@@ -127,7 +127,7 @@ export function ExperienceSection() {
         <SectionHeader
           dark
           eyebrow="02 · Experience"
-          title="A working track record across health, legal & SaaS."
+          title="Experience with international teams and clients."
           description="Five years of continuous shipping through long-term contracts, freelance wins, and product-led work for distributed teams."
         />
         <ol className="relative mt-14 space-y-10 md:before:absolute md:before:bottom-2 md:before:left-[18px] md:before:top-2 md:before:w-px md:before:bg-gradient-to-b md:before:from-transparent md:before:via-blue-900 md:before:to-transparent">
