@@ -22,6 +22,50 @@ const projects = [
     image: "/projects/menumate-demo.png",
   },
   {
+    name: "PromptStream",
+    domain: "murmur.alabaganne.com",
+    href: "https://murmur.alabaganne.com",
+    category: ["Desktop", "SaaS"],
+    topPick: true,
+    badge: "Founder",
+    tag: "AI dictation for macOS & Linux",
+    description:
+      "System-wide AI dictation app that turns speech into clean text and pastes it into the active app. Includes configurable shortcuts, a personal dictionary, multilingual transcription, and searchable local history.",
+    tech: ["Electron", "React", "TypeScript", "Next.js", "Supabase"],
+    accent: "#b45309",
+    image: "/projects/promptstream-demo.png",
+  },
+  {
+    name: "BackupMaster",
+    domain: "backupmaster.alabaganne.com",
+    href: "https://backupmaster.alabaganne.com",
+    category: ["Desktop", "Founder"],
+    topPick: true,
+    badge: "Founder",
+    tag: "Native macOS app",
+    description:
+      "Native macOS app for backing up iPhone photos and videos over USB or local Wi-Fi. Copies only missing files, retries interrupted transfers, organizes media by date or device, and includes a local photo and video gallery.",
+    tech: ["Swift", "SwiftUI", "libimobiledevice", "Next.js", "SQLite"],
+    accent: "#15803d",
+    image: "/projects/backupmaster-demo.png",
+  },
+  {
+    name: "EXODIA Store",
+    domain: "exodia-preview.myshopify.com",
+    href: "https://exodia-preview.myshopify.com/",
+    linkLabel: "View preview",
+    previewPassword: "paglow",
+    category: ["Web"],
+    topPick: true,
+    badge: "Shopify",
+    tag: "Custom Shopify theme",
+    description:
+      "I designed and developed a custom Shopify theme for exodiatn.com, a Tunisian clothing brand. The storefront includes responsive Streetwear and Techwear collections, product variants, search, and cart interactions, with French content and pricing in Tunisian dinars.",
+    tech: ["Shopify", "Liquid", "JavaScript", "CSS"],
+    accent: "#c2410c",
+    image: "/projects/exodia-demo.png",
+  },
+  {
     name: "Martinez Auto Detail",
     domain: "booking.martinezautodetailwa.com",
     href: "https://booking.martinezautodetailwa.com/",
@@ -255,6 +299,11 @@ export function ProjectsSection() {
                   <p className="mt-1 font-mono text-xs uppercase tracking-[0.08em] text-slate-500">{project.tag}</p>
                 </div>
                 <p className="text-sm leading-7 text-slate-600">{project.description}</p>
+                {project.previewPassword && (
+                  <p className="text-sm text-slate-600">
+                    Enter preview password: <code className="rounded bg-slate-100 px-2 py-1 font-semibold text-slate-900">{project.previewPassword}</code>
+                  </p>
+                )}
                 <div className="mt-auto flex flex-wrap gap-2 pt-2">
                   {project.tech.map((tech) => (
                     <span key={tech} className="rounded-md bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">
@@ -271,7 +320,7 @@ export function ProjectsSection() {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      Visit live
+                      {project.linkLabel || "Visit live"}
                       <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
                     </a>
                   ) : (
