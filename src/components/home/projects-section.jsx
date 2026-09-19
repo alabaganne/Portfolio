@@ -23,8 +23,8 @@ const projects = [
   },
   {
     name: "PromptStream",
-    domain: "murmur.alabaganne.com",
-    href: "https://murmur.alabaganne.com",
+    domain: "promptstream.alabaganne.com",
+    href: "https://promptstream.alabaganne.com",
     category: ["Desktop", "SaaS"],
     topPick: true,
     badge: "Founder",
