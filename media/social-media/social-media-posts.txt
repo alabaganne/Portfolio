@@ -1,0 +1,26 @@
+LinkedIn and Twitter Posts ideas:
+1/ Journey building SaaS products ...
+Copy paste from chatgpt post similar to what you posted on X (twitter)
+(for image: Take a picture of your Setup and add blue overlay, type in black "Let's build! 🧑‍💻"
+
+2/ As a normal person who've been through the education system, managed to land a software engineering job while studying software engineering at university, It's time to try what have been always in my mind, becoming an entrepreneur, from now on, working for myself, from now on, I'll be building my SaaS ideas one after the other, until one of them make it.
+I'm sure many of you are thinking the same and I hope that me taking the first steps inspires you to take the first step, step out of your comfort zone and explore the potential inside of you.
+I hope that my story inspires you to work on you
+I'm starting a youtube channel called "Million Dollar Dev" where I'll document my journey, from zero to million dollar in revenue.
+[Ask chatgpt to reformulate it and make it better, professional, calm and use 2 emojis max)
+
+* Revisiting an old project that'll allow students of tunisia to find internships and connect with companies, it's like a job board but for students
+(Show image of terminal error when running it)
+It is built with Laravel 7 x years ago as my end of studies project, key features are: (highlight key features)
+Let's see how long it'll take me to update it to the latest Laravel version.
+
+* Second post:
+After spending x hours of development time migrating the project from Laravel 7 to Laravel (latest), we're finally done.
+Since the time I built the project, in 2021, I learned a lot about UI and the backend. I became a better full-stack web developer, and now, we're diving deeper into the project, improving the code quality, the UI and the UX. I'm aiming to launch this product.
+Below you'll see an overview of what's built. Let's see where I can take it.
+I'll keep you updated with my progress 😉
+
+
+
+
+*** Image with text "Restaurants, I will make digital menus, online orders management easy and affordable. Are you ready ?"

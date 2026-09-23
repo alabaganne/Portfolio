@@ -1,0 +1,40 @@
+PC BUILDS (part lists, prices in TND/DT)
+
+== Yassin's build ==
+* (ala baganne) cpu ryzen 5 3600: 140 dt
+* (ala baganne) 2 * 8gb ram: 160 dt
+* (ala baganne) motherboard: 220 dt
+* (ala baganne) psu: 80 dt
+* (ala baganne) case: 100 dt
+* clavier: 90 dt
+* SSD: ?
+== TOTAL: 790 DT
+
+== Hachem's builds ==
+Good deal:
+CPU: i7 14700KF: 1000 DT
+GPU: RX 9070XT: 2200 DT
+RAM 16GB 2*8 RGB: 200 DT
+Motherboard: Asus Prime 300 DT
+Case LINALI: 300 DT (Expected) | Actual One I got: Aerocool Dryft G Bk V2 Black (New: 279 DT) | Expected Used: 200 DT 
+PSU MSI 850W Gold Certified: 200 DT
+SSD NVME 512 GB: 150 DT
+SSD 256GB: 100 DT
+Monitor IPS 1080P 24" 300Mhz: 300 DT
+Microphone: 50 DT
+SSD MSI NVME M390 1TB: 250 DT
+== TOTAL: 4950 DT
+> Bought it for 4850 DT
+
++8GB RAM DDR4 3200Mhz for 50 DT (might return as it might be not working properly)
+
+Low budget build:
+i5 13400F: 400 DT
+RTX 5060: 1000 DT
+PSU 600W Bronze: 150 DT
+RAM 16GB (2*8) 3200Mhz: 200 DT
+Motherboard Asus Prime B760M-R D4: 200 DT
+Case: 150 DT
+SSD: 150 DT
+Monitor: 300 DT
+== TOTAL PRICE: 2600 DT

@@ -1,0 +1,24 @@
+-- Fiver --
+I will design minimalistic icons that matches your brand colors
+I will design modern looking websites for your company
+I will convert your Figma/PSD/Image designs into fully responsive web apps
+I will create an e-commerce store for you with Shopify
+
+-- Upwork --
+
+Todos:
+- Update your profile (find improvements and apply them)
+- Build a Resume/Portfolio website
+- Complete old projects and make videos presenting them and talk about the technologies used
+- Create new projects with Next.js, Tailwind CSS, Supabase
+	1. Portfolio/Resume
+- Add 1 minute video introducing yourself to Upwork profile
+	* Half to talk about yourslef
+	* The other half to show off the results you've got before
+		* Show skills, projects in well edited video.
+- Apply with a Loom video
+
+Tips:
+	* Use key words to rank high when clients search "web developer"
+		- use it in your intro, skills, headline, etc...
+		- find keywords clients might use, and try to use them in your profile to rank high in proposals sections and on talent search.

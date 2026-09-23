@@ -1,0 +1,24 @@
+Hi, I'm Ala, a full-stack software engineer with 5 years of professional experience. I build complete products end to end, from design to backend to deployment. Here are a few I shipped solo:
+
+https://menumate.net/ (Next.js, React, Supabase/PostgreSQL, TypeScript, Tailwind CSS)
+https://global-deals.vercel.app/ (React, Mapbox GL JS, Supabase, Vanilla CSS)
+https://zainspot.com/ (Next.js, NestJS, MySQL, Tailwind CSS, Stripe)
+https://booking.martinezautodetailwa.com/ (booking system with Next.js, Supabase, Square API)
+
+And a couple I helped build inside startups:
+
+https://retainyourbrain.com/ (Alzheimer's prevention platform built with AngularJS, Express.js, MySQL, and AWS, where I've contributed for the past 5 years and still do today)
+https://app.nora.legal/ (React, Supabase, Tailwind CSS, and a Python FastAPI service using DSPy for smart document chunking and processing) at https://www.wequity.app/
+
+Why I'm a strong fit:
+- I turn rough ideas into a clear development plan with concrete, scoped tasks.
+- I design and develop across the full stack, frontend to backend, and handle deployments myself.
+- I'm autonomous, communicative, and reliable with deadlines.
+- Top Rated freelancer on Upwork (my side hustle).
+- I'm comfortable across most modern stacks and pick up new tools quickly when a project shifts.
+
+If this looks like the kind of engineer you need, I'd be glad to talk through the details in an interview.
+
+Best regards,
+Ala Baganne
+Full-Stack Web Developer and Software Engineer, 5+ years of experience
