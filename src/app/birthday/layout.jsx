@@ -1,7 +1,9 @@
 import { Quicksand } from "next/font/google";
+import { noIndexMetadata } from "@/lib/private-pages";
 
 export const metadata = {
   title: "Happy Birthday!",
+  ...noIndexMetadata,
 };
 
 const quicksand = Quicksand({

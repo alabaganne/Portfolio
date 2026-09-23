@@ -1,11 +1,23 @@
 import { NextResponse } from "next/server";
 
 import { disabledPages } from "@/lib/disabled-pages";
+import { privatePages } from "@/lib/private-pages";
+
+const isPrivatePath = (pathname) =>
+  privatePages.some((page) => pathname === page || pathname.startsWith(`${page}/`));
 
 export function middleware(request) {
-  if (disabledPages.includes(request.nextUrl.pathname)) {
+  const { pathname } = request.nextUrl;
+
+  if (disabledPages.includes(pathname)) {
     return new NextResponse(null, { status: 404 });
   }
 
-  return NextResponse.next();
+  const response = NextResponse.next();
+
+  if (isPrivatePath(pathname)) {
+    response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive, noimageindex");
+  }
+
+  return response;
 }

@@ -1,7 +1,9 @@
 import { Libre_Baskerville } from "next/font/google";
+import { noIndexMetadata } from "@/lib/private-pages";
 
 export const metadata = {
   title: "A Secret Note",
+  ...noIndexMetadata,
 };
 
 const libreBaskerville = Libre_Baskerville({

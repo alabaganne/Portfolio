@@ -13,7 +13,7 @@ const projects = [
     href: "https://menumate.net",
     category: ["Web", "SaaS"],
     topPick: true,
-    badge: "SaaS Founder",
+    badge: "SaaS",
     tag: "Live",
     description:
       "SaaS platform that lets restaurants create digital menus, generate QR codes, and accept real-time orders from a single dashboard. SEO-optimized and multilingual.",
@@ -27,7 +27,7 @@ const projects = [
     href: "https://promptstream.alabaganne.com",
     category: ["Desktop", "SaaS"],
     topPick: true,
-    badge: "Founder",
+    badge: "Desktop",
     tag: "AI dictation for macOS & Linux",
     description:
       "System-wide AI dictation app that turns speech into clean text and pastes it into the active app. Includes configurable shortcuts, a personal dictionary, multilingual transcription, and searchable local history.",
@@ -39,9 +39,9 @@ const projects = [
     name: "BackupMaster",
     domain: "backupmaster.alabaganne.com",
     href: "https://backupmaster.alabaganne.com",
-    category: ["Desktop", "Founder"],
+    category: ["Desktop"],
     topPick: true,
-    badge: "Founder",
+    badge: "macOS",
     tag: "Native macOS app",
     description:
       "Native macOS app for backing up iPhone photos and videos over USB or local Wi-Fi. Copies only missing files, retries interrupted transfers, organizes media by date or device, and includes a local photo and video gallery.",
@@ -83,8 +83,8 @@ const projects = [
     domain: "lebonbureau.alabaganne.com",
     href: "https://lebonbureau.alabaganne.com",
     image: "/projects/lebonbureau-demo.jpg",
-    category: ["Web", "Founder"],
-    badge: "Founder",
+    category: ["Web"],
+    badge: "E-commerce",
     tag: "E-commerce store",
     description:
       "A polished, modern e-commerce storefront for an office-furniture brand, with a refined responsive design, product catalog, admin dashboard, and Supabase-backed storage.",
@@ -254,7 +254,7 @@ export function ProjectsSection() {
         <SectionHeader
           eyebrow="03 · Projects"
           title="Selected work, shipped."
-          description="Selected freelance, founder, internship, and academic work across SaaS, e-commerce, and web applications."
+          description="Selected freelance, internship, and academic work across SaaS, e-commerce, and web applications."
         />
         <div className="mt-10 flex flex-wrap gap-2">
           {categories.map((category) => (
