@@ -195,7 +195,7 @@ function ProjectThumb({ project }) {
     <div className="relative aspect-[4/3] overflow-hidden border-b border-slate-200 bg-slate-50">
       {project.image ? (
         <Image
-          src={project.image}
+          src={`${project.image}?v=20260923-3`}
           alt={`${project.name} demo`}
           fill
           sizes="(min-width: 1024px) 50vw, 100vw"
