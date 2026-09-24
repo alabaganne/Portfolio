@@ -4,6 +4,7 @@ import { SectionHeader } from "@/components/section-header";
 import { useMemo, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 // Set `topPick: true` on a project to feature it under the Top Picks filter.
 const projects = [
@@ -20,6 +21,20 @@ const projects = [
     tech: ["Next.js", "React", "Tailwind", "Supabase", "PostgreSQL"],
     accent: "#1d4ed8",
     image: "/projects/menumate-demo.png",
+  },
+  {
+    name: "Karta",
+    domain: "karta.alabaganne.com",
+    href: "https://karta.alabaganne.com",
+    category: ["Web"],
+    topPick: true,
+    badge: "E-commerce",
+    tag: "Gift card store",
+    description:
+      "Online store for gaming and streaming gift cards in Tunisia, where most people can't pay online with an international card. Buyers pay in dinars by D17, bank transfer or cash, and get their code by email. French, English and Arabic.",
+    tech: ["Next.js", "TypeScript", "Tailwind", "MySQL", "Drizzle"],
+    accent: "#e32a35",
+    image: "/projects/karta-demo.png",
   },
   {
     name: "PromptStream",
@@ -80,20 +95,6 @@ const projects = [
     image: "/projects/absoft-demo.png",
   },
   {
-    name: "Taroura Arena",
-    domain: "taroura-arena.alabaganne.com",
-    href: "https://taroura-arena.alabaganne.com/",
-    category: ["Web", "Freelance"],
-    topPick: true,
-    badge: "Freelance",
-    tag: "Gym & karate club website",
-    description:
-      "Website for Taroura Arena, a gym and karate club in Jemmal, Tunisia. Full-screen video hero, training programmes, weekly class schedule, pricing plans, and trial-session booking by form or WhatsApp. French content, mobile-first.",
-    tech: ["HTML", "CSS", "JavaScript"],
-    accent: "#e10600",
-    image: "/projects/taroura-arena-demo.png",
-  },
-  {
     name: "Martinez Auto Detail",
     domain: "booking.martinezautodetailwa.com",
     href: "https://booking.martinezautodetailwa.com/",
@@ -135,13 +136,14 @@ const projects = [
   {
     name: "Internly",
     domain: "internly.alabaganne.com",
-    href: "http://internly.alabaganne.com",
+    href: "https://internly.alabaganne.com",
+    details: "/projects/internly",
     category: ["Web", "Academic"],
     topPick: true,
     badge: "Academic",
     tag: "End of studies project",
     description:
-      "Internship platform where students discover and apply to internships and companies post opportunities, with real-time notifications, tracking, and dashboards.",
+      "Internship platform where students find and apply to internships, companies post roles and review applicants, and admins manage students, companies, fields and skills. Includes messaging, saved roles and application tracking.",
     tech: ["Laravel", "Vue.js", "Inertia.js", "MySQL", "Pusher"],
     accent: "#1d4ed8",
     image: "/projects/internly-demo.png",
@@ -159,6 +161,20 @@ const projects = [
     tech: ["Vue.js", "Laravel", "MySQL", "Bootstrap", "Swagger"],
     accent: "#1d4ed8",
     image: "/projects/satoripop-rh-demo.png",
+  },
+  {
+    name: "Taroura Arena",
+    domain: "taroura-arena.alabaganne.com",
+    href: "https://taroura-arena.alabaganne.com/",
+    category: ["Web", "Freelance"],
+    topPick: true,
+    badge: "Freelance",
+    tag: "Gym & karate club website",
+    description:
+      "Website for Taroura Arena, a gym and karate club in Jemmal, Tunisia. Full-screen video hero, training programmes, weekly class schedule, pricing plans, and trial-session booking by form or WhatsApp. French content, mobile-first.",
+    tech: ["HTML", "CSS", "JavaScript"],
+    accent: "#e10600",
+    image: "/projects/taroura-arena-demo.png",
   },
   {
     name: "Socialura",
@@ -223,7 +239,7 @@ function ProjectThumb({ project }) {
     <div className="relative aspect-[4/3] overflow-hidden border-b border-slate-200 bg-slate-50">
       {project.image ? (
         <Image
-          src={`${project.image}?v=20260923-3`}
+          src={`${project.image}?v=20260924-3`}
           alt={`${project.name} demo`}
           fill
           sizes="(min-width: 1024px) 50vw, 100vw"
@@ -341,19 +357,26 @@ export function ProjectsSection() {
                 </div>
                 <div className="flex items-center justify-between border-t border-dashed border-slate-200 pt-4 text-sm">
                   <span className="font-mono text-xs uppercase tracking-[0.08em] text-slate-500">{project.category.join(" / ")}</span>
-                  {project.href ? (
-                    <a
-                      className="inline-flex items-center gap-1.5 font-semibold !text-blue-600 hover:underline"
-                      href={project.href}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {project.linkLabel || "Visit live"}
-                      <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
-                    </a>
-                  ) : (
-                    <span className="font-mono text-xs text-slate-500">private client work</span>
-                  )}
+                  <div className="flex items-center gap-5">
+                    {project.details && (
+                      <Link className="font-semibold !text-slate-700 hover:underline" href={project.details}>
+                        Screenshots
+                      </Link>
+                    )}
+                    {project.href ? (
+                      <a
+                        className="inline-flex items-center gap-1.5 font-semibold !text-blue-600 hover:underline"
+                        href={project.href}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {project.linkLabel || "Visit live"}
+                        <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+                      </a>
+                    ) : (
+                      <span className="font-mono text-xs text-slate-500">private client work</span>
+                    )}
+                  </div>
                 </div>
               </div>
             </article>
