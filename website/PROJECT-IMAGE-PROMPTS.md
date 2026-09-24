@@ -1,6 +1,6 @@
 # Portfolio project image prompts
 
-These prompts produced the September 2026 portfolio mockups using the built-in imagegen tool. Attach the referenced images when reusing a prompt.
+These prompts produced the September 2026 portfolio mockups using the built-in imagegen tool. Attach the referenced images when reusing a prompt. For websites, prefer the [scripted mockups](#scripted-website-mockups).
 
 ## References
 
@@ -10,6 +10,51 @@ These prompts produced the September 2026 portfolio mockups using the built-in i
 - Content source: a screenshot of the project being presented.
 
 Use the existing mockup as Image 1 and the new project's screenshot as Image 2. Keep the website or app's own colors inside the screen. Use the shared gradient outside it.
+
+## Scripted website mockups
+
+For websites that open in a browser, use the scripts in `scripts/` instead of the prompts. They place real screenshots in the same MacBook frame, so nothing gets redrawn. ABSoft, Taroura Arena, Karta and Internly were made this way.
+
+1. Take the screenshots:
+
+   ```sh
+   node scripts/capture.mjs <url> desktop /tmp/desk.png [--reduce-motion]
+   node scripts/capture.mjs <url> phone /tmp/phone.png [--reduce-motion]
+   ```
+
+   - `desktop`: 1440 x 960 css px at 2x, the same shape as the MacBook screen. Don't zoom out (a 1920 px view was tried and rejected: the text got too small and the hero lost its punch).
+   - `phone`: 430 x 885 css px at 3x, with an iPhone user agent and touch. Chrome windows can't go below about 500 px wide, so the script uses Chrome's device emulation instead of resizing a window.
+   - `--reduce-motion` shows the page's still poster instead of a random video frame (used for Taroura Arena).
+   - `--cookie=name=value` sets a cookie before loading, for example `--cookie=karta_consent=no` so the cookie banner doesn't cover the page.
+   - `--width` and `--height` change the view. Keep width / height at about 1.5. When a hero is shorter than the screen, pick the width so the view ends just past the hero: the start of the next section's background shows, but none of its text. ABSoft uses `--width=1360 --height=905`.
+   - Run the site locally when it has changes that aren't live yet. For a Next.js site, use a production build (`next build` and `next start`), because the dev server adds its own badge to the page.
+   - For apps behind a login, sign in inside the same Chrome session, then take the screenshots. Internly's login form comes filled in with a demo account, so the script only clicks "Log in".
+
+2. Build the mockup (needs Chrome and Pillow: `pip install pillow`):
+
+   ```sh
+   python3 scripts/mockup.py /tmp/desk.png ../media/mockups/<name>-demo-draft.png
+   python3 scripts/mockup.py /tmp/desk.png ../media/mockups/<name>-demo-draft.png --phone /tmp/phone.png --bar "#241C68"
+   ```
+
+### MacBook
+
+- Frame: `public/projects/menumate-demo.png`. The script finds its screen (941 x 626 px, top left at x=254, y=187) and keeps the frame's notch and corners.
+- The page starts below the notch, with a black strip beside it, like a fullscreen app. No content sits under the notch.
+
+### Phone (only when asked)
+
+Add the phone only when the request asks for it. By default, show the MacBook alone.
+
+- Size on the 1448 x 1086 canvas: 248 x 514 px, bottom right corner at x=1362, y=1036, standing in front of the laptop's right corner.
+- Corner radius 45 px, screen inset 10 px, Dynamic Island 72 x 21 px, side buttons on both sides, soft navy shadow.
+- iOS status bar (9:41, signal, wifi, battery), 47 css px tall, in the site's `theme-color`, like Safari. Pass the color with `--bar`.
+- The phone can show a different page of the same project when that tells the story better. For example, MenuMate's landing page on the MacBook and a restaurant's public menu page on the phone. For ABSoft and Taroura Arena, both devices show the landing page.
+- The phone screen should end cleanly, with no content cut at the bottom. If the hero doesn't fit, fix the site's mobile layout (ABSoft hides its photo on phones and lets the hero fill the first screen).
+
+### Project pages with more screenshots
+
+Some projects get their own page with plain app screenshots, no mockup and no browser bar (for example `/projects/internly`). Capture them at 1440 x 900 at 2x, save them as WebP in `public/projects/<name>/`, and link the page from the card with `details: "/projects/<name>"`.
 
 ## Web apps, landing pages and online stores
 
@@ -93,7 +138,7 @@ Add no other decorations or text.
 
 ## Replacing an image
 
-Save previews separately until reviewed. Keep final images in
+Save previews separately until reviewed, as `../media/mockups/<name>-demo-draft.png`. Keep final images in
 `public/projects/`, preserve the 4:3 aspect ratio, and update the image
 URL version in `src/components/home/projects-section.jsx` after replacing
 assets so the previous optimized images are not served from cache.
