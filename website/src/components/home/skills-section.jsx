@@ -1,80 +1,41 @@
-import { Bot, Cloud, Code, Database, Layers, TestTube2 } from "lucide-react";
-
-import { Section, SectionHeading } from "@/components/ui/section";
+import { SplitSection } from "@/components/ui/section";
 import { TagList } from "@/components/ui/tag";
 
-const skillCategories = [
+const skills = [
   {
-    name: "AI & Modern Stack",
-    icon: Bot,
-    description:
-      "LLM integration, RAG systems, vector databases, document processing pipelines.",
-    skills: ["LLM Integration", "RAG Systems", "DSPy", "OpenAI API", "Vertex AI", "Vector DBs", "OCR", "Apache Tika", "AI Agents"],
+    name: "AI features",
+    text: "I add AI to real products: document pipelines, search over your own files with cited answers, and agents that call LLM APIs.",
+    tools: ["OpenAI API", "Vertex AI", "DSPy", "RAG", "Vector databases", "OCR", "AI agents"],
   },
   {
-    name: "Frontend & Storefronts",
-    icon: Layers,
-    description:
-      "Responsive applications, custom Shopify themes, e-commerce stores, and landing pages.",
-    skills: ["React.js", "Next.js", "TypeScript", "Shopify", "Custom Themes", "WordPress", "Vue.js", "AngularJS", "Tailwind CSS", "Shadcn UI", "React Native"],
+    name: "Front end & online stores",
+    text: "Fast, responsive interfaces in React and Next.js, custom Shopify themes, WordPress stores and landing pages that load quickly and rank well.",
+    tools: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "Vue.js", "AngularJS", "React Native", "Shopify", "WordPress"],
   },
   {
-    name: "Backend & Databases",
-    icon: Database,
-    description:
-      "Scalable APIs, async pipelines, well-modeled relational and vector data.",
-    skills: ["Node.js", "NestJS", "Express.js", "FastAPI", "Laravel", "PostgreSQL", "MySQL", "MongoDB"],
+    name: "Back end & data",
+    text: "APIs, background jobs and databases that hold up in production, with clean data models and clear API docs.",
+    tools: ["Node.js", "NestJS", "Express.js", "FastAPI", "Laravel", "Python", "PHP", "PostgreSQL", "MySQL", "MongoDB", "Supabase"],
   },
   {
-    name: "Cloud & DevOps",
-    icon: Cloud,
-    description:
-      "Production deployments, CI/CD, background processing, monitoring.",
-    skills: ["AWS", "GCP Cloud Run", "Pub/Sub", "Cloud Tasks", "Docker", "Linux", "Supabase", "Vercel"],
-  },
-  {
-    name: "Testing & Practices",
-    icon: TestTube2,
-    description:
-      "Automated test suites, code review, API design, and Agile delivery.",
-    skills: ["Jest", "Cypress", "Mocha", "Supertest", "Karma", "Protractor", "Agile/Scrum", "Git"],
-  },
-  {
-    name: "Languages",
-    icon: Code,
-    description:
-      "Strong typed and dynamic languages across the full stack.",
-    skills: ["JavaScript", "TypeScript", "Python", "PHP", "SQL", "HTML5", "CSS3", "C"],
+    name: "Cloud & testing",
+    text: "Deploys, queues and automated tests, so releases stay calm and bugs show up before users see them.",
+    tools: ["AWS", "Google Cloud", "Docker", "Linux", "Vercel", "Jest", "Cypress", "Git", "Scrum"],
   },
 ];
 
 export function SkillsSection() {
   return (
-    <Section id="skills">
-      <SectionHeading
-        label="Skills"
-        title={
-          <>
-            Full-stack, <span className="text-fg-subtle">end to end.</span>
-          </>
-        }
-        description="Hands-on across the modern web stack, from typed frontends to async pipelines on managed cloud."
-      />
-      <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:mt-20 md:grid-cols-2 lg:grid-cols-3">
-        {skillCategories.map(({ name, icon: Icon, description, skills }, index) => (
-          <div
-            key={name}
-            data-reveal
-            style={{ "--reveal-delay": `${(index % 3) * 100}ms` }}
-            className="flex flex-col bg-canvas p-7 md:p-8"
-          >
-            <Icon className="size-5 text-fg-subtle" aria-hidden />
-            <h3 className="mt-8 text-lg font-medium tracking-[-0.02em] text-fg">{name}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-fg-muted">{description}</p>
-            <TagList items={skills} className="mt-6" />
-          </div>
+    <SplitSection id="skills" label="Skills" divider={false}>
+      <ul>
+        {skills.map((skill) => (
+          <li key={skill.name} data-reveal className="mb-12 border-b border-line pb-12 last:mb-0 last:border-0 last:pb-0">
+            <h3 className="text-title text-fg">{skill.name}</h3>
+            <p className="mt-6 text-body text-fg-muted">{skill.text}</p>
+            <TagList items={skill.tools} className="mt-6" />
+          </li>
         ))}
-      </div>
-    </Section>
+      </ul>
+    </SplitSection>
   );
 }

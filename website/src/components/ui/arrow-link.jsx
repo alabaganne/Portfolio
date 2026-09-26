@@ -15,7 +15,7 @@ const arrows = {
 };
 
 const tones = {
-  default: "text-fg hover:text-fg-muted",
+  default: "text-fg hover:opacity-80",
   muted: "text-fg-muted hover:text-fg",
   subtle: "text-fg-subtle hover:text-fg",
 };
@@ -28,7 +28,7 @@ export function ArrowLink({ href, direction = "up-right", tone = "default", clas
     <SmartLink
       href={href}
       className={cn(
-        "group/link inline-flex items-center gap-1.5 text-sm font-medium transition-colors",
+        "group/link inline-flex items-center gap-1.5 text-base font-medium transition-[color,opacity] duration-250",
         tones[tone] ?? tones.default,
         className,
       )}

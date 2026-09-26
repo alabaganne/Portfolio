@@ -4,10 +4,12 @@ import { Inter } from "next/font/google";
 import { site } from "@/lib/site";
 import "./globals.css";
 
+// Only the personal pages use Inter; the portfolio loads Clash fonts in SiteShell.
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
+  preload: false,
 });
 
 const siteUrl = site.url;

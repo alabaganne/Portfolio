@@ -1,54 +1,81 @@
 @import "tailwindcss";
 
-/*
- * Design tokens for the portfolio: a dark, minimal palette with one accent.
- * Colors, type sizes and motion are defined once here; components use the
- * generated utilities (bg-canvas, text-fg-muted, border-line, text-heading...).
- */
+/* Design tokens for the portfolio; DESIGN.md explains how to use them. */
 @theme inline {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 @theme {
+  --font-display: "Clash Display", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Clash Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 
-  --color-canvas: #0a0a0b;
-  --color-surface: #121214;
-  --color-surface-2: #1a1a1d;
-  --color-line: rgb(255 255 255 / 0.08);
-  --color-line-strong: rgb(255 255 255 / 0.16);
-  --color-fg: #f4f4f5;
-  --color-fg-muted: #a1a1aa;
-  --color-fg-subtle: #83838c;
-  --color-accent: #5b8cff;
+  --color-canvas: #0a0a09;
+  --color-surface: rgb(255 255 255 / 0.06);
+  --color-surface-2: rgb(255 255 255 / 0.12);
+  --color-line: rgb(255 255 255 / 0.12);
+  --color-line-strong: rgb(255 255 255 / 0.18);
+  --color-fg: #ffffff;
+  --color-fg-muted: rgb(255 255 255 / 0.8);
+  --color-fg-subtle: rgb(255 255 255 / 0.64);
+  --color-fg-faint: rgb(255 255 255 / 0.5);
+  --color-accent: #f4fa94;
 
-  --text-display: clamp(2.75rem, 1.05rem + 5.6vw, 6rem);
-  --text-display--line-height: 0.98;
-  --text-display--letter-spacing: -0.05em;
+  --text-display: clamp(2.625rem, 0.9rem + 6.4vw, 6rem);
+  --text-display--line-height: 1;
+  --text-display--letter-spacing: 0.025em;
   --text-display--font-weight: 500;
 
-  --text-heading: clamp(2.25rem, 1.5rem + 2.8vw, 4rem);
-  --text-heading--line-height: 1.04;
-  --text-heading--letter-spacing: -0.04em;
+  --text-heading: clamp(2.25rem, 1.5rem + 3vw, 4rem);
+  --text-heading--line-height: 1.1;
+  --text-heading--letter-spacing: 0.015em;
   --text-heading--font-weight: 500;
 
-  --text-title: clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem);
-  --text-title--line-height: 1.2;
-  --text-title--letter-spacing: -0.025em;
+  --text-label: clamp(2rem, 1.7rem + 1.2vw, 2.5rem);
+  --text-label--line-height: 1.2;
+  --text-label--letter-spacing: 0.015em;
+  --text-label--font-weight: 500;
+
+  --text-title: clamp(1.5rem, 1.3rem + 0.8vw, 2rem);
+  --text-title--line-height: 1.25;
+  --text-title--letter-spacing: 0.015em;
   --text-title--font-weight: 500;
 
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --text-heading-sm: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  --text-heading-sm--line-height: 1.25;
+  --text-heading-sm--letter-spacing: 0.015em;
+  --text-heading-sm--font-weight: 500;
 
-  --animate-rise: rise 1.1s var(--ease-out-expo) both;
+  --text-heading-xs: clamp(1.125rem, 1.05rem + 0.3vw, 1.25rem);
+  --text-heading-xs--line-height: 1.25;
+  --text-heading-xs--letter-spacing: 0.015em;
+  --text-heading-xs--font-weight: 500;
 
-  @keyframes rise {
+  --text-lead: clamp(1.5rem, 1rem + 1.2vw, 2rem);
+  --text-lead--line-height: 1.5;
+  --text-lead--letter-spacing: 0.01em;
+
+  --text-body: clamp(1.125rem, 1.05rem + 0.3vw, 1.25rem);
+  --text-body--line-height: 1.5;
+  --text-body--letter-spacing: 0.015em;
+
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in-expo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+  --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1);
+
+  --animate-cover: cover-out 1s var(--ease-out-expo) both;
+  --animate-page-in: page-in 0.8s var(--ease-in-expo) both;
+
+  @keyframes cover-out {
+    to {
+      transform: scaleY(0);
+    }
+  }
+
+  @keyframes page-in {
     from {
       opacity: 0;
-      transform: translate3d(0, 24px, 0);
-    }
-    to {
-      opacity: 1;
-      transform: none;
     }
   }
 }
@@ -79,6 +106,26 @@ html:has(.site-shell) body {
   color: var(--color-fg);
 }
 
+@layer base {
+  .site-shell {
+    font-family: var(--font-body);
+  }
+
+  .site-shell :is(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-display);
+    font-weight: 500;
+  }
+
+  /* Set per element, like the template: an em value set on a parent would be passed down in px. */
+  .site-shell :is(p, li, dt, dd, h1, h2, h3, h4, h5, h6, figcaption) {
+    letter-spacing: 0.015em;
+  }
+
+  .site-shell a {
+    letter-spacing: 0.01em;
+  }
+}
+
 ::selection {
   background: #2563eb;
   color: #ffffff;
@@ -86,6 +133,7 @@ html:has(.site-shell) body {
 
 .site-shell ::selection {
   background: var(--color-accent);
+  color: var(--color-canvas);
 }
 
 .site-shell :focus-visible {
@@ -93,8 +141,15 @@ html:has(.site-shell) body {
   outline-offset: 3px;
 }
 
+/* Anchors land below the 76px sticky navbar; big screens use the section's own top padding. */
 .site-shell [id] {
-  scroll-margin-top: 72px;
+  scroll-margin-top: 76px;
+}
+
+@media (min-width: 1024px) {
+  .site-shell section[id] {
+    scroll-margin-top: 0;
+  }
 }
 
 /* Scroll reveal: RevealObserver hides [data-reveal] elements below the fold and shows them on scroll. */
@@ -132,30 +187,29 @@ html:has(.site-shell) body {
 .mdx-content h5,
 .mdx-content h6 {
   color: var(--color-fg);
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  line-height: 1.2;
+  letter-spacing: 0.015em;
+  line-height: 1.25;
 }
 
 .mdx-content h2 {
-  font-size: clamp(1.625rem, 1.3rem + 1.2vw, 2.125rem);
-  margin-top: 2rem;
+  font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem);
+  margin-top: 2.5rem;
 }
 
 .mdx-content h3 {
-  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
-  margin-top: 1.5rem;
+  font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
+  margin-top: 1.75rem;
 }
 
 .mdx-content p,
 .mdx-content li {
-  color: #c4c4ca;
-  line-height: 1.8;
+  color: var(--color-fg-muted);
+  line-height: 1.7;
 }
 
 .mdx-content strong {
   color: var(--color-fg);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .mdx-content ul,
@@ -170,7 +224,7 @@ html:has(.site-shell) body {
 }
 
 .mdx-content ol li::marker {
-  color: var(--color-fg-subtle);
+  color: var(--color-accent);
 }
 
 .mdx-content a {
@@ -187,18 +241,27 @@ html:has(.site-shell) body {
 }
 
 .mdx-content blockquote {
-  border-left: 2px solid var(--color-accent);
-  color: var(--color-fg);
-  font-size: 1.125em;
-  padding-left: 1.25rem;
+  border-left: 4px solid var(--color-accent);
+  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-block: 1rem;
+  padding-left: 2rem;
+}
+
+.mdx-content blockquote p {
+  color: inherit;
+  line-height: inherit;
 }
 
 .mdx-content pre {
   background: var(--color-surface);
-  border: 1px solid var(--color-line);
-  border-radius: 1rem;
+  border-radius: 0.75rem;
   color: var(--color-fg);
   font-size: 0.875rem;
+  letter-spacing: 0;
   overflow-x: auto;
   padding: 1.25rem 1.5rem;
 }
@@ -209,6 +272,7 @@ html:has(.site-shell) body {
   color: var(--color-fg);
   font-family: var(--font-mono);
   font-size: 0.875em;
+  letter-spacing: 0;
   padding: 0.15rem 0.4rem;
 }
 
@@ -224,16 +288,17 @@ html:has(.site-shell) body {
 }
 
 .blog-article ul > li::before {
-  background: var(--color-fg-subtle);
+  background: var(--color-accent);
+  border-radius: 999px;
   content: "";
   flex: none;
-  height: 1px;
-  margin-top: 0.9em;
-  width: 0.625rem;
+  height: 5px;
+  margin-top: 0.75em;
+  width: 5px;
 }
 
 .blog-article > p:first-of-type {
   color: var(--color-fg);
-  font-size: 1.25rem;
-  line-height: 1.65;
+  font-size: 1.375rem;
+  line-height: 1.6;
 }

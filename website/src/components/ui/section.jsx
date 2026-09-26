@@ -1,7 +1,9 @@
 import { Container } from "@/components/ui/container";
 import { cn } from "@/lib/utils";
 
-export function Section({ id, divider = true, padding = "py-20 md:py-28", className, children, ...props }) {
+export const sectionPadding = "py-16 md:py-24 lg:py-36";
+
+export function Section({ id, divider = true, padding = sectionPadding, className, children, ...props }) {
   return (
     <section id={id} className={className} {...props}>
       <Container>
@@ -11,27 +13,26 @@ export function Section({ id, divider = true, padding = "py-20 md:py-28", classN
   );
 }
 
-export function Eyebrow({ as: Component = "p", className, children }) {
+// "• About": the yellow-dot heading that names each section.
+export function SectionLabel({ as: Heading = "h2", className, children }) {
   return (
-    <Component className={cn("flex items-center gap-2.5 text-sm font-medium text-fg-muted", className)}>
-      <span aria-hidden className="size-1.5 rounded-full bg-accent" />
+    <Heading className={cn("text-label text-fg", className)}>
+      <span aria-hidden className="mr-3 text-accent">
+        •
+      </span>
       {children}
-    </Component>
+    </Heading>
   );
 }
 
-// Label in the left column, heading and intro in the right: the layout every home section shares.
-export function SectionHeading({ label, title, description, children, className, as: Heading = "h2" }) {
+// Label on the left half, content on the right: the layout most sections share.
+export function SplitSection({ id, label, divider, className, children }) {
   return (
-    <div data-reveal className={cn("grid gap-6 md:grid-cols-12 md:gap-8", className)}>
-      <div className="md:col-span-4 md:pt-3 lg:col-span-3">
-        <Eyebrow>{label}</Eyebrow>
+    <Section id={id} divider={divider} className={className}>
+      <div className="grid items-baseline gap-8 md:grid-cols-2 md:gap-10">
+        <SectionLabel>{label}</SectionLabel>
+        <div>{children}</div>
       </div>
-      <div className="md:col-span-8 lg:col-span-9">
-        <Heading className="max-w-4xl text-balance text-heading text-fg">{title}</Heading>
-        {description ? <p className="mt-6 max-w-2xl text-lg leading-relaxed text-fg-muted">{description}</p> : null}
-        {children}
-      </div>
-    </div>
+    </Section>
   );
 }

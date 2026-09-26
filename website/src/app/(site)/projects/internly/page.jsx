@@ -1,10 +1,9 @@
 import Image from "next/image";
 
-import { PageHeader } from "@/components/page-header";
 import { ArrowLink } from "@/components/ui/arrow-link";
-import { Button, ButtonArrow } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { Section } from "@/components/ui/section";
+import { Section, sectionPadding, SectionLabel } from "@/components/ui/section";
+import { TagList } from "@/components/ui/tag";
 
 export const metadata = {
   title: "Internly screenshots | Ala Baganne",
@@ -60,18 +59,12 @@ const sections = [
   },
 ];
 
-const facts = [
-  ["Type", "End of studies project"],
-  ["Stack", tech.join(", ")],
-  ["Workspaces", "Students, companies and admins"],
-];
-
-function Shot({ file, title, text, priority = false, sizes = "(min-width: 1240px) 880px, (min-width: 768px) 66vw, 100vw" }) {
+function Shot({ file, title, text, priority = false, sizes = "(min-width: 1400px) 600px, (min-width: 768px) 50vw, 100vw", className }) {
   const src = `/projects/internly/${file}.webp`;
 
   return (
-    <figure data-reveal className="group">
-      <a href={src} target="_blank" rel="noreferrer" className="relative block overflow-hidden rounded-2xl bg-surface">
+    <figure data-reveal className={className}>
+      <a href={src} target="_blank" rel="noreferrer" className="group block overflow-hidden rounded-xl bg-surface">
         <Image
           src={src}
           alt={`Internly ${title.toLowerCase()} screen`}
@@ -79,13 +72,12 @@ function Shot({ file, title, text, priority = false, sizes = "(min-width: 1240px
           height={1800}
           sizes={sizes}
           priority={priority}
-          className="h-auto w-full transition-transform duration-[1200ms] ease-out-expo group-hover:scale-[1.02]"
+          className="h-auto w-full transition-transform duration-700 ease-out-expo group-hover:scale-[1.02]"
         />
-        <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[inherit] ring-1 ring-inset ring-white/10" />
       </a>
       <figcaption className="mt-5">
-        <p className="font-medium text-fg">{title}</p>
-        <p className="mt-1 text-sm leading-relaxed text-fg-muted">{text}</p>
+        <p className="font-display text-xl font-medium text-fg">{title}</p>
+        <p className="mt-1 text-base text-fg-subtle">{text}</p>
       </figcaption>
     </figure>
   );
@@ -94,75 +86,67 @@ function Shot({ file, title, text, priority = false, sizes = "(min-width: 1240px
 export default function InternlyPage() {
   return (
     <>
-      <PageHeader
-        back={{ href: "/#projects", label: "All projects" }}
-        label="Case study"
-        title="Internly"
-        description="An internship platform with three workspaces. Students find and apply to internships, companies post roles and review applicants, and admins manage the whole catalog."
-      >
-        <dl className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-line bg-line motion-safe:animate-rise motion-safe:[animation-delay:240ms] sm:grid-cols-2 lg:grid-cols-4">
-          {facts.map(([label, value]) => (
-            <div key={label} className="bg-canvas p-6">
-              <dt className="text-sm text-fg-subtle">{label}</dt>
-              <dd className="mt-2 text-[15px] leading-relaxed text-fg">{value}</dd>
-            </div>
-          ))}
-          <div className="bg-canvas p-6">
-            <dt className="text-sm text-fg-subtle">Live demo</dt>
-            <dd className="mt-2">
-              <ArrowLink href="https://internly.alabaganne.com">
-                internly.alabaganne.com
-              </ArrowLink>
-              <p className="mt-1 text-sm leading-relaxed text-fg-muted">The login form comes filled in with a demo student account.</p>
-            </dd>
+      <header>
+        <Container>
+          <div className={sectionPadding}>
+            <ArrowLink href="/#projects" direction="left" tone="muted">
+              All projects
+            </ArrowLink>
+            <h1 className="mt-10 text-display uppercase text-fg md:mt-12">Internly</h1>
+            <TagList items={["End of studies project", ...tech]} className="mt-8" />
           </div>
-        </dl>
-      </PageHeader>
+        </Container>
+      </header>
 
-      <Container className="pb-8">
+      <Container>
         <Shot
           file="student-dashboard"
           title="Student dashboard"
           text="Open roles, companies hiring and the status of every application at a glance."
-          sizes="(min-width: 1240px) 1176px, 100vw"
+          sizes="(min-width: 1400px) 1240px, 100vw"
           priority
         />
       </Container>
 
-      {sections.map((section) => (
-        <Section key={section.title}>
-          <div className="grid gap-10 md:grid-cols-12 md:gap-8">
-            <div data-reveal className="md:col-span-4 lg:col-span-3">
-              <div className="md:sticky md:top-28">
-                <h2 className="text-title text-fg">{section.title}</h2>
-                <p className="mt-3 leading-relaxed text-fg-muted">{section.text}</p>
-              </div>
-            </div>
-            <div className="grid gap-14 md:col-span-8 lg:col-span-9">
-              {section.shots.map((shot) => (
-                <Shot key={shot.file} {...shot} />
-              ))}
-            </div>
-          </div>
-        </Section>
-      ))}
-
-      <Section>
-        <div data-reveal className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-          <h2 className="max-w-xl text-heading text-fg">
-            Need a platform <span className="text-fg-subtle">like this?</span>
-          </h2>
-          <div className="flex flex-wrap gap-3">
-            <Button href="#contact" size="lg">
-              Get in touch
-              <ButtonArrow />
-            </Button>
-            <Button href="/#projects" variant="secondary" size="lg">
-              More projects
-            </Button>
+      <Section divider={false}>
+        <div className="grid items-baseline gap-8 md:grid-cols-2 md:gap-10">
+          <SectionLabel>Overview</SectionLabel>
+          <div data-reveal>
+            <p className="text-lead text-fg">
+              An internship platform with three workspaces: students find and apply to internships, companies post
+              roles and review applicants, and admins run the whole catalog.
+            </p>
+            <p className="mt-6 text-body text-fg-muted">
+              It includes messaging, saved roles and application tracking. The live demo&apos;s login form comes filled
+              in with a demo student account.
+            </p>
+            <ArrowLink href="https://internly.alabaganne.com" className="mt-8">
+              internly.alabaganne.com
+            </ArrowLink>
           </div>
         </div>
       </Section>
+
+      {sections.map((section) => (
+        <Section key={section.title}>
+          <div className="grid items-baseline gap-8 md:grid-cols-2 md:gap-10">
+            <SectionLabel>{section.title}</SectionLabel>
+            <p data-reveal className="text-body text-fg-muted">
+              {section.text}
+            </p>
+          </div>
+          <div className="mt-12 grid gap-x-10 gap-y-14 md:grid-cols-2">
+            {section.shots.map((shot) => (
+              <Shot
+                key={shot.file}
+                {...shot}
+                className={section.shots.length === 1 ? "md:col-span-2" : undefined}
+                sizes={section.shots.length === 1 ? "(min-width: 1400px) 1240px, 100vw" : undefined}
+              />
+            ))}
+          </div>
+        </Section>
+      ))}
     </>
   );
 }

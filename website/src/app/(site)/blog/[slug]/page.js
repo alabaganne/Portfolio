@@ -1,12 +1,12 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-import { formatPostDate, PostCard, PostMeta } from "@/components/post-card";
+import { formatPostDate, PostCard } from "@/components/post-card";
 import { ArrowLink } from "@/components/ui/arrow-link";
 import { Container } from "@/components/ui/container";
-import { Glow } from "@/components/ui/glow";
-import { Section, SectionHeading } from "@/components/ui/section";
-import { Tag } from "@/components/ui/tag";
+import { LogoMark } from "@/components/ui/logo";
+import { Section, sectionPadding, SectionLabel } from "@/components/ui/section";
+import { Tag, TagList } from "@/components/ui/tag";
 import { getAllPostSlugs, getAllPostsMetadata, getPostBySlug } from "@/lib/blog";
 import { site, socialLinks } from "@/lib/site";
 
@@ -73,7 +73,7 @@ export default async function BlogPostPage({ params }) {
 
   const { metadata, html } = post;
   const posts = await getAllPostsMetadata();
-  const relatedPosts = posts.filter((item) => item.slug !== metadata.slug).slice(0, 3);
+  const relatedPosts = posts.filter((item) => item.slug !== metadata.slug).slice(0, 2);
   const publishedLabel = formatPostDate(metadata.date, "long");
 
   const canonicalUrl = `${siteUrl}/blog/${metadata.slug}`;
@@ -105,69 +105,56 @@ export default async function BlogPostPage({ params }) {
   return (
     <>
       <article>
-        <header className="relative isolate overflow-hidden">
-          <Glow />
-          <Container className="pb-14 pt-32 md:pb-16 md:pt-44">
-            <div className="mx-auto max-w-[720px]">
-              <div className="motion-safe:animate-rise">
-                <ArrowLink href="/blog" direction="left" tone="muted">
-                  All posts
-                </ArrowLink>
-              </div>
-              <PostMeta
-                className="mt-12 motion-safe:animate-rise"
-                items={[
+        <header>
+          <Container>
+            <div className={sectionPadding}>
+              <ArrowLink href="/blog" direction="left" tone="muted">
+                All posts
+              </ArrowLink>
+              <h1 className="mt-10 max-w-[1000px] text-balance text-heading uppercase text-fg md:mt-12">{metadata.title}</h1>
+              <ul className="mt-8 flex flex-wrap gap-3">
+                {[
                   metadata.category,
                   publishedLabel ? <time dateTime={metadata.date}>{publishedLabel}</time> : null,
                   metadata.readTime,
-                ]}
-              />
-              <h1 className="mt-5 text-balance text-[clamp(2.25rem,1.4rem+3.4vw,4rem)] font-medium leading-[1.04] tracking-[-0.04em] text-fg motion-safe:animate-rise motion-safe:[animation-delay:80ms]">
-                {metadata.title}
-              </h1>
-              <p className="mt-6 text-lg leading-relaxed text-fg-muted motion-safe:animate-rise motion-safe:[animation-delay:160ms] md:text-xl">
-                {metadata.description}
-              </p>
-              {metadata.author ? (
-                <div className="mt-10 flex items-center gap-3 motion-safe:animate-rise motion-safe:[animation-delay:240ms]">
-                  <span className="grid size-11 place-items-center rounded-full border border-line-strong bg-surface text-sm font-medium text-fg">
-                    AB
-                  </span>
-                  <span>
-                    <span className="block text-sm font-medium text-fg">{metadata.author}</span>
-                    <span className="block text-sm text-fg-subtle">{site.role}</span>
-                  </span>
-                </div>
-              ) : null}
+                ]
+                  .filter(Boolean)
+                  .map((item, index) => (
+                    <li key={index}>
+                      <Tag size="md">{item}</Tag>
+                    </li>
+                  ))}
+              </ul>
+              <p className="mt-10 max-w-[700px] text-lead text-fg-muted">{metadata.description}</p>
             </div>
           </Container>
         </header>
 
         {metadata.coverImage ? (
           <Container>
-            <div className="relative mx-auto aspect-[16/9] max-w-5xl overflow-hidden rounded-2xl bg-surface motion-safe:animate-rise motion-safe:[animation-delay:300ms]">
-              <Image src={metadata.coverImage} alt={metadata.coverImageAlt} fill sizes="(min-width: 1100px) 1024px, 100vw" className="object-cover" priority />
-              <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[inherit] ring-1 ring-inset ring-white/10" />
+            <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-surface">
+              <Image
+                src={metadata.coverImage}
+                alt={metadata.coverImageAlt}
+                fill
+                sizes="(min-width: 1400px) 1240px, 100vw"
+                className="object-cover"
+                priority
+              />
             </div>
           </Container>
         ) : null}
 
-        <Container className="py-16 md:py-24">
+        <Container className={sectionPadding}>
           <div className="mx-auto max-w-[720px]">
-            <div className="blog-article mdx-content text-[17px] leading-[1.8]" dangerouslySetInnerHTML={{ __html: html }} />
+            <div className="blog-article mdx-content text-lg" dangerouslySetInnerHTML={{ __html: html }} />
 
             {metadata.tags.length > 0 ? (
-              <ul className="mt-14 flex flex-wrap gap-2 border-t border-line pt-8">
-                {metadata.tags.map((tag) => (
-                  <li key={tag}>
-                    <Tag>#{tag}</Tag>
-                  </li>
-                ))}
-              </ul>
+              <TagList items={metadata.tags.map((tag) => `#${tag}`)} className="mt-14 border-t border-line pt-8" />
             ) : null}
 
-            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2">
-              <span className="text-sm text-fg-subtle">Share</span>
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2">
+              <span className="text-base text-fg-subtle">Share</span>
               {shareLinks.map((link) => (
                 <ArrowLink key={link.label} href={link.href} tone="muted">
                   {link.label}
@@ -175,17 +162,14 @@ export default async function BlogPostPage({ params }) {
               ))}
             </div>
 
-            <aside className="mt-12 flex flex-col gap-5 rounded-2xl border border-line bg-surface p-7 sm:flex-row">
-              <span className="grid size-14 shrink-0 place-items-center rounded-full border border-line-strong bg-canvas text-base font-medium text-fg">
-                AB
-              </span>
+            <aside className="mt-12 flex flex-col gap-5 rounded-xl bg-surface p-6 sm:flex-row md:p-8">
+              <LogoMark className="size-14" />
               <div>
-                <h2 className="text-lg font-medium tracking-[-0.02em] text-fg">Written by {metadata.author || site.name}</h2>
-                <p className="mt-2 text-sm leading-relaxed text-fg-muted">
-                  Full-Stack Software Engineer building production web apps, AI document systems, and SaaS products from
-                  Monastir, Tunisia.
+                <h2 className="text-xl text-fg">Written by {metadata.author || site.name}</h2>
+                <p className="mt-2 text-base text-fg-muted">
+                  Full-stack software engineer building web apps, AI features and SaaS products from {site.location}.
                 </p>
-                <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+                <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
                   {socialLinks.slice(0, 2).map((link) => (
                     <ArrowLink key={link.href} href={link.href}>
                       {link.label}
@@ -201,17 +185,12 @@ export default async function BlogPostPage({ params }) {
 
       {relatedPosts.length > 0 ? (
         <Section>
-          <SectionHeading
-            label="Keep reading"
-            title={
-              <>
-                More from <span className="text-fg-subtle">the notebook.</span>
-              </>
-            }
-          />
-          <div className="mt-14 grid gap-x-8 gap-y-14 md:mt-20 md:grid-cols-2 lg:grid-cols-3">
+          <SectionLabel>Keep reading</SectionLabel>
+          <div className="mt-12 grid gap-6 md:grid-cols-2 md:gap-10">
             {relatedPosts.map((item) => (
-              <PostCard key={item.slug} post={item} />
+              <div key={item.slug} data-reveal>
+                <PostCard post={item} />
+              </div>
             ))}
           </div>
         </Section>

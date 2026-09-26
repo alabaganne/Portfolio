@@ -1,93 +1,42 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
-import { ArrowLink } from "@/components/ui/arrow-link";
-import { TagList } from "@/components/ui/tag";
+import { SmartLink } from "@/components/ui/smart-link";
 
-function ProjectImage({ project }) {
-  const accent = project.accent || "#5b8cff";
-
+// Irene-style work card: the mockup on black, then the project name and tagline.
+export function ProjectCard({ project, hidden = false }) {
   return (
-    <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-surface">
-      {project.image ? (
+    <SmartLink
+      href={project.href}
+      tabIndex={hidden ? -1 : undefined}
+      draggable={false}
+      className="group flex w-[80vw] max-w-[26rem] shrink-0 flex-col overflow-hidden rounded-xl bg-black transition-transform duration-300 ease-out-quart hover:-translate-y-1 active:scale-[0.99] md:w-[30rem] md:max-w-none lg:w-[37.5rem]"
+    >
+      <span className="relative block aspect-[4/3]">
         <Image
-          src={`${project.image}?v=20260926-1`}
+          src={`${project.image}?v=20260926-3`}
           alt={`${project.name} demo`}
           fill
-          sizes="(min-width: 1240px) 588px, (min-width: 768px) 50vw, 100vw"
-          className="object-cover transition-transform duration-[1200ms] ease-out-expo group-hover:scale-[1.04]"
+          draggable={false}
+          sizes="(min-width: 1024px) 600px, (min-width: 768px) 480px, 80vw"
+          className="object-cover"
         />
-      ) : (
-        <div
-          className="absolute inset-0"
-          style={{ background: `radial-gradient(80% 80% at 50% 0%, ${accent}40, transparent 70%)` }}
-        />
-      )}
-      <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[inherit] ring-1 ring-inset ring-white/10" />
-      <span className="absolute left-4 top-4 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-black">
-        {project.badge}
-      </span>
-      {project.href ? (
         <span
           aria-hidden
-          className="absolute bottom-4 right-4 grid size-12 translate-y-2 place-items-center rounded-full bg-white text-black opacity-0 transition duration-500 ease-out-expo group-hover:translate-y-0 group-hover:opacity-100"
+          className="absolute bottom-4 right-4 grid size-12 scale-50 place-items-center rounded-full bg-accent text-canvas opacity-0 transition duration-300 ease-out-quart group-hover:scale-100 group-hover:opacity-100 group-focus-visible:scale-100 group-focus-visible:opacity-100"
         >
           <ArrowUpRight className="size-5" />
         </span>
-      ) : null}
-    </div>
-  );
-}
-
-export function ProjectCard({ project }) {
-  return (
-    <article className="group flex h-full flex-col">
-      {project.href ? (
-        <a href={project.href} target="_blank" rel="noreferrer" tabIndex={-1} aria-hidden>
-          <ProjectImage project={project} />
-        </a>
-      ) : (
-        <ProjectImage project={project} />
-      )}
-
-      <div className="mt-6 flex items-start justify-between gap-4">
-        <div>
-          <h3 className="text-title text-fg">
-            {project.href ? (
-              <a className="transition-colors hover:text-fg-muted" href={project.href} target="_blank" rel="noreferrer">
-                {project.name}
-              </a>
-            ) : (
-              project.name
-            )}
-          </h3>
-          <p className="mt-1.5 text-sm text-fg-subtle">{project.tag}</p>
-        </div>
-        <p className="shrink-0 pt-1.5 text-xs text-fg-subtle">{project.category.join(" / ")}</p>
-      </div>
-
-      <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-fg-muted">{project.description}</p>
-      {project.previewPassword ? (
-        <p className="mt-3 text-sm text-fg-muted">
-          Preview password:{" "}
-          <code className="rounded-md bg-surface-2 px-2 py-0.5 font-mono text-[13px] text-fg">{project.previewPassword}</code>
-        </p>
-      ) : null}
-
-      <TagList items={project.tech} className="mt-5" />
-
-      <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-2 pt-6">
-        {project.href ? (
-          <ArrowLink href={project.href}>{project.linkLabel || "Visit live"}</ArrowLink>
-        ) : (
-          <span className="text-sm text-fg-subtle">Private client work</span>
-        )}
-        {project.details ? (
-          <ArrowLink href={project.details} direction="right" tone="muted">
-            Screenshots
-          </ArrowLink>
+      </span>
+      <span className="block flex-1 p-5 sm:p-6">
+        <span className="block font-display text-heading-sm text-fg">{project.name}</span>
+        <span className="block font-display text-heading-sm text-fg-subtle">{project.tag}</span>
+        {project.previewPassword ? (
+          <span className="mt-2 block text-sm text-fg-faint">
+            Password <span className="font-medium text-fg-muted">{project.previewPassword}</span>
+          </span>
         ) : null}
-      </div>
-    </article>
+      </span>
+    </SmartLink>
   );
 }

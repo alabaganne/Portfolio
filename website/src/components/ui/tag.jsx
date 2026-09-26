@@ -1,12 +1,14 @@
 import { cn } from "@/lib/utils";
 
-export function Tag({ className, ...props }) {
+const sizes = {
+  sm: "px-3 py-1 text-sm",
+  md: "px-4 py-2 text-base",
+};
+
+export function Tag({ size = "sm", className, ...props }) {
   return (
     <span
-      className={cn(
-        "inline-flex items-center rounded-full border border-line bg-white/[0.02] px-2.5 py-1 text-xs font-medium text-fg-muted",
-        className,
-      )}
+      className={cn("inline-flex items-center rounded-md bg-surface-2 font-display font-medium text-fg", sizes[size], className)}
       {...props}
     />
   );

@@ -1,23 +1,20 @@
-import { ArrowUpRight } from "lucide-react";
-
 import { SmartLink } from "@/components/ui/smart-link";
 import { cn } from "@/lib/utils";
 
 const variants = {
-  primary: "bg-fg text-canvas hover:bg-white",
-  secondary: "border border-line-strong text-fg hover:border-white/30 hover:bg-white/[0.04]",
-  ghost: "text-fg-muted hover:text-fg",
+  primary: "bg-accent text-canvas hover:opacity-80",
+  secondary: "bg-surface-2 text-fg hover:bg-line-strong",
 };
 
 const sizes = {
-  sm: "h-9 px-4 text-[13px]",
-  md: "h-11 px-5 text-sm",
-  lg: "h-12 px-6 text-[15px]",
+  sm: "min-h-10 px-5 text-sm",
+  md: "min-h-12 px-6 text-base",
+  lg: "min-h-14 px-6 text-lg",
 };
 
 export function Button({ href, variant = "primary", size = "md", className, children, ...props }) {
   const classes = cn(
-    "group/button inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full font-medium transition-colors duration-300 [&_svg]:size-4",
+    "inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-md pb-px font-display font-medium uppercase leading-none tracking-[1px] transition-[opacity,background-color,transform] duration-250 active:scale-[0.98] [&_svg]:size-4",
     variants[variant] ?? variants.primary,
     sizes[size] ?? sizes.md,
     className,
@@ -35,18 +32,5 @@ export function Button({ href, variant = "primary", size = "md", className, chil
     <button type="button" className={classes} {...props}>
       {children}
     </button>
-  );
-}
-
-// Arrow that nudges up and right when its parent Button is hovered.
-export function ButtonArrow({ className }) {
-  return (
-    <ArrowUpRight
-      aria-hidden
-      className={cn(
-        "transition-transform duration-300 group-hover/button:-translate-y-0.5 group-hover/button:translate-x-0.5",
-        className,
-      )}
-    />
   );
 }

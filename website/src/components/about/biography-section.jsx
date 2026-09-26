@@ -1,78 +1,71 @@
-import { Mail } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import { Section, SectionHeading } from "@/components/ui/section";
+import { Container } from "@/components/ui/container";
+import { SplitSection } from "@/components/ui/section";
 import { site } from "@/lib/site";
 
-const paragraphs = [
-  <>
-    I&apos;m a <strong>Full-Stack Software Engineer</strong> with 5+ years of professional experience. I build SaaS products and AI applications, design custom Shopify themes, and create e-commerce stores and landing pages for individuals and businesses. I work across frontend, backend, integrations, and deployment.
-  </>,
-  <>
-    I work part-time at <strong>Retain Health</strong>, contributing to RetainYourBrain, a digital health platform with <strong>25,000+ users</strong>. From October 2025 to May 2026, I also worked part-time at <strong>Wequity</strong> on NORA, an AI-powered legal document automation platform built with FastAPI, Supabase, GCP, and Vertex AI.
-  </>,
-  <>
-    On the side, I run my own products. <strong>MenuMate</strong> is a SaaS I designed, built and launched for restaurants to manage digital menus, QR codes, and real-time orders. I&apos;m <strong>Top Rated on Upwork</strong> with a 100% Job Success Score.
-  </>,
-];
-
-const details = [
+const facts = [
   ["Based in", site.location],
-  ["Experience", "5+ years"],
-  ["Work mode", "Remote · Worldwide"],
-  // ["Status", "● Available"],
-  ["Languages", "EN · FR · AR"],
+  ["Works", "Remote, worldwide"],
+  ["Speaks", "English, French, Arabic"],
+  ["Freelance", "Top Rated on Upwork", site.socials.upwork],
 ];
 
-export function AboutSection() {
+const stats = [
+  { value: "5+", label: "Years building software" },
+  { value: "25K+", label: "Users on a platform I help build" },
+  { value: "100%", label: "Job success on Upwork" },
+  { value: "10+", label: "Projects live in production" },
+];
+
+export function BiographySection() {
   return (
-    <Section id="about">
-      <SectionHeading
-        label="About"
-        title={
-          <>
-            I build software that <span className="text-fg-subtle">holds up in production.</span>
-          </>
-        }
-        description="From custom storefronts and personal websites to SaaS products and AI workflows, I turn requirements into working software."
-      />
-      <div className="mt-14 grid gap-12 md:mt-20 md:grid-cols-12 md:gap-8">
-        <div
-          data-reveal
-          className="space-y-6 text-lg leading-relaxed text-fg-muted md:col-span-8 md:col-start-5 lg:col-span-5 lg:col-start-4 [&_strong]:font-medium [&_strong]:text-fg"
-        >
-          {paragraphs.map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
-          ))}
+    <>
+      <SplitSection label="Biography">
+        <p data-reveal className="text-lead text-fg">
+          I&apos;m a full-stack software engineer who likes turning rough ideas into software people use every day.
+        </p>
+        <div data-reveal className="mt-8 space-y-6 text-body text-fg-muted">
+          <p>
+            Since 2021 I&apos;ve worked part-time at Retain Health on RetainYourBrain, a brain health platform with
+            25,000+ users. Until May 2026 I also worked on NORA at Wequity, an AI platform that helps law firms and
+            notaries process legal documents.
+          </p>
+          <p>
+            On the side I build my own products, like MenuMate, a SaaS I designed, built and launched so restaurants
+            can run digital menus, QR codes and orders. I&apos;m also Top Rated on Upwork, where I build stores,
+            booking systems and landing pages for clients.
+          </p>
         </div>
-        <aside data-reveal className="md:col-span-8 md:col-start-5 lg:col-span-4 lg:col-start-9" style={{ "--reveal-delay": "120ms" }}>
-          <dl className="divide-y divide-line border-y border-line text-sm">
-            {details.map(([label, value]) => (
-              <div key={label} className="flex justify-between gap-6 py-4">
-                <dt className="text-fg-subtle">{label}</dt>
-                <dd className={label === "Status" ? "font-medium text-green-400" : "text-right text-fg"}>{value}</dd>
-              </div>
-            ))}
-            <div className="flex justify-between gap-6 py-4">
-              <dt className="text-fg-subtle">Upwork</dt>
-              <dd className="text-right">
-                <a
-                  className="text-fg underline decoration-white/30 underline-offset-4 transition-colors hover:decoration-accent"
-                  href={site.socials.upwork}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Top Rated · 100% JSS ↗
-                </a>
+        <dl data-reveal className="mt-14 grid gap-x-10 gap-y-8 sm:grid-cols-2">
+          {facts.map(([label, value, href]) => (
+            <div key={label}>
+              <dt className="text-base text-fg-subtle">{label}</dt>
+              <dd className="mt-1 font-display text-heading-xs text-fg">
+                {href ? (
+                  <a href={href} target="_blank" rel="noreferrer" className="transition-opacity duration-250 hover:opacity-80">
+                    {value} ↗
+                  </a>
+                ) : (
+                  value
+                )}
               </dd>
             </div>
-          </dl>
-          <Button href={`mailto:${site.email}`} variant="secondary" className="mt-6 w-full">
-            <Mail aria-hidden />
-            {site.email}
-          </Button>
-        </aside>
-      </div>
-    </Section>
+          ))}
+        </dl>
+      </SplitSection>
+
+      <Container>
+        <dl
+          data-reveal
+          className="grid grid-cols-2 gap-x-6 gap-y-12 rounded-xl bg-surface px-6 py-12 sm:px-10 md:px-16 md:py-20 lg:grid-cols-4 lg:gap-x-10"
+        >
+          {stats.map((stat) => (
+            <div key={stat.label} className="flex flex-col-reverse justify-end gap-3">
+              <dt className="text-body text-fg-subtle">{stat.label}</dt>
+              <dd className="font-display text-heading text-fg">{stat.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </Container>
+    </>
   );
 }

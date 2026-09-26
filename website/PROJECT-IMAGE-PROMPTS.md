@@ -2,15 +2,23 @@
 
 These prompts produced the September 2026 portfolio mockups using the built-in imagegen tool. Attach the referenced images when reusing a prompt. For websites, prefer the [scripted mockups](#scripted-website-mockups).
 
-Every mockup shows the same MacBook on a near-black background (about `#0a0a0c`, with a faint cool light at the top right), to match the dark website. The earlier mockups sat on a bright cyan/lavender/violet/cobalt gradient; they were moved onto the dark background by keeping the laptop and each project's screen pixels and replacing only the backdrop. Desktop apps are shown on the MacBook screen, with the old gradient as the desktop wallpaper.
+Every mockup shows the same MacBook, in the same spot, on a transparent background, so the cards in the Work rows line up. The cards show it on plain black (see `project-card.jsx`). Desktop apps are shown on the MacBook screen, on a graphite gray wallpaper.
+
+Image tools can't make transparent images, so AI-made mockups are made on the near-black background (about `#0a0a0c`) and then cut out:
+
+```sh
+python3 scripts/cutout.py <in.png> public/projects/<name>-demo.png
+```
+
+It makes the dark area around the devices transparent and keeps their shadows.
 
 ## References
 
-- Web mockup and shared background: `public/projects/menumate-demo.png`.
+- Web mockup and shared frame: `public/projects/menumate-demo.png`.
 - Desktop app on the MacBook screen: `public/projects/backupmaster-demo.png` (light app) and `public/projects/promptstream-demo.png` (dark app).
 - Content source: a screenshot of the project being presented.
 
-Use the existing mockup as Image 1 and the new project's screenshot as Image 2. Keep the website or app's own colors inside the screen. Keep the dark background outside it.
+Use the existing mockup as Image 1 and the new project's screenshot as Image 2. Keep the website or app's own colors inside the screen. Keep the dark background outside it, then run `scripts/cutout.py`.
 
 ## Scripted website mockups
 
@@ -40,7 +48,7 @@ For websites that open in a browser, use the scripts in `scripts/` instead of th
 
 ### MacBook
 
-- Frame: `public/projects/menumate-demo.png`, the MacBook on the dark background. The script finds its screen (941 x 626 px, top left at x=254, y=187) and keeps the frame's notch and corners.
+- Frame: `public/projects/menumate-demo.png`, the MacBook on a transparent background. New mockups keep that transparency. The script finds its screen (941 x 626 px, top left at x=254, y=187) and keeps the frame's notch and corners.
 - The page starts below the notch, with a black strip beside it, like a fullscreen app. No content sits under the notch.
 
 ### Phone (only when asked)
@@ -50,7 +58,7 @@ Add the phone only when the request asks for it. By default, show the MacBook al
 - Size on the 1448 x 1086 canvas: 248 x 514 px, bottom right corner at x=1362, y=1036, standing in front of the laptop's right corner.
 - Corner radius 45 px, screen inset 10 px, Dynamic Island 72 x 21 px, side buttons on both sides, soft black shadow.
 - iOS status bar (9:41, signal, wifi, battery), 47 css px tall, in the site's `theme-color`, like Safari. Pass the color with `--bar`.
-- The phone can show a different page of the same project when that tells the story better. For example, MenuMate's landing page on the MacBook and a restaurant's public menu page on the phone. For ABSoft and Taroura Arena, both devices show the landing page.
+- The phone can show a different page of the same project when that tells the story better. For example, MenuMate's landing page on the MacBook and a restaurant's public menu page on the phone. For ABSoft, both devices show the landing page. Taroura Arena shows the MacBook only.
 - The phone screen should end cleanly, with no content cut at the bottom. If the hero doesn't fit, fix the site's mobile layout (ABSoft hides its photo on phones and lets the hero fill the first screen).
 
 ### Project pages with more screenshots
@@ -95,8 +103,8 @@ native [PROJECT NAME] app screenshot to present. Preserve the screenshot's
 interface, typography, icons, colors, content and natural proportions.
 
 Keep Image 1's laptop, camera angle, dark background and margins exactly.
-Fill the MacBook screen with a soft cyan, lavender, violet and cobalt
-gradient wallpaper, and place one complete native app window on it,
+Fill the MacBook screen with a smooth graphite gray gradient wallpaper
+(about #5c5c64 at the top left to #28282d at the bottom right), and place one complete native app window on it,
 centered and front-on, at about 80% of the screen width, with rounded
 corners, a subtle border and a soft shadow. Keep the native window
 controls. If the screenshot lacks them, add a slim integrated titlebar
@@ -127,8 +135,8 @@ window background. This change is for the demo image only.
 
 ```text
 Edit the existing PromptStream thumbnail. Add one small floating
-dictation pill at the bottom center, in the gradient below the app.
-Keep the app window, interface, canvas, gradient and shadow unchanged.
+dictation pill at the bottom center, on the wallpaper below the app.
+Keep the app window, interface, canvas, wallpaper and shadow unchanged.
 
 On a 1448 x 1086 canvas, center the pill around x=724, y=992.
 Use a roughly 250 x 62 pixel rounded capsule with a dark charcoal

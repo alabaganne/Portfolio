@@ -15,22 +15,13 @@ export const site = {
 };
 
 export const navLinks = [
-  { href: "/#projects", label: "Work" },
-  { href: "/#about", label: "About" },
-  { href: "/#services", label: "Services" },
-  { href: "/#experience", label: "Experience" },
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
   { href: "/blog", label: "Blog" },
+  { href: "/contact", label: "Contact" },
 ];
 
-export const footerLinks = [
-  { href: "/#projects", label: "Work" },
-  { href: "/#about", label: "About" },
-  { href: "/#services", label: "Services" },
-  { href: "/#experience", label: "Experience" },
-  { href: "/#skills", label: "Skills" },
-  { href: "/#education", label: "Education" },
-  { href: "/blog", label: "Blog" },
-];
+export const footerLinks = navLinks;
 
 export const socialLinks = [
   { href: site.socials.linkedin, label: "LinkedIn" },

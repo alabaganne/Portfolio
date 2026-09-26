@@ -1,79 +1,67 @@
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-
-import { ArrowLink } from "@/components/ui/arrow-link";
-import { Button, ButtonArrow } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { Eyebrow } from "@/components/ui/section";
+import { Logo } from "@/components/ui/logo";
+import { SmartLink } from "@/components/ui/smart-link";
 import { footerLinks, site, socialLinks } from "@/lib/site";
+
+const contactLinks = [
+  { href: `mailto:${site.email}`, label: "Email" },
+  { href: site.phone.href, label: site.phone.label },
+  { href: site.resume, label: "Resume (PDF)" },
+];
+
+function FooterList({ label, links }) {
+  return (
+    <nav aria-label={label}>
+      <ul className="grid gap-4">
+        {links.map((link) => (
+          <li key={link.href}>
+            <SmartLink href={link.href} className="font-medium text-fg transition-opacity duration-250 hover:opacity-80">
+              {link.label}
+            </SmartLink>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
 
 export function SiteFooter() {
   return (
-    <footer id="contact" className="relative isolate overflow-hidden">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[560px] bg-[radial-gradient(55%_60%_at_50%_100%,rgba(91,140,255,0.12),transparent_70%)]"
-      />
+    <footer className="motion-safe:animate-page-in">
       <Container>
-        <div className="border-t border-line pt-24 md:pt-32">
-          <div data-reveal>
-            <Eyebrow>Contact</Eyebrow>
-            <h2 className="mt-8 text-[clamp(3rem,0.9rem+8.4vw,8.5rem)] font-medium leading-[0.92] tracking-[-0.055em] text-fg">
-              Let&apos;s build
-              <br />
-              something <span className="text-fg-subtle">real.</span>
-            </h2>
-          </div>
+        <div
+          data-reveal
+          className="-mx-6 bg-surface px-6 py-16 text-center sm:mx-0 sm:rounded-xl sm:px-10 md:px-20 md:py-24 lg:py-36"
+        >
+          <h2 className="text-display uppercase text-fg">Let’s work together</h2>
+          <p className="mt-10 font-display text-[clamp(1.25rem,5.4vw,4rem)] font-medium uppercase leading-[1.1] tracking-[0.015em] text-accent [overflow-wrap:anywhere] md:mt-12">
+            <span aria-hidden>• </span>
+            <a href={`mailto:${site.email}`} className="transition-opacity duration-250 hover:opacity-80">
+              {site.email}
+            </a>
+          </p>
+          <p className="mx-auto mt-8 max-w-[34rem] text-balance text-body text-fg-muted">
+            Have a project or question? I’d be glad to hear from you.
+          </p>
+        </div>
 
-          <div data-reveal className="mt-14 grid gap-10 md:mt-20 md:grid-cols-12 md:gap-8">
-            <p className="text-lg leading-relaxed text-fg-muted md:col-span-6 lg:col-span-5">
-              I work with individuals and businesses on Shopify themes, e-commerce, landing pages, and full-stack
-              applications. I&apos;m open to freelance projects, part-time contracts, and full-time roles. Email me about
-              your project or opportunity.
-            </p>
-            <div className="md:col-span-6 lg:col-span-6 lg:col-start-7">
-              <a
-                href={`mailto:${site.email}`}
-                className="group inline-flex max-w-full items-center gap-3 text-[clamp(1.375rem,0.9rem+1.9vw,2.5rem)] font-medium tracking-[-0.03em] text-fg"
-              >
-                <span className="truncate bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-1 transition-[background-size] duration-500 ease-out-expo group-hover:bg-[length:100%_1px]">
-                  {site.email}
-                </span>
-                <ArrowUpRight
-                  aria-hidden
-                  className="size-6 shrink-0 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 md:size-8"
-                />
-              </a>
-              <div className="mt-8 flex flex-wrap gap-2">
-                <Button href={site.phone.href} variant="secondary" size="sm">
-                  {site.phone.label}
-                </Button>
-                {socialLinks.map((link) => (
-                  <Button key={link.href} href={link.href} variant="secondary" size="sm">
-                    {link.label}
-                    <ButtonArrow />
-                  </Button>
-                ))}
-              </div>
+        <div className="py-16 md:py-24 lg:py-36">
+          <div className="grid gap-10 sm:grid-cols-3 lg:grid-cols-[3fr_1fr_1fr_1fr]">
+            <div className="sm:col-span-3 lg:col-span-1">
+              <Logo />
             </div>
+            <FooterList label="Site" links={footerLinks} />
+            <FooterList label="Social" links={socialLinks} />
+            <FooterList label="Contact" links={contactLinks} />
           </div>
-
-          <div className="mt-24 flex flex-col gap-6 border-t border-line py-8 text-sm text-fg-subtle md:mt-32 lg:flex-row lg:items-center lg:justify-between">
-            <p>© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
-            <nav aria-label="Footer">
-              <ul className="flex flex-wrap gap-x-6 gap-y-2">
-                {footerLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link href={link.href} className="transition-colors hover:text-fg">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-            <ArrowLink href="#top" direction="up" tone="subtle">
+          <div className="mt-16 flex flex-wrap gap-x-12 gap-y-4 text-sm font-medium text-fg-faint">
+            <p>
+              © {new Date().getFullYear()} <span className="text-fg-muted">{site.name}</span>
+            </p>
+            <p>{site.location}</p>
+            <a href="#top" className="text-fg-muted transition-opacity duration-250 hover:opacity-80">
               Back to top
-            </ArrowLink>
+            </a>
           </div>
         </div>
       </Container>
