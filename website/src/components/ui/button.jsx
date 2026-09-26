@@ -1,37 +1,52 @@
-import { forwardRef } from "react";
+import { ArrowUpRight } from "lucide-react";
+
+import { SmartLink } from "@/components/ui/smart-link";
 import { cn } from "@/lib/utils";
 
-const buttonVariants = {
-  default: "bg-sky-500 text-white hover:bg-sky-400/90",
-  outline: "border border-white/15 bg-transparent text-slate-100 hover:bg-white/10",
-  ghost: "bg-transparent text-slate-300 hover:bg-white/10",
-  subtle: "bg-white/10 text-white hover:bg-white/20",
+const variants = {
+  primary: "bg-fg text-canvas hover:bg-white",
+  secondary: "border border-line-strong text-fg hover:border-white/30 hover:bg-white/[0.04]",
+  ghost: "text-fg-muted hover:text-fg",
 };
 
-const buttonSizes = {
-  default: "h-11 px-6",
-  sm: "h-9 px-4 text-sm",
-  lg: "h-12 px-7 text-base",
+const sizes = {
+  sm: "h-9 px-4 text-[13px]",
+  md: "h-11 px-5 text-sm",
+  lg: "h-12 px-6 text-[15px]",
 };
 
-export const Button = forwardRef(function Button(
-  { className, variant = "default", size = "default", href, type, ...props },
-  ref,
-) {
-  const Component = href ? "a" : "button";
+export function Button({ href, variant = "primary", size = "md", className, children, ...props }) {
+  const classes = cn(
+    "group/button inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full font-medium transition-colors duration-300 [&_svg]:size-4",
+    variants[variant] ?? variants.primary,
+    sizes[size] ?? sizes.md,
+    className,
+  );
+
+  if (href) {
+    return (
+      <SmartLink href={href} className={classes} {...props}>
+        {children}
+      </SmartLink>
+    );
+  }
 
   return (
-    <Component
-      ref={ref}
+    <button type="button" className={classes} {...props}>
+      {children}
+    </button>
+  );
+}
+
+// Arrow that nudges up and right when its parent Button is hovered.
+export function ButtonArrow({ className }) {
+  return (
+    <ArrowUpRight
+      aria-hidden
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-full font-medium transition focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-sky-400 disabled:cursor-not-allowed disabled:opacity-60",
-        buttonVariants[variant] ?? buttonVariants.default,
-        buttonSizes[size] ?? buttonSizes.default,
+        "transition-transform duration-300 group-hover/button:-translate-y-0.5 group-hover/button:translate-x-0.5",
         className,
       )}
-      href={href}
-      type={href ? undefined : type ?? "button"}
-      {...props}
     />
   );
-});
+}

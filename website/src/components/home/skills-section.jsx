@@ -1,5 +1,7 @@
-import { SectionHeader } from "@/components/section-header";
 import { Bot, Cloud, Code, Database, Layers, TestTube2 } from "lucide-react";
+
+import { Section, SectionHeading } from "@/components/ui/section";
+import { TagList } from "@/components/ui/tag";
 
 const skillCategories = [
   {
@@ -48,34 +50,31 @@ const skillCategories = [
 
 export function SkillsSection() {
   return (
-    <section id="skills" className="bg-white py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <SectionHeader
-          eyebrow="04 · Skills"
-          title="Full-stack, end to end."
-          description="Hands-on across the modern web stack, from typed frontends to async pipelines on managed cloud."
-        />
-        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {skillCategories.map(({ name, icon: Icon, description, skills }) => (
-            <div key={name} className="rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-blue-100">
-              <div className="flex items-center gap-3">
-                <span className="grid h-10 w-10 place-items-center rounded-xl bg-blue-50 text-blue-600">
-                  <Icon className="h-5 w-5" aria-hidden />
-                </span>
-                <h3 className="font-display text-lg font-semibold tracking-tight text-slate-950">{name}</h3>
-              </div>
-              <p className="mt-3 text-sm leading-6 text-slate-500">{description}</p>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {skills.map((skill) => (
-                  <span key={skill} className="rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1.5 text-xs font-medium text-slate-600">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+    <Section id="skills">
+      <SectionHeading
+        label="Skills"
+        title={
+          <>
+            Full-stack, <span className="text-fg-subtle">end to end.</span>
+          </>
+        }
+        description="Hands-on across the modern web stack, from typed frontends to async pipelines on managed cloud."
+      />
+      <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:mt-20 md:grid-cols-2 lg:grid-cols-3">
+        {skillCategories.map(({ name, icon: Icon, description, skills }, index) => (
+          <div
+            key={name}
+            data-reveal
+            style={{ "--reveal-delay": `${(index % 3) * 100}ms` }}
+            className="flex flex-col bg-canvas p-7 md:p-8"
+          >
+            <Icon className="size-5 text-fg-subtle" aria-hidden />
+            <h3 className="mt-8 text-lg font-medium tracking-[-0.02em] text-fg">{name}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-fg-muted">{description}</p>
+            <TagList items={skills} className="mt-6" />
+          </div>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }

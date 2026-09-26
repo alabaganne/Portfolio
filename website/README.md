@@ -28,7 +28,10 @@ npm start
 
 ## Content
 
-- `src/components/home/`: introduction, experience, selected projects and contact sections.
+- `src/components/home/`: home page sections (hero, work, about, services, experience, skills, education).
+- `src/components/site-footer.jsx`: the contact section at the bottom of every page.
+- `src/lib/site.js`: contact details, social links and navigation.
+- `src/app/globals.css`: design tokens (colors, type scale, motion) and blog post styles.
 - `src/content/blog/`: blog posts.
 - `public/projects/`: project screenshots.
 - `src/app/layout.jsx`: page metadata and canonical website URL.

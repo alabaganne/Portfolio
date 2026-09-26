@@ -2,14 +2,15 @@
 
 These prompts produced the September 2026 portfolio mockups using the built-in imagegen tool. Attach the referenced images when reusing a prompt. For websites, prefer the [scripted mockups](#scripted-website-mockups).
 
+Every mockup shows the same MacBook on a near-black background (about `#0a0a0c`, with a faint cool light at the top right), to match the dark website. The earlier mockups sat on a bright cyan/lavender/violet/cobalt gradient; they were moved onto the dark background by keeping the laptop and each project's screen pixels and replacing only the backdrop. Desktop apps are shown on the MacBook screen, with the old gradient as the desktop wallpaper.
+
 ## References
 
 - Web mockup and shared background: `public/projects/menumate-demo.png`.
-- Light desktop window: `public/projects/backupmaster-demo.png`.
-- Dark desktop window: `public/projects/promptstream-demo.png`.
+- Desktop app on the MacBook screen: `public/projects/backupmaster-demo.png` (light app) and `public/projects/promptstream-demo.png` (dark app).
 - Content source: a screenshot of the project being presented.
 
-Use the existing mockup as Image 1 and the new project's screenshot as Image 2. Keep the website or app's own colors inside the screen. Use the shared gradient outside it.
+Use the existing mockup as Image 1 and the new project's screenshot as Image 2. Keep the website or app's own colors inside the screen. Keep the dark background outside it.
 
 ## Scripted website mockups
 
@@ -39,7 +40,7 @@ For websites that open in a browser, use the scripts in `scripts/` instead of th
 
 ### MacBook
 
-- Frame: `public/projects/menumate-demo.png`. The script finds its screen (941 x 626 px, top left at x=254, y=187) and keeps the frame's notch and corners.
+- Frame: `public/projects/menumate-demo.png`, the MacBook on the dark background. The script finds its screen (941 x 626 px, top left at x=254, y=187) and keeps the frame's notch and corners.
 - The page starts below the notch, with a black strip beside it, like a fullscreen app. No content sits under the notch.
 
 ### Phone (only when asked)
@@ -47,7 +48,7 @@ For websites that open in a browser, use the scripts in `scripts/` instead of th
 Add the phone only when the request asks for it. By default, show the MacBook alone.
 
 - Size on the 1448 x 1086 canvas: 248 x 514 px, bottom right corner at x=1362, y=1036, standing in front of the laptop's right corner.
-- Corner radius 45 px, screen inset 10 px, Dynamic Island 72 x 21 px, side buttons on both sides, soft navy shadow.
+- Corner radius 45 px, screen inset 10 px, Dynamic Island 72 x 21 px, side buttons on both sides, soft black shadow.
 - iOS status bar (9:41, signal, wifi, battery), 47 css px tall, in the site's `theme-color`, like Safari. Pass the color with `--bar`.
 - The phone can show a different page of the same project when that tells the story better. For example, MenuMate's landing page on the MacBook and a restaurant's public menu page on the phone. For ABSoft and Taroura Arena, both devices show the landing page.
 - The phone screen should end cleanly, with no content cut at the bottom. If the hero doesn't fit, fix the site's mobile layout (ABSoft hides its photo on phones and lets the hero fill the first screen).
@@ -63,7 +64,7 @@ Use case: compositing / product-mockup.
 Create one landscape 4:3 portfolio thumbnail, 1448 x 1086 pixels.
 
 Image 1 is the edit target and strict presentation template. Preserve its
-exact gradient background, MacBook Pro hardware, camera angle, size,
+exact dark background, MacBook Pro hardware, camera angle, size,
 position, shadow and margins. Image 2 supplies only the website content.
 
 Replace only the website inside Image 1's screen with [PROJECT NAME]
@@ -74,13 +75,13 @@ Keep important content clear of the display notch.
 
 Use the same centered, straight-on space-gray MacBook Pro, slim black
 bezel, small keyboard view and complete visible laptop as Image 1.
-Keep the bright cyan upper right, lavender upper left, violet lower left
-and electric cobalt lower right gradient, with subtle fine grain and a
-soft grounded shadow. Background colors fill every edge.
+Keep the near-black charcoal background (about #0a0a0c) with a faint
+cool light at the top right and subtle fine grain. Keep the aluminium a
+neutral silver grey. Background colors fill every edge.
 
 No extra devices, badges, text outside the screen, decorative shapes,
-patterns, scenery, floor horizon, dramatic glow or dull dark corners.
-Keep the screen crisp and the colored margins balanced.
+patterns, scenery, floor horizon or colored glow. Keep the screen crisp
+and the margins balanced.
 ```
 
 ## Desktop apps
@@ -89,22 +90,25 @@ Keep the screen crisp and the colored margins balanced.
 Use case: compositing.
 Create one landscape 4:3 portfolio thumbnail, 1448 x 1086 pixels.
 
-Image 1 is the background and framing reference. Image 2 is the native
-[PROJECT NAME] app screenshot to present. Preserve the screenshot's
+Image 1 is the MacBook mockup on the dark background. Image 2 is the
+native [PROJECT NAME] app screenshot to present. Preserve the screenshot's
 interface, typography, icons, colors, content and natural proportions.
 
-Place one complete native app window directly on Image 1's bright
-cyan/lavender/violet/cobalt gradient. Center it, front-on with no tilt,
-at about 80% of the canvas width. Keep generous balanced margins,
-rounded corners, a subtle border and a soft controlled shadow.
-Keep the native window controls. If the screenshot lacks them, add
-a slim integrated titlebar with small red, yellow and green controls.
+Keep Image 1's laptop, camera angle, dark background and margins exactly.
+Fill the MacBook screen with a soft cyan, lavender, violet and cobalt
+gradient wallpaper, and place one complete native app window on it,
+centered and front-on, at about 80% of the screen width, with rounded
+corners, a subtle border and a soft shadow. Keep the native window
+controls. If the screenshot lacks them, add a slim integrated titlebar
+with small red, yellow and green controls.
 
-No laptop, monitor, desktop wallpaper, dock, OS menu bar, extra text,
-decorative objects or patterns. Do not crop or redesign the interface.
+No dock, OS menu bar, extra text, decorative objects or patterns.
+Do not crop or redesign the interface.
 ```
 
 ## BackupMaster demo adjustment
+
+The two edits below were made on the old gradient thumbnails, before the app windows moved onto the MacBook screen.
 
 ```text
 Remove the entire yellow device-trust notice, including its icon,
@@ -140,5 +144,5 @@ Add no other decorations or text.
 
 Save previews separately until reviewed, as `../media/mockups/<name>-demo-draft.png`. Keep final images in
 `public/projects/`, preserve the 4:3 aspect ratio, and update the image
-URL version in `src/components/home/projects-section.jsx` after replacing
+URL version in `src/components/home/project-card.jsx` after replacing
 assets so the previous optimized images are not served from cache.

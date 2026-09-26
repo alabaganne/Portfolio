@@ -1,5 +1,8 @@
-import { SectionHeader } from "@/components/section-header";
 import { Mail } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { Section, SectionHeading } from "@/components/ui/section";
+import { site } from "@/lib/site";
 
 const paragraphs = [
   <>
@@ -13,20 +16,8 @@ const paragraphs = [
   </>,
 ];
 
-const services = [
-  "Web Development",
-  "Application Development",
-  "AI Integration",
-  "Custom Shopify Themes",
-  "E-commerce",
-  "Landing Pages",
-  "Database Development",
-  "Mobile Apps",
-  "Custom Software",
-];
-
 const details = [
-  ["Based in", "Monastir, Tunisia"],
+  ["Based in", site.location],
   ["Experience", "5+ years"],
   ["Work mode", "Remote · Worldwide"],
   // ["Status", "● Available"],
@@ -35,69 +26,53 @@ const details = [
 
 export function AboutSection() {
   return (
-    <section id="about" className="bg-white py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <SectionHeader
-          eyebrow="01 · About me"
-          title={
-            <>
-              I build software that <span className="text-blue-600">holds up</span> in production.
-            </>
-          }
-          description="From custom storefronts and personal websites to SaaS products and AI workflows, I turn requirements into working software."
-        />
-        <div className="mt-14 grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-14">
-          <div className="space-y-5 text-[1.05rem] leading-8 text-slate-600">
-            {paragraphs.map((paragraph, index) => (
-              <p key={index} className="[&_strong]:font-semibold [&_strong]:text-slate-950">
-                {paragraph}
-              </p>
-            ))}
-            <div className="flex flex-wrap gap-2 pt-3">
-              {services.map((service) => (
-                <span
-                  key={service}
-                  className="rounded-full border border-blue-100 bg-blue-50 px-3 py-1.5 text-sm font-semibold text-blue-700"
-                >
-                  {service}
-                </span>
-              ))}
-            </div>
-          </div>
-          <aside>
-            <div className="rounded-3xl border border-slate-200 bg-gradient-to-b from-slate-50 to-white p-7">
-              <div className="divide-y divide-dashed divide-slate-200">
-                {details.map(([label, value]) => (
-                  <div key={label} className="flex justify-between gap-5 py-3.5 text-sm">
-                    <span className="text-slate-500">{label}</span>
-                    <span className={label === "Status" ? "font-semibold text-green-600" : "text-right font-semibold text-slate-950"}>
-                      {value}
-                    </span>
-                  </div>
-                ))}
-                <div className="flex justify-between gap-5 py-3.5 text-sm">
-                  <span className="text-slate-500">Upwork</span>
-                  <a
-                    className="text-right font-semibold text-blue-600 hover:underline"
-                    href="https://www.upwork.com/freelancers/~018064bc5b1d8ca3ce"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Top Rated · 100% JSS ↗
-                  </a>
-                </div>
-              </div>
-              <a
-                className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-slate-950 px-5 text-sm font-semibold text-white transition hover:bg-blue-600"
-                href="mailto:alabaganne9@gmail.com"
-              >
-                <Mail className="h-4 w-4" aria-hidden />
-                alabaganne9@gmail.com
-              </a>
-            </div>
-          </aside>
+    <Section id="about">
+      <SectionHeading
+        label="About"
+        title={
+          <>
+            I build software that <span className="text-fg-subtle">holds up in production.</span>
+          </>
+        }
+        description="From custom storefronts and personal websites to SaaS products and AI workflows, I turn requirements into working software."
+      />
+      <div className="mt-14 grid gap-12 md:mt-20 md:grid-cols-12 md:gap-8">
+        <div
+          data-reveal
+          className="space-y-6 text-lg leading-relaxed text-fg-muted md:col-span-8 md:col-start-5 lg:col-span-5 lg:col-start-4 [&_strong]:font-medium [&_strong]:text-fg"
+        >
+          {paragraphs.map((paragraph, index) => (
+            <p key={index}>{paragraph}</p>
+          ))}
         </div>
+        <aside data-reveal className="md:col-span-8 md:col-start-5 lg:col-span-4 lg:col-start-9" style={{ "--reveal-delay": "120ms" }}>
+          <dl className="divide-y divide-line border-y border-line text-sm">
+            {details.map(([label, value]) => (
+              <div key={label} className="flex justify-between gap-6 py-4">
+                <dt className="text-fg-subtle">{label}</dt>
+                <dd className={label === "Status" ? "font-medium text-green-400" : "text-right text-fg"}>{value}</dd>
+              </div>
+            ))}
+            <div className="flex justify-between gap-6 py-4">
+              <dt className="text-fg-subtle">Upwork</dt>
+              <dd className="text-right">
+                <a
+                  className="text-fg underline decoration-white/30 underline-offset-4 transition-colors hover:decoration-accent"
+                  href={site.socials.upwork}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Top Rated · 100% JSS ↗
+                </a>
+              </dd>
+            </div>
+          </dl>
+          <Button href={`mailto:${site.email}`} variant="secondary" className="mt-6 w-full">
+            <Mail aria-hidden />
+            {site.email}
+          </Button>
+        </aside>
       </div>
-    </section>
+    </Section>
   );
 }

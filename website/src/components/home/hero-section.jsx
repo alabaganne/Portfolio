@@ -1,12 +1,13 @@
-import { ArrowUpRight, Download, Mail, MapPin, MonitorSmartphone } from "lucide-react";
+import { Download, Mail, MapPin } from "lucide-react";
 
-const profile = {
-  location: "Monastir, Tunisia",
-  summary:
-    "I build full-stack applications, AI features, custom Shopify themes, e-commerce stores, and landing pages for individuals and businesses. 5+ years delivering software for international clients.",
-  email: "alabaganne9@gmail.com",
-  website: "alabaganne.com",
-};
+import { Button, ButtonArrow } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
+import { Glow } from "@/components/ui/glow";
+import { site } from "@/lib/site";
+import { cn } from "@/lib/utils";
+
+const summary =
+  "I build full-stack applications, AI features, custom Shopify themes, e-commerce stores, and landing pages for individuals and businesses. 5+ years delivering software for international clients.";
 
 const stats = [
   { value: "5+", label: "Years of experience" },
@@ -15,91 +16,74 @@ const stats = [
   { value: "10+", label: "Production projects" },
 ];
 
+// Dividers for a 2 × 2 grid on small screens and a single row of four on large ones.
+const statBorders = [
+  "pr-6",
+  "border-l pl-6 lg:pl-8",
+  "border-t pr-6 lg:border-l lg:border-t-0 lg:pl-8",
+  "border-l border-t pl-6 lg:border-t-0 lg:pl-8",
+];
+
 export function HeroSection() {
   return (
-    <section id="top" className="relative isolate min-h-[92svh] overflow-hidden bg-[#07142b] text-white">
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-20 bg-[linear-gradient(135deg,#050e22_0%,#0b1c3a_52%,#0a224a_100%)]"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 bg-[linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] bg-[size:56px_56px] opacity-70 [mask-image:radial-gradient(ellipse_80%_60%_at_50%_50%,#000_40%,transparent_100%)]"
-      />
-      <div className="mx-auto flex min-h-[92svh] w-full max-w-6xl flex-col items-center justify-center px-5 pb-24 pt-36 text-center sm:px-8">
-        {/* Availability badge - hidden for now, keep for later
-        <p className="inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 text-sm text-slate-300 backdrop-blur">
-          <span className="h-2 w-2 rounded-full bg-green-400 shadow-[0_0_0_4px_rgba(34,197,94,0.18)]" />
-          Available for new opportunities · Remote-first
+    <section aria-labelledby="hero-title" className="relative isolate overflow-hidden">
+      <Glow />
+      <Container className="pb-8 pt-36 md:pt-48">
+        <p className="flex items-center gap-2.5 text-sm font-medium text-fg-muted motion-safe:animate-rise">
+          <span aria-hidden className="size-1.5 rounded-full bg-accent" />
+          {site.name} · {site.role}
         </p>
-        */}
-        <h1 className="mt-8 max-w-5xl font-display text-4xl font-semibold leading-[1.08] tracking-[-0.035em] text-white sm:text-6xl sm:leading-[1.02] lg:text-7xl">
-          Full-Stack engineer building{" "}
-          <span className="bg-gradient-to-r from-blue-300 via-blue-200 to-white bg-clip-text text-transparent">
-            web apps, online stores
-          </span>{" "}
-          & AI systems.
+
+        <h1
+          id="hero-title"
+          className="mt-8 max-w-[18ch] text-balance text-display text-fg motion-safe:animate-rise motion-safe:[animation-delay:80ms]"
+        >
+          <span className="text-fg-subtle">Full-Stack engineer building</span> web apps, online stores &amp; AI
+          systems.
         </h1>
-        <p className="mt-6 max-w-3xl text-base leading-8 text-slate-300 sm:text-lg">
-          {profile.summary}
-        </p>
-        <div className="mt-7 flex flex-wrap justify-center gap-x-5 gap-y-3 text-sm text-slate-400">
-          <span className="inline-flex items-center gap-2">
-            <MapPin className="h-4 w-4" aria-hidden />
-            {profile.location}
-          </span>
-          <a className="inline-flex items-center gap-2 transition hover:text-white" href={`mailto:${profile.email}`}>
-            <Mail className="h-4 w-4" aria-hidden />
-            {profile.email}
-          </a>
-          <span className="inline-flex items-center gap-2">
-            <MonitorSmartphone className="h-4 w-4" aria-hidden />
-            {profile.website}
-          </span>
+
+        <div className="mt-12 grid gap-10 md:mt-16 md:grid-cols-12 md:items-end md:gap-8">
+          <div className="motion-safe:animate-rise motion-safe:[animation-delay:160ms] md:col-span-7 lg:col-span-6">
+            <p className="max-w-xl text-lg leading-relaxed text-fg-muted md:text-xl">{summary}</p>
+            <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-fg-subtle">
+              <li className="inline-flex items-center gap-2">
+                <MapPin className="size-4" aria-hidden />
+                {site.location}
+              </li>
+              <li>
+                <a className="inline-flex items-center gap-2 transition-colors hover:text-fg" href={`mailto:${site.email}`}>
+                  <Mail className="size-4" aria-hidden />
+                  {site.email}
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div className="flex flex-wrap gap-3 motion-safe:animate-rise motion-safe:[animation-delay:240ms] md:col-span-5 md:justify-end lg:col-span-6">
+            <Button href="#projects" size="lg">
+              See my work
+              <ButtonArrow />
+            </Button>
+            <Button href="#contact" variant="secondary" size="lg">
+              Discuss a project
+            </Button>
+            <Button href={site.resume} variant="secondary" size="lg" download>
+              <Download aria-hidden />
+              Resume
+            </Button>
+          </div>
         </div>
-        <div className="mt-10 flex flex-wrap justify-center gap-3">
-          <a
-            className="inline-flex h-12 items-center gap-2 rounded-full bg-blue-600 px-6 text-sm font-semibold text-white shadow-[0_8px_20px_-8px_rgba(37,99,235,0.6)] transition hover:-translate-y-0.5 hover:bg-blue-700"
-            href="#projects"
-          >
-            See my work
-            <ArrowUpRight className="h-4 w-4" aria-hidden />
-          </a>
-          <a
-            className="inline-flex h-12 items-center gap-2 rounded-full border border-white/15 bg-white/[0.08] px-6 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/[0.14]"
-            href="#contact"
-          >
-            Discuss a project
-            <ArrowUpRight className="h-4 w-4" aria-hidden />
-          </a>
-          <a
-            className="inline-flex h-12 items-center gap-2 rounded-full border border-white/15 bg-white/[0.08] px-6 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/[0.14]"
-            href="/Ala_Baganne_Resume.pdf"
-            download
-          >
-            <Download className="h-4 w-4" aria-hidden />
-            Resume
-          </a>
-        </div>
-        <div className="mt-16 grid w-full max-w-4xl grid-cols-2 gap-4 lg:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.label} className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 text-left backdrop-blur">
-              <div className="font-display text-3xl font-semibold tracking-tight text-white">{stat.value}</div>
-              <div className="mt-1 text-sm text-slate-400">{stat.label}</div>
+
+        <dl className="mt-20 grid grid-cols-2 border-t border-line motion-safe:animate-rise motion-safe:[animation-delay:320ms] md:mt-28 lg:grid-cols-4">
+          {stats.map((stat, index) => (
+            <div key={stat.label} className={cn("flex flex-col-reverse gap-3 border-line py-8", statBorders[index])}>
+              <dt className="text-sm leading-snug text-fg-muted">{stat.label}</dt>
+              <dd className="text-[clamp(2.25rem,1.6rem+2.2vw,3.5rem)] font-medium leading-none tracking-[-0.045em] text-fg">
+                {stat.value}
+              </dd>
             </div>
           ))}
-        </div>
-      </div>
-      <div className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-[0.68rem] uppercase tracking-[0.2em] text-slate-400 md:flex">
-        scroll
-        <span className="h-9 w-px origin-top animate-[hero-scroll-line_2.4s_ease-in-out_infinite] bg-gradient-to-b from-transparent to-slate-300 motion-reduce:animate-none" />
-      </div>
-      <style>{`
-        @keyframes hero-scroll-line {
-          0%, 100% { transform: scaleY(0.5); }
-          50% { transform: scaleY(1); }
-        }
-      `}</style>
+        </dl>
+      </Container>
     </section>
   );
 }

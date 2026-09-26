@@ -1,5 +1,6 @@
-import { SectionHeader } from "@/components/section-header";
-import { ExternalLink } from "lucide-react";
+import { ArrowLink } from "@/components/ui/arrow-link";
+import { Section, SectionHeading } from "@/components/ui/section";
+import { TagList } from "@/components/ui/tag";
 
 const experiences = [
   {
@@ -118,83 +119,56 @@ const experiences = [
 
 export function ExperienceSection() {
   return (
-    <section id="experience" className="relative overflow-hidden bg-[#0b1c3a] py-20 text-slate-300 md:py-28">
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:linear-gradient(180deg,#000_0%,transparent_72%)]"
+    <Section id="experience">
+      <SectionHeading
+        label="Experience"
+        title={
+          <>
+            Experience with international <span className="text-fg-subtle">teams and clients.</span>
+          </>
+        }
+        description="Five years of continuous shipping through long-term contracts, freelance wins, and product-led work for distributed teams."
       />
-      <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
-        <SectionHeader
-          dark
-          eyebrow="02 · Experience"
-          title="Experience with international teams and clients."
-          description="Five years of continuous shipping through long-term contracts, freelance wins, and product-led work for distributed teams."
-        />
-        <ol className="relative mt-14 space-y-10 md:before:absolute md:before:bottom-2 md:before:left-[18px] md:before:top-2 md:before:w-px md:before:bg-gradient-to-b md:before:from-transparent md:before:via-blue-900 md:before:to-transparent">
-          {experiences.map((role) => (
-            <li key={`${role.company}-${role.period}`} className="relative md:pl-14">
-              <span
-                className={
-                  "absolute left-[11px] top-2 hidden h-4 w-4 rounded-full border-2 border-blue-500 bg-blue-500 shadow-[0_0_0_4px_rgba(37,99,235,0.15)] after:absolute after:-inset-2 after:animate-ping after:rounded-full after:bg-blue-500 after:opacity-25 md:block"
-                }
-              />
-              <article className="rounded-2xl border border-white/10 bg-white/[0.035] p-6 transition hover:border-blue-300/40 hover:bg-white/[0.05] md:p-7">
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <h3 className="font-display text-xl font-semibold tracking-tight text-white">{role.role}</h3>
-                  <span className="font-mono text-xs text-slate-400">{role.period}</span>
-                </div>
-                <div className="mt-2 flex flex-wrap items-center gap-2 text-sm font-medium text-blue-200">
-                  <span>{role.company}</span>
-                  <span className="text-slate-600">·</span>
-                  <span>{role.type}</span>
-                  <span className="text-slate-600">·</span>
-                  <span>{role.location}</span>
-                  <span className="text-slate-600">·</span>
-                  <span>{role.mode}</span>
-                </div>
-                <p className="mt-4 text-sm leading-7 text-slate-300">{role.summary}</p>
-                <ul className="mt-4 grid gap-2">
-                  {role.achievements.map((item) => (
-                    <li key={item} className="flex gap-3 text-sm leading-7 text-slate-300">
-                      <span className="mt-3 h-px w-2 flex-none bg-blue-300" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                {role.links?.length ? (
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {role.links.map((link) => (
-                      <a
-                        key={link.href}
-                        className="inline-flex items-center gap-2 rounded-xl border border-blue-300/20 bg-blue-300/10 px-3.5 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-blue-300/50 hover:bg-blue-300/15"
-                        href={link.href}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <ExternalLink className="h-3.5 w-3.5" aria-hidden />
-                        <span>{link.label}</span>
-                        <span className="border-l border-blue-300/30 pl-2 font-mono text-xs font-normal text-blue-200">
-                          {link.domain}
-                        </span>
-                      </a>
-                    ))}
-                  </div>
-                ) : null}
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {role.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="rounded-full border border-blue-300/20 bg-blue-300/10 px-3 py-1 font-mono text-xs text-blue-200"
-                    >
-                      {tech}
-                    </span>
+      <ol className="mt-14 divide-y divide-line border-t border-line md:mt-20">
+        {experiences.map((role) => (
+          <li
+            key={`${role.company}-${role.period}`}
+            data-reveal
+            className="grid gap-6 py-10 md:grid-cols-12 md:gap-8 md:py-14"
+          >
+            <div className="md:col-span-4 lg:col-span-3">
+              <p className="text-sm tabular-nums text-fg-subtle">{role.period}</p>
+              <p className="mt-3 font-medium text-fg">{role.company}</p>
+              <p className="mt-1 text-sm leading-relaxed text-fg-subtle">
+                {role.type} · {role.location} · {role.mode}
+              </p>
+            </div>
+            <div className="md:col-span-8 lg:col-span-9">
+              <h3 className="text-title text-fg">{role.role}</h3>
+              <p className="mt-4 max-w-3xl leading-relaxed text-fg-muted">{role.summary}</p>
+              <ul className="mt-6 max-w-3xl space-y-3">
+                {role.achievements.map((item) => (
+                  <li key={item} className="flex gap-4 text-[15px] leading-relaxed text-fg-muted">
+                    <span aria-hidden className="mt-[0.8em] h-px w-3 flex-none bg-fg-subtle" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              {role.links?.length ? (
+                <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+                  {role.links.map((link) => (
+                    <ArrowLink key={link.href} href={link.href}>
+                      {link.label}
+                      <span className="ml-2 font-normal text-fg-subtle">{link.domain}</span>
+                    </ArrowLink>
                   ))}
                 </div>
-              </article>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
+              ) : null}
+              <TagList items={role.tech} className="mt-6" />
+            </div>
+          </li>
+        ))}
+      </ol>
+    </Section>
   );
 }
