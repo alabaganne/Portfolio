@@ -1,26 +1,16 @@
 import Script from "next/script";
-import { JetBrains_Mono, Manrope, Space_Grotesk } from "next/font/google";
+import { Inter } from "next/font/google";
+
+import { site } from "@/lib/site";
 import "./globals.css";
 
-const manrope = Manrope({
-  variable: "--font-manrope",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const jetBrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const siteUrl = "https://alabaganne.com";
+const siteUrl = site.url;
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
@@ -82,10 +72,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={`${manrope.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable} bg-[--background] text-[--foreground] antialiased`}
-      >
+    <html lang="en" className={inter.variable} data-scroll-behavior="smooth">
+      <body>
         <Script id="ld-json" type="application/ld+json" strategy="beforeInteractive">
           {JSON.stringify([
             {
@@ -93,7 +81,7 @@ export default function RootLayout({ children }) {
               "@type": "Person",
               name: "Ala Baganne",
               url: siteUrl,
-              email: "alabaganne9@gmail.com",
+              email: site.email,
               jobTitle: "Full-Stack Software Engineer",
               address: {
                 "@type": "PostalAddress",
@@ -102,11 +90,7 @@ export default function RootLayout({ children }) {
               },
               description:
                 "Full-stack software engineer with 5+ years of experience building web applications, AI systems, custom Shopify themes, e-commerce stores, and landing pages.",
-              sameAs: [
-                "https://www.linkedin.com/in/alabaganne/",
-                "https://github.com/alabaganne",
-                "https://www.upwork.com/freelancers/~018064bc5b1d8ca3ce",
-              ],
+              sameAs: [site.socials.linkedin, site.socials.github, site.socials.upwork],
             },
             {
               "@context": "https://schema.org",

@@ -1,51 +1,65 @@
-import { SectionHeader } from "@/components/section-header";
-import { Card } from "@/components/ui/card";
-import { LayoutTemplate, ShoppingCart, Workflow } from "lucide-react";
+import { TagList } from "@/components/ui/tag";
+import { Section, SectionHeading } from "@/components/ui/section";
 
 const services = [
   {
-    title: "Advanced Web Applications",
+    title: "Web applications & SaaS",
     description:
-      "Deliver complex, data-heavy apps with robust business logic, real-time UX, and scalable backends.",
-    icon: Workflow,
+      "Full-stack products from database to deployment: dashboards, booking systems, internal tools and SaaS products.",
+    tags: ["Next.js", "React", "Node.js", "Supabase", "PostgreSQL"],
   },
   {
-    title: "Custom Ecommerce Platforms",
+    title: "AI features & integrations",
     description:
-      "Craft tailored storefronts with custom catalogs, checkout flows, and integrations beyond off-the-shelf themes.",
-    icon: ShoppingCart,
+      "LLM features built into your product: RAG knowledge bases, document processing pipelines and translation workflows.",
+    tags: ["OpenAI API", "Vertex AI", "DSPy", "RAG", "FastAPI"],
   },
   {
-    title: "WordPress Experience Sites",
+    title: "Shopify themes & e-commerce",
     description:
-      "Design and build WordPress themes and blocks that stay fast, secure, and simple for teams to update.",
-    icon: LayoutTemplate,
+      "Custom Shopify themes and online stores with product catalogs, variants, search, cart and payment integrations.",
+    tags: ["Shopify", "Liquid", "Stripe", "Square"],
+  },
+  {
+    title: "Landing pages & websites",
+    description:
+      "Fast, responsive and SEO-ready websites for businesses and individuals, in one language or several.",
+    tags: ["Next.js", "Tailwind", "WordPress", "Resend"],
   },
 ];
 
 export function ServicesSection() {
   return (
-    <section id="services" className="space-y-8">
-      <SectionHeader
-        eyebrow="SERVICES"
-        title="How I can help"
-        description="End-to-end delivery for startups and teams that need polished apps, ecommerce experiences, and WordPress builds."
+    <Section id="services">
+      <SectionHeading
+        label="Services"
+        title={
+          <>
+            What I can build <span className="text-fg-subtle">for you.</span>
+          </>
+        }
+        description="Web and application development, AI integration, custom Shopify themes, e-commerce, landing pages, database work, mobile apps and custom software."
       />
-      <div className="grid gap-5 md:grid-cols-3">
-        {services.map(({ title, description, icon: Icon }) => (
-          <Card key={title} className="h-full border-white/10 bg-white/[0.04] p-6">
-            <div className="flex h-full flex-col gap-5">
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-sky-400/10 text-sky-400">
-                <Icon className="h-6 w-6" aria-hidden />
-              </span>
-              <div className="space-y-2">
-                <h3 className="text-lg font-semibold text-white">{title}</h3>
-                <p className="text-sm text-slate-300">{description}</p>
-              </div>
+      <ol className="mt-14 divide-y divide-line border-t border-line md:mt-20">
+        {services.map((service, index) => (
+          <li
+            key={service.title}
+            data-reveal
+            className="group grid gap-4 py-8 md:grid-cols-12 md:gap-8 md:py-10"
+          >
+            <span className="text-sm tabular-nums text-fg-subtle md:col-span-4 md:pt-1.5 lg:col-span-3">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <h3 className="text-title text-fg transition-transform duration-500 ease-out-expo md:col-span-8 lg:col-span-5 lg:group-hover:translate-x-1.5">
+              {service.title}
+            </h3>
+            <div className="md:col-span-8 md:col-start-5 lg:col-span-4 lg:col-start-9">
+              <p className="leading-relaxed text-fg-muted">{service.description}</p>
+              <TagList items={service.tags} className="mt-5" />
             </div>
-          </Card>
+          </li>
         ))}
-      </div>
-    </section>
+      </ol>
+    </Section>
   );
 }

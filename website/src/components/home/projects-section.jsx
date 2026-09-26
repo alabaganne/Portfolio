@@ -1,10 +1,10 @@
 "use client";
 
-import { SectionHeader } from "@/components/section-header";
 import { useMemo, useState } from "react";
-import { ArrowUpRight } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+
+import { ProjectCard } from "@/components/home/project-card";
+import { FilterPills } from "@/components/ui/filter-pills";
+import { Section, SectionHeading } from "@/components/ui/section";
 
 // Set `topPick: true` on a project to feature it under the Top Picks filter.
 const projects = [
@@ -231,51 +231,6 @@ const projects = [
   },
 ];
 
-function ProjectThumb({ project }) {
-  const accent = project.accent || "#2563eb";
-  const id = project.name.replace(/\W/g, "");
-
-  return (
-    <div className="relative aspect-[4/3] overflow-hidden border-b border-slate-200 bg-slate-50">
-      {project.image ? (
-        <Image
-          src={`${project.image}?v=20260924-3`}
-          alt={`${project.name} demo`}
-          fill
-          sizes="(min-width: 1024px) 50vw, 100vw"
-          className="object-cover"
-        />
-      ) : (
-        <svg className="block h-full w-full" viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice">
-          <defs>
-            <pattern id={`grid-${id}`} width="20" height="20" patternUnits="userSpaceOnUse">
-              <path d="M 20 0 L 0 0 0 20" fill="none" stroke={accent} strokeWidth="0.5" strokeOpacity="0.08" />
-            </pattern>
-            <linearGradient id={`bg-${id}`} x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stopColor={accent} stopOpacity="0.04" />
-              <stop offset="1" stopColor={accent} stopOpacity="0.12" />
-            </linearGradient>
-          </defs>
-          <rect width="400" height="240" fill={`url(#bg-${id})`} />
-          <rect width="400" height="240" fill={`url(#grid-${id})`} />
-          <rect x="78" y="58" width="244" height="124" rx="12" fill="#fff" stroke={accent} strokeWidth="1.5" strokeOpacity=".5" />
-          <rect x="98" y="82" width="112" height="8" rx="4" fill={accent} fillOpacity=".35" />
-          <rect x="98" y="102" width="78" height="6" rx="3" fill={accent} fillOpacity=".16" />
-          <rect x="98" y="130" width="70" height="30" rx="5" fill={accent} fillOpacity=".1" />
-          <rect x="180" y="130" width="58" height="30" rx="5" fill={accent} fillOpacity=".16" />
-          <rect x="250" y="130" width="52" height="30" rx="5" fill={accent} fillOpacity=".1" />
-        </svg>
-      )}
-      <span
-        className="absolute right-3 top-3 rounded-full px-2.5 py-1 text-[0.68rem] font-bold uppercase tracking-[0.05em] text-white"
-        style={{ background: accent }}
-      >
-        {project.badge}
-      </span>
-    </div>
-  );
-}
-
 const TOP_PICKS = "Top Picks";
 
 function matchesFilter(project, filter) {
@@ -290,99 +245,49 @@ export function ProjectsSection() {
     []
   );
   const [filter, setFilter] = useState(TOP_PICKS);
+  const [filterChanged, setFilterChanged] = useState(false);
   const visible = projects.filter((project) => matchesFilter(project, filter));
 
+  const selectFilter = (category) => {
+    setFilter(category);
+    setFilterChanged(true);
+  };
+
   return (
-    <section id="projects" className="bg-slate-50 py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <SectionHeader
-          eyebrow="03 · Projects"
-          title="Selected work, shipped."
-          description="Selected freelance, internship, and academic work across SaaS, e-commerce, and web applications."
+    <Section id="projects" divider={false} padding="pb-20 pt-16 md:pb-28 md:pt-24">
+      <SectionHeading
+        label="Work"
+        title={
+          <>
+            Selected work, <span className="text-fg-subtle">shipped.</span>
+          </>
+        }
+        description="Selected freelance, internship, and academic work across SaaS, e-commerce, and web applications."
+      >
+        <FilterPills
+          className="mt-10"
+          label="Filter projects"
+          options={categories.map((category) => ({
+            value: category,
+            count: category === "All" ? undefined : projects.filter((project) => matchesFilter(project, category)).length,
+          }))}
+          value={filter}
+          onChange={selectFilter}
         />
-        <div className="mt-10 flex flex-wrap gap-2">
-          {categories.map((category) => (
-            <button
-              key={category}
-              className={
-                "rounded-full border px-4 py-2 text-sm font-semibold transition " +
-                (filter === category
-                  ? "border-slate-950 bg-slate-950 text-white"
-                  : "border-slate-200 bg-white text-slate-600 hover:border-blue-600 hover:text-blue-600")
-              }
-              type="button"
-              onClick={() => setFilter(category)}
-            >
-              {category}
-              {category !== "All" ? (
-                <span className="ml-1.5 text-xs opacity-60">
-                  {projects.filter((project) => matchesFilter(project, category)).length}
-                </span>
-              ) : null}
-            </button>
-          ))}
-        </div>
-        <div className="mt-8 grid gap-7 lg:grid-cols-2">
-          {visible.map((project) => (
-            <article
-              key={project.name}
-              className="flex flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white transition hover:-translate-y-1 hover:border-blue-100"
-            >
-              <ProjectThumb project={project} />
-              <div className="flex flex-1 flex-col gap-4 p-6">
-                <div>
-                  <h3 className="font-display text-2xl font-semibold tracking-tight text-slate-950">
-                    {project.href ? (
-                      <a className="transition hover:text-blue-600" href={project.href} target="_blank" rel="noreferrer">
-                        {project.name}
-                      </a>
-                    ) : (
-                      project.name
-                    )}
-                  </h3>
-                  <p className="mt-1 font-mono text-xs uppercase tracking-[0.08em] text-slate-500">{project.tag}</p>
-                </div>
-                <p className="text-sm leading-7 text-slate-600">{project.description}</p>
-                {project.previewPassword && (
-                  <p className="text-sm text-slate-600">
-                    Enter preview password: <code className="rounded bg-slate-100 px-2 py-1 font-semibold text-slate-900">{project.previewPassword}</code>
-                  </p>
-                )}
-                <div className="mt-auto flex flex-wrap gap-2 pt-2">
-                  {project.tech.map((tech) => (
-                    <span key={tech} className="rounded-md bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                <div className="flex items-center justify-between border-t border-dashed border-slate-200 pt-4 text-sm">
-                  <span className="font-mono text-xs uppercase tracking-[0.08em] text-slate-500">{project.category.join(" / ")}</span>
-                  <div className="flex items-center gap-5">
-                    {project.details && (
-                      <Link className="font-semibold !text-slate-700 hover:underline" href={project.details}>
-                        Screenshots
-                      </Link>
-                    )}
-                    {project.href ? (
-                      <a
-                        className="inline-flex items-center gap-1.5 font-semibold !text-blue-600 hover:underline"
-                        href={project.href}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        {project.linkLabel || "Visit live"}
-                        <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
-                      </a>
-                    ) : (
-                      <span className="font-mono text-xs text-slate-500">private client work</span>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
+      </SectionHeading>
+
+      <div key={filter} className="mt-14 grid gap-x-8 gap-y-16 md:mt-20 md:grid-cols-2 md:gap-y-20">
+        {visible.map((project, index) => (
+          <div
+            key={project.name}
+            data-reveal={filterChanged ? undefined : ""}
+            style={filterChanged ? { animationDelay: `${Math.min(index, 5) * 60}ms` } : { "--reveal-delay": `${(index % 2) * 120}ms` }}
+            className={filterChanged ? "motion-safe:animate-rise" : undefined}
+          >
+            <ProjectCard project={project} />
+          </div>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }

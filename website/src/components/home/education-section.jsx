@@ -1,5 +1,4 @@
-import { SectionHeader } from "@/components/section-header";
-import { Award, Calendar } from "lucide-react";
+import { Section, SectionHeading } from "@/components/ui/section";
 
 const education = [
   {
@@ -28,42 +27,44 @@ const certifications = [
 
 export function EducationSection() {
   return (
-    <section id="education" className="bg-slate-50 py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <SectionHeader
-          eyebrow="05 · Education & Certifications"
-          title="Formal training in software engineering."
-          description="Top-of-class admission to the competitive Software Engineering track at ISSAT Sousse, with a foundation in fundamentals and modern practice."
-        />
-        <div className="mt-14 grid gap-8 lg:grid-cols-[1.35fr_1fr]">
-          <ol className="space-y-4">
-            {education.map((item) => (
-              <li key={`${item.school}-${item.degree}`} className="rounded-2xl border border-slate-200 bg-white p-6">
-                <div className="inline-flex items-center gap-2 font-mono text-xs text-slate-500">
-                  <Calendar className="h-3.5 w-3.5" aria-hidden />
-                  {item.period}
-                </div>
-                <h3 className="mt-3 font-display text-xl font-semibold tracking-tight text-slate-950">{item.degree}</h3>
-                <p className="mt-1 text-sm font-semibold text-blue-700">{item.school}</p>
-                <p className="mt-4 text-sm leading-7 text-slate-600">{item.notes}</p>
-              </li>
-            ))}
-          </ol>
-          <div className="space-y-4">
-            {certifications.map((certification) => (
-              <div key={certification.name} className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-white px-4 py-5">
-                <span className="grid h-10 w-10 flex-none place-items-center rounded-xl bg-slate-50 text-blue-600">
-                  <Award className="h-5 w-5" aria-hidden />
-                </span>
-                <div>
-                  <h3 className="text-sm font-semibold text-slate-950">{certification.name}</h3>
-                  <p className="mt-0.5 text-xs text-slate-500">{certification.issuer}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+    <Section id="education">
+      <SectionHeading
+        label="Education"
+        title={
+          <>
+            Formal training in <span className="text-fg-subtle">software engineering.</span>
+          </>
+        }
+        description="Top-of-class admission to the competitive Software Engineering track at ISSAT Sousse, with a foundation in fundamentals and modern practice."
+      />
+      <ol className="mt-14 divide-y divide-line border-t border-line md:mt-20">
+        {education.map((item) => (
+          <li
+            key={`${item.school}-${item.degree}`}
+            data-reveal
+            className="grid gap-6 py-10 md:grid-cols-12 md:gap-8 md:py-12"
+          >
+            <p className="text-sm tabular-nums text-fg-subtle md:col-span-4 md:pt-1.5 lg:col-span-3">{item.period}</p>
+            <div className="md:col-span-8 lg:col-span-9">
+              <h3 className="text-title text-fg">{item.degree}</h3>
+              <p className="mt-2 text-sm font-medium text-fg-muted">{item.school}</p>
+              <p className="mt-4 max-w-3xl leading-relaxed text-fg-muted">{item.notes}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <div data-reveal className="mt-20 grid gap-6 md:grid-cols-12 md:gap-8">
+        <h3 className="text-sm font-medium text-fg-muted md:col-span-4 md:pt-4 lg:col-span-3">Certifications</h3>
+        <ul className="divide-y divide-line border-y border-line md:col-span-8 lg:col-span-9">
+          {certifications.map((certification) => (
+            <li key={certification.name} className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+              <span className="text-fg">{certification.name}</span>
+              <span className="shrink-0 text-sm text-fg-subtle">{certification.issuer}</span>
+            </li>
+          ))}
+        </ul>
       </div>
-    </section>
+    </Section>
   );
 }
