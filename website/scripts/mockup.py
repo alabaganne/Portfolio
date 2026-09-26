@@ -40,11 +40,12 @@ def edge(points):
     raise SystemExit("screen edge not found in frame")
 
 
-# laptop screen: find it inside the bezel, keep the frame's notch and corners
-top = edge([(400, y) for y in range(120, 400)])[1]
+# laptop screen: find it inside the bezel, keep the frame's notch and corners.
+# Scans start on the black bezel, past the lid's bright aluminium rim.
+top = edge([(400, y) for y in range(175, 400)])[1]
 bottom = edge([(400, y) for y in range(900, 600, -1)])[1]
-left = edge([(x, 500) for x in range(150, 500)])[0]
-right = edge([(x, 500) for x in range(1300, 900, -1)])[0]
+left = edge([(x, 500) for x in range(240, 500)])[0]
+right = edge([(x, 500) for x in range(1208, 900, -1)])[0]
 pad = 3
 box = (left - pad, top - pad, right + pad + 1, bottom + pad + 1)
 crop = frame.crop(box)
@@ -76,9 +77,9 @@ if args.phone:
     k = PW / 220
     R_OUT, RIM, INSET = 40 * k, 2.5, 10
 
-    for dy, alpha, blur in ((22, 110, 22), (7, 90, 7)):
+    for dy, alpha, blur in ((22, 150, 22), (7, 120, 7)):
         sh = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
-        ImageDraw.Draw(sh).rounded_rectangle((X0 + 4, Y0 + dy, X1 - 4, Y1 + dy), R_OUT, fill=(12, 14, 45, alpha))
+        ImageDraw.Draw(sh).rounded_rectangle((X0 + 4, Y0 + dy, X1 - 4, Y1 + dy), R_OUT, fill=(0, 0, 0, alpha))
         canvas = Image.alpha_composite(canvas, sh.filter(ImageFilter.GaussianBlur(blur)))
 
     M = 4  # room for the side buttons

@@ -11,7 +11,7 @@ function ProjectImage({ project }) {
     <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-surface">
       {project.image ? (
         <Image
-          src={`${project.image}?v=20260924-3`}
+          src={`${project.image}?v=20260926-1`}
           alt={`${project.name} demo`}
           fill
           sizes="(min-width: 1240px) 588px, (min-width: 768px) 50vw, 100vw"
@@ -24,8 +24,7 @@ function ProjectImage({ project }) {
         />
       )}
       <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[inherit] ring-1 ring-inset ring-white/10" />
-      <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-black/55 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-md">
-        <span aria-hidden className="size-1.5 rounded-full" style={{ background: accent }} />
+      <span className="absolute left-4 top-4 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-black">
         {project.badge}
       </span>
       {project.href ? (
