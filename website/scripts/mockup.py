@@ -14,7 +14,7 @@ parser.add_argument("--bar", default="#000000", help="status bar color, use the 
 parser.add_argument("--frame", default=HERE.parent / "public/projects/menumate-demo.png")
 args = parser.parse_args()
 
-frame = Image.open(args.frame).convert("RGB")
+frame = Image.open(args.frame).convert("RGBA")
 px = frame.load()
 
 
@@ -66,7 +66,7 @@ screen = Image.new("RGB", crop.size, (0, 0, 0))
 screen.paste(cover(Image.open(args.desktop).convert("RGB"), crop.width, crop.height - pad - band), (0, pad + band))
 screen.paste(crop, (0, 0), bezel)
 frame.paste(screen, box[:2])
-canvas = frame.convert("RGBA")
+canvas = frame
 
 if args.phone:
     mob = Image.open(args.phone).convert("RGB")
@@ -136,5 +136,5 @@ if args.phone:
     layer = layer.resize((PW + 2 * M, PH + 2 * M), Image.LANCZOS)
     canvas.alpha_composite(layer, (X0 - M, Y0 - M))
 
-canvas.convert("RGB").save(args.out, optimize=True)
+canvas.save(args.out, optimize=True)
 print("saved", args.out, canvas.size)
