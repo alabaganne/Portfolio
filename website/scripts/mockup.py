@@ -11,7 +11,7 @@ parser.add_argument("desktop")
 parser.add_argument("out")
 parser.add_argument("--phone", help="phone screenshot from capture.mjs (430 css px wide at 3x)")
 parser.add_argument("--bar", default="#000000", help="status bar color, use the site's theme-color")
-parser.add_argument("--frame", default=HERE.parent / "public/projects/menumate-demo.png")
+parser.add_argument("--frame", default=HERE / "macbook-frame.png")
 args = parser.parse_args()
 
 frame = Image.open(args.frame).convert("RGBA")

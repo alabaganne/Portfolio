@@ -14,7 +14,7 @@ It makes the dark area around the devices transparent and keeps their shadows.
 
 ## References
 
-- Web mockup and shared frame: `public/projects/menumate-demo.png`.
+- Web mockup and shared frame: `scripts/macbook-frame.png` (the old MenuMate mockup).
 - Desktop app on the MacBook screen: `public/projects/backupmaster-demo.png` (light app) and `public/projects/promptstream-demo.png` (dark app).
 - Content source: a screenshot of the project being presented.
 
@@ -22,7 +22,7 @@ Use the existing mockup as Image 1 and the new project's screenshot as Image 2. 
 
 ## Scripted website mockups
 
-For websites that open in a browser, use the scripts in `scripts/` instead of the prompts. They place real screenshots in the same MacBook frame, so nothing gets redrawn. ABSoft, Taroura Arena, Karta and Internly were made this way.
+For websites that open in a browser, use the scripts in `scripts/` instead of the prompts. They place real screenshots in the same MacBook frame, so nothing gets redrawn. MenuMate, ABSoft, Taroura Arena, Karta and Internly were made this way.
 
 1. Take the screenshots:
 
@@ -35,7 +35,7 @@ For websites that open in a browser, use the scripts in `scripts/` instead of th
    - `phone`: 430 x 885 css px at 3x, with an iPhone user agent and touch. Chrome windows can't go below about 500 px wide, so the script uses Chrome's device emulation instead of resizing a window.
    - `--reduce-motion` shows the page's still poster instead of a random video frame (used for Taroura Arena).
    - `--cookie=name=value` sets a cookie before loading, for example `--cookie=karta_consent=no` so the cookie banner doesn't cover the page.
-   - `--width` and `--height` change the view. Keep width / height at about 1.5. When a hero is shorter than the screen, pick the width so the view ends just past the hero: the start of the next section's background shows, but none of its text. ABSoft uses `--width=1360 --height=905`.
+   - `--width` and `--height` change the view. Keep width / height at about 1.5. When a hero is shorter or taller than the screen, pick the width so the view ends just past the hero: the start of the next section's background shows, but none of its text. MenuMate uses `--width=1620 --height=1080`. The strip under the notch trims the bottom of the view, so ABSoft uses `--height=929` to keep its floating WhatsApp button whole.
    - Run the site locally when it has changes that aren't live yet. For a Next.js site, use a production build (`next build` and `next start`), because the dev server adds its own badge to the page.
    - For apps behind a login, sign in inside the same Chrome session, then take the screenshots. Internly's login form comes filled in with a demo account, so the script only clicks "Log in".
 
@@ -48,7 +48,7 @@ For websites that open in a browser, use the scripts in `scripts/` instead of th
 
 ### MacBook
 
-- Frame: `public/projects/menumate-demo.png`, the MacBook on a transparent background. New mockups keep that transparency. The script finds its screen (941 x 626 px, top left at x=254, y=187) and keeps the frame's notch and corners.
+- Frame: `scripts/macbook-frame.png`, the MacBook on a transparent background. Don't swap it for a new mockup: the script finds the screen by its light page. New mockups keep that transparency. The script finds its screen (941 x 626 px, top left at x=254, y=187) and keeps the frame's notch and corners.
 - The page starts below the notch, with a black strip beside it, like a fullscreen app. No content sits under the notch.
 
 ### Phone (only when asked)
@@ -58,8 +58,8 @@ Add the phone only when the request asks for it. By default, show the MacBook al
 - Size on the 1448 x 1086 canvas: 248 x 514 px, bottom right corner at x=1362, y=1036, standing in front of the laptop's right corner.
 - Corner radius 45 px, screen inset 10 px, Dynamic Island 72 x 21 px, side buttons on both sides, soft black shadow.
 - iOS status bar (9:41, signal, wifi, battery), 47 css px tall, in the site's `theme-color`, like Safari. Pass the color with `--bar`.
-- The phone can show a different page of the same project when that tells the story better. For example, MenuMate's landing page on the MacBook and a restaurant's public menu page on the phone. For ABSoft, both devices show the landing page. Taroura Arena shows the MacBook only.
-- The phone screen should end cleanly, with no content cut at the bottom. If the hero doesn't fit, fix the site's mobile layout (ABSoft hides its photo on phones and lets the hero fill the first screen).
+- The phone can show a different page of the same project when that tells the story better. For example, MenuMate's landing page on the MacBook and a restaurant's public menu page on the phone. ABSoft and Taroura Arena show the MacBook only.
+- The phone screen should end cleanly, with no content cut at the bottom. If the hero doesn't fit, fix the site's mobile layout.
 
 ### Project pages with more screenshots
 
