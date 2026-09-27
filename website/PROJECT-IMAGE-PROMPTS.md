@@ -22,7 +22,7 @@ Use the existing mockup as Image 1 and the new project's screenshot as Image 2. 
 
 ## Scripted website mockups
 
-For websites that open in a browser, use the scripts in `scripts/` instead of the prompts. They place real screenshots in the same MacBook frame, so nothing gets redrawn. MenuMate, ABSoft, Taroura Arena, Karta and Internly were made this way.
+For websites that open in a browser, use the scripts in `scripts/` instead of the prompts. They place real screenshots in the same MacBook frame, so nothing gets redrawn. MenuMate, ABSoft, Resume Studio, Taroura Arena, Karta and Internly were made this way.
 
 1. Take the screenshots:
 
@@ -34,6 +34,7 @@ For websites that open in a browser, use the scripts in `scripts/` instead of th
    - `desktop`: 1440 x 960 css px at 2x, the same shape as the MacBook screen. Don't zoom out (a 1920 px view was tried and rejected: the text got too small and the hero lost its punch).
    - `phone`: 430 x 885 css px at 3x, with an iPhone user agent and touch. Chrome windows can't go below about 500 px wide, so the script uses Chrome's device emulation instead of resizing a window.
    - `--reduce-motion` shows the page's still poster instead of a random video frame (used for Taroura Arena).
+   - `--click=x,y` clicks at that css px spot after loading, waits, then moves the mouse away. Resume Studio uses `--height=929 --click=582,580` to open the first résumé in the editor.
    - `--cookie=name=value` sets a cookie before loading, for example `--cookie=karta_consent=no` so the cookie banner doesn't cover the page.
    - `--width` and `--height` change the view. Keep width / height at about 1.5. When a hero is shorter or taller than the screen, pick the width so the view ends just past the hero: the start of the next section's background shows, but none of its text. MenuMate uses `--width=1620 --height=1080`. The strip under the notch trims the bottom of the view, so ABSoft uses `--height=929` to keep its floating WhatsApp button whole.
    - Run the site locally when it has changes that aren't live yet. For a Next.js site, use a production build (`next build` and `next start`), because the dev server adds its own badge to the page.

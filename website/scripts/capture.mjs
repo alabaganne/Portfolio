@@ -1,5 +1,5 @@
 // Screenshot a page as a desktop or phone, for project mockups.
-// usage: node scripts/capture.mjs <url> <desktop|phone> <out.png> [--width=1440 --height=960] [--cookie=name=value] [--reduce-motion] [--wait=2500]
+// usage: node scripts/capture.mjs <url> <desktop|phone> <out.png> [--width=1440 --height=960] [--cookie=name=value] [--click=x,y] [--reduce-motion] [--wait=2500]
 import { spawn } from "node:child_process";
 import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -18,7 +18,7 @@ const args = process.argv.slice(2);
 const [url, presetName, out] = args.filter((a) => !a.startsWith("--"));
 const option = (name) => args.find((a) => a.startsWith(`--${name}=`))?.split("=")[1];
 if (!url || !PRESETS[presetName] || !out) {
-  console.error("usage: node scripts/capture.mjs <url> <desktop|phone> <out.png> [--width=1440 --height=960] [--cookie=name=value] [--reduce-motion] [--wait=2500]");
+  console.error("usage: node scripts/capture.mjs <url> <desktop|phone> <out.png> [--width=1440 --height=960] [--cookie=name=value] [--click=x,y] [--reduce-motion] [--wait=2500]");
   process.exit(1);
 }
 const preset = {
@@ -28,6 +28,7 @@ const preset = {
 };
 const reduceMotion = args.includes("--reduce-motion");
 const waitMs = Number(option("wait") ?? 2500);
+const click = option("click")?.split(",").map(Number);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const profile = mkdtempSync(join(tmpdir(), "capture-"));
@@ -95,6 +96,14 @@ try {
   await send("Page.navigate", { url });
   await Promise.race([loaded, sleep(15000)]);
   await sleep(waitMs);
+  if (click) {
+    // open a view that needs a click, then move the mouse away so no hover shows
+    for (const type of ["mouseMoved", "mousePressed", "mouseReleased"])
+      await send("Input.dispatchMouseEvent", { type, x: click[0], y: click[1], button: "left", clickCount: 1 });
+    await sleep(waitMs);
+    await send("Input.dispatchMouseEvent", { type: "mouseMoved", x: preset.width / 2, y: preset.height - 1 });
+    await sleep(500);
+  }
 
   const { data } = await send("Page.captureScreenshot", { format: "png" });
   writeFileSync(out, Buffer.from(data, "base64"));

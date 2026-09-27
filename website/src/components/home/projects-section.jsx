@@ -84,10 +84,10 @@ const projects = [
     image: "/projects/meet-demo.png",
   },
   {
-    name: "ATS Resume Builder",
-    tag: "Resumes with PDF export",
-    href: "https://ats-react-resume-builder.vercel.app",
-    image: "/projects/ats-resume-builder-demo.png",
+    name: "Resume Studio",
+    tag: "Résumés with PDF & Word export",
+    href: "https://react-resume-studio.vercel.app",
+    image: "/projects/resume-studio-demo.png",
   },
   {
     name: "Eyedeal",

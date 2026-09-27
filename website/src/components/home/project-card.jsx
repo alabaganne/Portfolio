@@ -14,7 +14,7 @@ export function ProjectCard({ project, hidden = false }) {
     >
       <span className="relative block aspect-[4/3]">
         <Image
-          src={`${project.image}?v=20260927-2`}
+          src={`${project.image}?v=20260927-3`}
           alt={`${project.name} demo`}
           fill
           draggable={false}
