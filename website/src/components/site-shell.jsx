@@ -1,6 +1,7 @@
 import { RevealObserver } from "@/components/reveal-observer";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteNavbar } from "@/components/site-navbar";
+import { WhatsAppButton } from "@/components/whatsapp-button";
 
 // Loaded from Fontshare because their license forbids sharing the font files in a public repo.
 const fonts = [
@@ -30,6 +31,7 @@ export function SiteShell({ children }) {
       <SiteNavbar />
       <main id="main">{children}</main>
       <SiteFooter />
+      <WhatsAppButton />
       <RevealObserver />
     </div>
   );

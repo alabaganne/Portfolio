@@ -5,6 +5,7 @@ export const site = {
   url: "https://alabaganne.com",
   email: "alabaganne9@gmail.com",
   phone: { label: "+216 50 101 959", href: "tel:+21650101959" },
+  whatsapp: "https://wa.me/21650101959",
   location: "Monastir, Tunisia",
   resume: "/Ala_Baganne_Resume.pdf",
   socials: {
