@@ -59,7 +59,7 @@ Add the phone only when the request asks for it. By default, show the MacBook al
 - Size on the 1448 x 1086 canvas: 248 x 514 px, bottom right corner at x=1362, y=1036, standing in front of the laptop's right corner.
 - Corner radius 45 px, screen inset 10 px, Dynamic Island 72 x 21 px, side buttons on both sides, soft black shadow.
 - iOS status bar (9:41, signal, wifi, battery), 47 css px tall, in the site's `theme-color`, like Safari. Pass the color with `--bar`.
-- The phone can show a different page of the same project when that tells the story better. For example, MenuMate's landing page on the MacBook and a restaurant's public menu page on the phone. ABSoft and Taroura Arena show the MacBook only.
+- The phone can show a different page of the same project when that tells the story better. For example, MenuMate's landing page on the MacBook and the Chez Farouk menu (`menumate.net/en/chez-farouk`) on the phone, with `--bar "#FDF8E6"`. ABSoft and Taroura Arena show the MacBook only.
 - The phone screen should end cleanly, with no content cut at the bottom. If the hero doesn't fit, fix the site's mobile layout.
 
 ### Project pages with more screenshots

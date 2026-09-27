@@ -50,9 +50,8 @@ export default function ContactPage() {
         }
         description={
           <>
-            I’m open to <span className="whitespace-nowrap">full-time</span> roles,{" "}
-            <span className="whitespace-nowrap">part-time</span> contracts and freelance projects. Tell me about your
-            team or your project, or just say hi.
+            I’m always happy to talk about ideas, projects and collaborations. Tell me what you’re working on, or just
+            say hi.
           </>
         }
       />

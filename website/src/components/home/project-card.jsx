@@ -2,8 +2,9 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
 import { SmartLink } from "@/components/ui/smart-link";
+import { Tag } from "@/components/ui/tag";
 
-// Irene-style work card: the mockup on black, then the project name and tagline.
+// Irene-style work card: the mockup on black, then the project name, tagline and tech.
 export function ProjectCard({ project, hidden = false }) {
   return (
     <SmartLink
@@ -14,7 +15,7 @@ export function ProjectCard({ project, hidden = false }) {
     >
       <span className="relative block aspect-[4/3]">
         <Image
-          src={`${project.image}?v=20260927-3`}
+          src={`${project.image}?v=20260927-4`}
           alt={`${project.name} demo`}
           fill
           draggable={false}
@@ -34,6 +35,13 @@ export function ProjectCard({ project, hidden = false }) {
         {project.previewPassword ? (
           <span className="mt-2 block text-sm text-fg-faint">
             Password <span className="font-medium text-fg-muted">{project.previewPassword}</span>
+          </span>
+        ) : null}
+        {project.tech ? (
+          <span className="mt-4 flex flex-wrap gap-2">
+            {project.tech.map((item) => (
+              <Tag key={item}>{item}</Tag>
+            ))}
           </span>
         ) : null}
       </span>
