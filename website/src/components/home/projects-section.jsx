@@ -73,7 +73,7 @@ const projects = [
   },
   {
     name: "Socialura",
-    tag: "Store with Stripe checkout",
+    tag: "WordPress Store with Stripe checkout",
     href: "http://socialura.alabaganne.com",
     image: "/projects/socialura-demo.png",
   },

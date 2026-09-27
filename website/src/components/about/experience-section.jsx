@@ -13,15 +13,6 @@ const experiences = [
     links: [{ label: "retainyourbrain.com", href: "https://retainyourbrain.com" }],
   },
   {
-    company: "Wequity",
-    role: "Full-Stack & AI Engineer",
-    period: "Oct 2025 – May 2026",
-    place: "Part-time contract, remote (Brussels, Belgium)",
-    summary:
-      "I built full-stack features for NORA, an AI platform that processes legal documents in English, French and Dutch: a knowledge base that answers questions with sources, a module that learns edits from example documents, and DeepL translation.",
-    tech: ["React", "FastAPI", "Supabase", "GCP", "Vertex AI", "OpenAI API", "DSPy"],
-  },
-  {
     company: "Upwork",
     role: "Freelance Web Developer",
     period: "Aug 2024 – today",
@@ -32,7 +23,16 @@ const experiences = [
     links: [{ label: "Upwork profile", href: "https://www.upwork.com/freelancers/~018064bc5b1d8ca3ce" }],
   },
   {
-    company: "satoripop",
+    company: "Wequity",
+    role: "Full-Stack & AI Engineer",
+    period: "Oct 2025 – May 2026",
+    place: "Part-time contract, remote (Brussels, Belgium)",
+    summary:
+      "I built full-stack features for NORA, an AI platform that processes legal documents in English, French and Dutch: a knowledge base that answers questions with sources, a module that learns edits from example documents, and DeepL translation.",
+    tech: ["React", "FastAPI", "Supabase", "GCP", "Vertex AI", "OpenAI API", "DSPy"],
+  },
+  {
+    company: "Satoripop",
     role: "Full-Stack Developer Intern",
     period: "Jul 2023 – Aug 2023",
     place: "Internship, Sousse, Tunisia",
@@ -51,7 +51,7 @@ const experiences = [
     tech: ["Vue.js", "Quasar", "Node.js", "Feathers.js", "MongoDB"],
   },
   {
-    company: "satoripop",
+    company: "Satoripop",
     role: "Web Development Intern",
     period: "Jul 2020 – Aug 2020",
     place: "Internship, Sousse, Tunisia",
