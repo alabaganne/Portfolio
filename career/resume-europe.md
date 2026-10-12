@@ -86,7 +86,6 @@ Built an admin dashboard for a real estate intelligence platform, working direct
 | **MenuMate** | [menumate.net](https://menumate.net) | SaaS I founded for restaurants: QR-code digital menus, real-time ordering, admin dashboard. SEO-optimized, multilingual. | Next.js, React, Supabase, Tailwind |
 | **LeBonBureau** | [lebonbureau.alabaganne.com](https://lebonbureau.alabaganne.com) | Polished e-commerce storefront for an office-furniture brand: refined responsive design, product catalog, and admin dashboard. | Next.js, React, TypeScript, Supabase |
 | **Internly** | [internly.alabaganne.com](https://internly.alabaganne.com) | Internship platform where students apply to internships and companies post opportunities: real-time notifications, tracking, dashboards. | Laravel, Vue.js, Inertia.js, MySQL, Pusher |
-| **Global Deals** | [global-deals.vercel.app](https://global-deals.vercel.app) | Interactive 3D globe with event markers, clustering, and Bezier line visualizations; admin panel and auth. | React 18, Mapbox GL JS, Supabase, Tiptap |
 | **ATS Resume Builder** | [ats-react-resume-builder.vercel.app](https://ats-react-resume-builder.vercel.app) | Resume builder that creates ATS-optimized resumes with real-time preview and one-click PDF export. | Next.js, React, Tailwind, jsPDF |
 
 *More live demos available at [alabaganne.com](https://alabaganne.com).*

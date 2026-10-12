@@ -71,7 +71,7 @@ Several "live" links are plain `http://`: `internly.alabaganne.com`, `hr-managem
 `layout.jsx` declares `twitter.card: "summary_large_image"` and an `openGraph` block, but never sets an image. Links to alabaganne.com shared on LinkedIn, X, or Slack render as a blank grey card. Add a 1200×630 image and reference it in both `openGraph.images` and `twitter.images`. Fifteen minutes, visible everywhere.
 
 **7. Stat mismatch.**
-Hero says "10+ production projects"; the projects section renders 8 cards (one, Global Deals, is commented out in `projects-section.jsx`). Either publish Global Deals or say 8+.
+Hero says "10+ production projects"; the projects section renders 8 cards. Say 8+ or add more projects.
 
 **8. Verify the resume PDF.**
 The hero downloads `/Ala_Baganne_Resume.pdf`. Your source of truth is `career/resume-2026.pdf`. Confirm the public file matches the current export.

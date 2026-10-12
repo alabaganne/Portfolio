@@ -1,7 +1,6 @@
 Hi, I'm Ala, a full-stack software engineer with 5 years of professional experience. I build complete products end to end, from design to backend to deployment. Here are a few I shipped solo:
 
 https://menumate.net/ (Next.js, React, Supabase/PostgreSQL, TypeScript, Tailwind CSS)
-https://global-deals.vercel.app/ (React, Mapbox GL JS, Supabase, Vanilla CSS)
 https://zainspot.com/ (Next.js, NestJS, MySQL, Tailwind CSS, Stripe)
 https://booking.martinezautodetailwa.com/ (booking system with Next.js, Supabase, Square API)
 

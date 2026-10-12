@@ -95,7 +95,6 @@ Developed a web application to manage company employees and converted a PSD land
 | **Martinez Auto Detail** | [booking.martinezautodetailwa.com](https://booking.martinezautodetailwa.com) | Custom booking system with service selection, dynamic pricing, date/time picking, Square-powered card storage, and an owner dashboard. | Next.js, React, Tailwind, Square API |
 | **LeBonBureau** | [lebonbureau.alabaganne.com](https://lebonbureau.alabaganne.com) | Polished e-commerce storefront for an office-furniture brand — refined responsive design, product catalog, and admin dashboard. | Next.js, React, TypeScript, Supabase |
 | **Internly** | [internly.alabaganne.com](https://internly.alabaganne.com) | Internship platform (end-of-studies project) where students apply to internships and companies post opportunities — real-time notifications, tracking, dashboards. | Laravel, Vue.js, Inertia.js, MySQL, Pusher |
-| **Global Deals** | [global-deals.vercel.app](https://global-deals.vercel.app) | Interactive 3D globe with event markers, clustering, and Bezier line visualizations; admin panel + auth. | React 18, Mapbox GL JS, Supabase, Tiptap |
 | **ATS Resume Builder** | [ats-react-resume-builder.vercel.app](https://ats-react-resume-builder.vercel.app) | Resume builder with structured templates, real-time preview, and one-click PDF export. | Next.js, React, Tailwind, jsPDF |
 
 *More live demos available at [alabaganne.com](https://alabaganne.com).*
