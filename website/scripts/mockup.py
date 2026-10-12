@@ -1,6 +1,7 @@
 # Put a desktop screenshot in the MacBook frame, and optionally a phone screenshot in an iPhone.
 # usage: python3 scripts/mockup.py <desktop.png> <out.png> [--phone phone.png --bar "#hex"] [--frame frame.png]
 import argparse
+import subprocess
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
@@ -106,8 +107,13 @@ if args.phone:
     content = Image.new("RGB", (mob.width, 47 * u + mob.height), bar)
     content.paste(mob, (0, 47 * u))
     cd = ImageDraw.Draw(content)
-    font = ImageFont.truetype("/System/Library/Fonts/SFNS.ttf", 17 * u)
-    font.set_variation_by_name("Semibold")
+    # SF Pro on macOS; elsewhere any bold sans for the "9:41" clock
+    try:
+        font = ImageFont.truetype("/System/Library/Fonts/SFNS.ttf", 17 * u)
+        font.set_variation_by_name("Semibold")
+    except OSError:
+        path = subprocess.run(["fc-match", "-f", "%{file}", "sans-serif:semibold"], capture_output=True, text=True).stdout
+        font = ImageFont.truetype(path, 16 * u)
     cy = 24 * u
     cd.text((54 * u, cy), "9:41", font=font, fill=ink, anchor="mm")
     bx = (css_w - 97) * u

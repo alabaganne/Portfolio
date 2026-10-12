@@ -20,15 +20,30 @@ const tones = {
   subtle: "text-fg-subtle hover:text-fg",
 };
 
-export function ArrowLink({ href, direction = "up-right", tone = "default", className, children, ...props }) {
+const sizes = {
+  base: { text: "gap-1.5 text-base font-medium", icon: "size-4" },
+  title: { text: "gap-2 font-display text-title", icon: "size-6" },
+};
+
+export function ArrowLink({
+  href,
+  direction = "up-right",
+  tone = "default",
+  size = "base",
+  className,
+  children,
+  ...props
+}) {
   const { Icon, motion } = arrows[direction] ?? arrows["up-right"];
-  const icon = <Icon aria-hidden className={cn("size-4 shrink-0 transition-transform duration-300", motion)} />;
+  const { text, icon: iconSize } = sizes[size] ?? sizes.base;
+  const icon = <Icon aria-hidden className={cn("shrink-0 transition-transform duration-300", iconSize, motion)} />;
 
   return (
     <SmartLink
       href={href}
       className={cn(
-        "group/link inline-flex items-center gap-1.5 text-base font-medium transition-[color,opacity] duration-250",
+        "group/link inline-flex items-center transition-[color,opacity] duration-250",
+        text,
         tones[tone] ?? tones.default,
         className,
       )}
@@ -38,5 +53,18 @@ export function ArrowLink({ href, direction = "up-right", tone = "default", clas
       <span>{children}</span>
       {direction === "left" ? null : icon}
     </SmartLink>
+  );
+}
+
+// A wrapping row of ArrowLinks, e.g. a project's live site and code.
+export function ArrowLinkList({ links, className }) {
+  return (
+    <ul className={cn("flex flex-wrap gap-x-6 gap-y-2", className)}>
+      {links.map((link) => (
+        <li key={link.href}>
+          <ArrowLink href={link.href}>{link.label}</ArrowLink>
+        </li>
+      ))}
+    </ul>
   );
 }

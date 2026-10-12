@@ -6,7 +6,7 @@ import { footerLinks, site, socialLinks } from "@/lib/site";
 const contactLinks = [
   { href: `mailto:${site.email}`, label: "Email" },
   { href: site.phone.href, label: site.phone.label },
-  { href: site.resume, label: "Resume (PDF)" },
+  { href: site.resume, label: "CV (PDF)" },
 ];
 
 function FooterList({ label, links }) {
@@ -41,7 +41,7 @@ export function SiteFooter() {
             </a>
           </p>
           <p className="mx-auto mt-8 max-w-[34rem] text-balance text-body text-fg-muted">
-            Have a project or question? I’d be glad to hear from you.
+            Looking for a full-stack engineer for your team? Get in touch.
           </p>
         </div>
 

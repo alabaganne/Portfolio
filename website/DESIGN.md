@@ -45,12 +45,11 @@ Sizes are fluid between phone and desktop, and match the template at 1440px. Big
 
 ## Pages
 
-Like the template, the site is split into pages instead of one long page:
+Recruiters skim one page, so all portfolio content is on the home page and each section appears once:
 
-- **Home** (`/`): the hero, a short "• About" intro with "More about me", the Work rows and Skills.
-- **About** (`/about`): "Get to know Ala", then Biography, a card with the key numbers, Experience, Education and Certifications.
+- **Home** (`/`): a compact hero (name, role, one-line pitch, job search line, "View selected work", "Download CV", main stack), Experience (every job with its summary, details and tech), Selected work (four case study rows), More projects, Skills, About (a short bio, a card with the key numbers and "How I work"), Education and Certifications. At about 1165×747 the hero and its buttons fit on the first screen and Experience starts just below. `/about` redirects to `/#about`.
 - **Contact** (`/contact`): "Reach out and say hi", an intro, then Contact (email, phone, resume) and Connect (LinkedIn, GitHub, Upwork).
-- **Blog** (`/blog`, `/blog/[slug]`) and case studies like `/projects/internly`.
+- **Blog** (`/blog`, `/blog/[slug]`) and case studies at `/projects/menumate`, `/projects/kartatunisie`, `/projects/internly` and `/projects/promptstream` (`components/case-study.jsx`).
 
 Every page ends with the "Let's work together" card and the footer links.
 
@@ -70,17 +69,18 @@ Every page ends with the "Let's work together" card and the footer links.
 - **Navbar:** 76px, sticky, `canvas` at 85% with a light blur. Links (Home, About, Blog, Contact) are Clash Display 18px. Hovering a link grows a small white dot under it; the current page is yellow with a yellow dot. On phones a menu slides in from the left.
 - **Buttons** (`ui/button.jsx`): uppercase Clash Display with 1px letter spacing and 6px corners. `primary` is yellow with black text, `secondary` is `surface-2`. Sizes are 40, 48 and 56px tall. They fade a little on hover and shrink slightly when pressed.
 - **Tags** (`ui/tag.jsx`): `surface-2` boxes with 6px corners and Clash Display text, in two sizes.
-- **Project cards** (`home/project-card.jsx`): solid black, 600px wide on desktop like the template's work cards. The mockup (4:3), then the name and a short tagline in `text-heading-sm` (keep the tagline under about 28 characters). On hover the card lifts 4px and a yellow arrow circle appears at the bottom right of the image.
-- **Project rows** (`home/project-marquee.jsx`): two rows of cards. The first drifts left and the second drifts right. A row stops while it's hovered or focused, and can be dragged with the mouse, swiped or scrolled. After a swipe it waits 1.5s before moving again. Projects alternate between the rows, so keep the strongest ones near the top of the list.
+- **Featured work rows** (`home/projects-section.jsx`): the mockup on black next to the project's type and status, name, one-sentence summary, role, one key engineering decision, tech tags, a "Read case study" button and live links. They stack on phones. No horizontal scrolling.
+- **Project cards** (`home/project-card.jsx`): the "More projects" grid (2 columns on phones, 3 on tablets, 4 on desktop). Solid black, the mockup (4:3), then the name, a short tagline and the tech. The name link covers the whole card. On hover or focus the card lifts 4px and a yellow arrow circle appears.
+- **Case studies** (`components/case-study.jsx`): left-aligned title, summary, a facts row (role, type, timeline, status), tags and links, the mockup, then one split section per heading (Problem, Ownership, Constraints, Architecture, Tradeoff, Testing & reliability, Outcome, Evidence) and optional screenshots. Only add a section when its facts are verified.
 - **Contact card** (`site-footer.jsx`): "Let's work together" on a `surface` card, with the email in yellow uppercase below it. It's on every page, above the footer links.
 - **Blog cards** (`post-card.jsx`): the same card style as the projects, with the cover image, title, category and date.
 
 ## Motion
 
-- **Page load:** a `#181817` cover wipes up over 1s (`animate-cover`, ease out expo) while the page fades in over 0.8s (`animate-page-in`, ease in expo). The cover is in `SiteShell` and runs once. The fade is in `(site)/template.jsx`, so it runs again on every page change.
+- **Page load:** a `#181817` cover wipes up over 0.7s (`animate-cover`, ease out expo) while the page fades in over 0.45s (`animate-page-in`, ease out quart), so text is readable almost at once. The cover is in `SiteShell` and runs once. The fade is in `(site)/template.jsx`, so it runs again on every page change.
 - **Scroll reveal:** add `data-reveal` to fade an element up as it scrolls into view.
 - **Hover:** links fade to 80%, cards lift 4px (0.3s, ease out quart), and images zoom by 3%.
-- **Reduced motion:** the cover, the fade, the reveals and the drifting rows all turn off. The rows can still be scrolled by hand.
+- **Reduced motion:** the cover, the fade, the reveals, smooth scrolling and the card lift all turn off.
 
 ## Writing
 

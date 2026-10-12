@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "portfolio",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "website", "run", "start", "--", "-p", "3100"],
+      "port": 3100
+    },
+    {
+      "name": "portfolio-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "website", "run", "dev", "--", "-p", "3102"],
+      "port": 3102
+    },
+    {
+      "name": "baseline",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "/tmp/claude-1000/-home-alabaganne-Desktop-Portfolio/11493d4a-ae8b-464c-8159-4c44a10ccb13/scratchpad/baseline/website", "run", "start", "--", "-p", "3101"],
+      "port": 3101
+    }
+  ]
+}

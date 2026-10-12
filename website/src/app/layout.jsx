@@ -18,13 +18,15 @@ export const metadata = {
   metadataBase: new URL(siteUrl),
   title: "Ala Baganne | Full-Stack Software Engineer",
   description:
-    "Ala Baganne builds full-stack applications, AI features, custom Shopify themes, e-commerce stores, and landing pages for individuals and businesses.",
+    "Ala Baganne is a full-stack engineer building web products with React, Next.js, TypeScript and Node.js, with PostgreSQL, Supabase and applied AI. Open to full-time engineering roles, remote or on-site.",
   keywords: [
     "Ala Baganne",
     "full-stack software engineer",
     "AI engineer",
     "Next.js developer",
     "React",
+    "TypeScript",
+    "PostgreSQL",
     "FastAPI",
     "Supabase",
     "Node.js",
@@ -42,7 +44,7 @@ export const metadata = {
     url: siteUrl,
     title: "Ala Baganne | Full-Stack Software Engineer",
     description:
-      "Explore Ala Baganne's web applications, SaaS products, AI work, e-commerce stores, and landing pages. Custom Shopify theme development available.",
+      "Case studies, experience and CV of Ala Baganne, a full-stack engineer working with React, Next.js, TypeScript, Node.js, PostgreSQL and applied AI.",
     siteName: "Ala Baganne Portfolio",
     locale: "en_US",
     images: [
@@ -58,7 +60,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Ala Baganne | Full-Stack Software Engineer",
     description:
-      "Explore Ala Baganne's web applications, SaaS products, AI work, e-commerce stores, and landing pages. Custom Shopify theme development available.",
+      "Case studies, experience and CV of Ala Baganne, a full-stack engineer working with React, Next.js, TypeScript, Node.js, PostgreSQL and applied AI.",
     images: [
       {
         url: "/og-image.png",

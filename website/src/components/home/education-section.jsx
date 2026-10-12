@@ -11,7 +11,7 @@ const education = [
   {
     degree: "Bachelor's degree, Computer Science",
     school: "ISSAT Sousse",
-    period: "2018 – Jul 2021",
+    period: "Oct 2018 – Jul 2021",
     notes:
       "Ranked in the top 5 of 90 students, which earned direct entry to the engineering program. Final-year project: Internly, a full-stack internship platform.",
   },

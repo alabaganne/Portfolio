@@ -6,8 +6,8 @@
 }
 
 @theme {
-  --font-display: "Clash Display", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Clash Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Clash Display", "Clash Display Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Clash Grotesk", "Clash Grotesk Fallback", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 
   --color-canvas: #0a0a09;
@@ -64,8 +64,9 @@
   --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
   --ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1);
 
-  --animate-cover: cover-out 1s var(--ease-out-expo) both;
-  --animate-page-in: page-in 0.8s var(--ease-in-expo) both;
+  /* Short and eased out, so content is readable almost at once. Both are off with reduced motion. */
+  --animate-cover: cover-out 0.7s var(--ease-out-expo) both;
+  --animate-page-in: page-in 0.45s var(--ease-out-quart) both;
 
   @keyframes cover-out {
     to {
@@ -80,9 +81,35 @@
   }
 }
 
+/* Arial resized to the Clash fonts' metrics (measured in Chrome), shown until Fontshare's files load,
+   so the swap doesn't move the page. */
+@font-face {
+  font-family: "Clash Display Fallback";
+  src: local("Arial"), local("Liberation Sans"), local("Helvetica");
+  size-adjust: 104.05%;
+  ascent-override: 85.5%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Clash Grotesk Fallback";
+  src: local("Arial"), local("Liberation Sans"), local("Helvetica");
+  size-adjust: 91.87%;
+  ascent-override: 96.9%;
+  descent-override: 27.2%;
+  line-gap-override: 0%;
+}
+
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {

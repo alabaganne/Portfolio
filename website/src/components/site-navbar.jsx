@@ -3,10 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Download } from "lucide-react";
 
+import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/ui/logo";
-import { navLinks } from "@/lib/site";
+import { navLinks, site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export function SiteNavbar() {
@@ -32,7 +34,9 @@ export function SiteNavbar() {
     };
   }, [menuOpen]);
 
-  const isActive = (href) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+  // Anchor links (Work, Experience) point into the home page, so they're only current through `match`.
+  const isActive = ({ href, match }) =>
+    match ? pathname.startsWith(match) : !href.includes("#") && pathname.startsWith(href);
   const closeMenu = () => setMenuOpen(false);
 
   return (
@@ -41,17 +45,17 @@ export function SiteNavbar() {
         <Container className="flex h-full items-center justify-between motion-safe:animate-page-in">
           <Logo onClick={closeMenu} className="transition-opacity duration-250 hover:opacity-80" />
 
-          <nav aria-label="Primary" className="hidden md:block">
-            <ul className="-mr-5 flex items-center">
+          <nav aria-label="Primary" className="ml-auto hidden md:block">
+            <ul className="flex items-center">
               {navLinks.map((link) => {
-                const active = isActive(link.href);
+                const active = isActive(link);
                 return (
                   <li key={link.href}>
                     <Link
                       href={link.href}
                       aria-current={active ? "page" : undefined}
                       className={cn(
-                        "group/nav relative flex px-5 py-1.5 font-display text-lg/[1.5] font-medium transition-[color,opacity] duration-250",
+                        "group/nav relative flex px-3 py-1.5 font-display text-lg/[1.5] font-medium transition-[color,opacity] duration-250 lg:px-5",
                         active ? "text-accent" : "text-fg hover:opacity-70",
                       )}
                     >
@@ -70,9 +74,16 @@ export function SiteNavbar() {
             </ul>
           </nav>
 
+          <Button href={site.resume} download variant="secondary" size="sm" className="ml-auto md:ml-6">
+            <Download aria-hidden />
+            <span>
+              <span className="max-lg:sr-only">Download </span>CV
+            </span>
+          </Button>
+
           <button
             type="button"
-            className="-mr-3 grid size-16 place-items-center md:hidden"
+            className="-mr-3 ml-1 grid size-16 place-items-center md:hidden"
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             onClick={() => setMenuOpen((open) => !open)}
@@ -124,7 +135,7 @@ export function SiteNavbar() {
           <Logo onClick={closeMenu} className="mb-12 flex h-[30px] items-center" />
           <ul>
             {navLinks.map((link) => {
-              const active = isActive(link.href);
+              const active = isActive(link);
               return (
                 <li key={link.href}>
                   <Link

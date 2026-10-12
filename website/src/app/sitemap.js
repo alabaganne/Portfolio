@@ -1,3 +1,4 @@
+import { featuredProjects } from "@/content/projects";
 import { getAllPostsMetadata } from "@/lib/blog";
 
 const siteUrl = "https://alabaganne.com";
@@ -21,12 +22,6 @@ export default async function sitemap() {
       priority: 1,
     },
     {
-      url: `${siteUrl}/about`,
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
       url: `${siteUrl}/contact`,
       lastModified,
       changeFrequency: "yearly",
@@ -38,12 +33,12 @@ export default async function sitemap() {
       changeFrequency: "weekly",
       priority: 0.8,
     },
-    {
-      url: `${siteUrl}/projects/internly`,
+    ...featuredProjects.map(({ slug }) => ({
+      url: `${siteUrl}/projects/${slug}`,
       lastModified,
       changeFrequency: "monthly",
-      priority: 0.6,
-    },
+      priority: 0.7,
+    })),
     ...blogEntries,
   ];
 }

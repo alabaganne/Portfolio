@@ -11,6 +11,7 @@ export function SmartLink({ href, children, ...props }) {
     return (
       <a href={href} target="_blank" rel="noreferrer" {...props}>
         {children}
+        <span className="sr-only"> (opens in a new tab)</span>
       </a>
     );
   }

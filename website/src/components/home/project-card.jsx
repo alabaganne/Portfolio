@@ -2,49 +2,42 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
 import { SmartLink } from "@/components/ui/smart-link";
-import { Tag } from "@/components/ui/tag";
+import { imageVersion } from "@/content/projects";
 
-// Irene-style work card: the mockup on black, then the project name, tagline and tech.
-export function ProjectCard({ project, hidden = false }) {
+// Compact Irene-style work card for the "More projects" grid: the mockup on black, then the name and tagline.
+// The name link stretches over the whole card, so the card is one tab stop with the project's name.
+export function ProjectCard({ project }) {
   return (
-    <SmartLink
-      href={project.href}
-      tabIndex={hidden ? -1 : undefined}
-      draggable={false}
-      className="group flex w-[80vw] max-w-[26rem] shrink-0 flex-col overflow-hidden rounded-xl bg-black transition-transform duration-300 ease-out-quart hover:-translate-y-1 active:scale-[0.99] md:w-[30rem] md:max-w-none lg:w-[37.5rem]"
-    >
+    <li className="group relative flex flex-col overflow-hidden rounded-xl bg-black transition-transform duration-300 ease-out-quart focus-within:-translate-y-1 hover:-translate-y-1 motion-reduce:transform-none">
       <span className="relative block aspect-[4/3]">
         <Image
-          src={`${project.image}?v=20260927-4`}
-          alt={`${project.name} demo`}
+          src={`${project.image}?v=${imageVersion}`}
+          alt=""
           fill
-          draggable={false}
-          sizes="(min-width: 1024px) 600px, (min-width: 768px) 480px, 80vw"
+          sizes="(min-width: 1400px) 300px, (min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
           className="object-cover"
         />
         <span
           aria-hidden
-          className="absolute bottom-4 right-4 grid size-12 scale-50 place-items-center rounded-full bg-accent text-canvas opacity-0 transition duration-300 ease-out-quart group-hover:scale-100 group-hover:opacity-100 group-focus-visible:scale-100 group-focus-visible:opacity-100"
+          className="absolute bottom-3 right-3 grid size-10 scale-50 place-items-center rounded-full bg-accent text-canvas opacity-0 transition duration-300 ease-out-quart group-focus-within:scale-100 group-focus-within:opacity-100 group-hover:scale-100 group-hover:opacity-100"
         >
-          <ArrowUpRight className="size-5" />
+          <ArrowUpRight className="size-4" />
         </span>
       </span>
-      <span className="block flex-1 p-5 sm:p-6">
-        <span className="block font-display text-heading-sm text-fg">{project.name}</span>
-        <span className="block font-display text-heading-sm text-fg-subtle">{project.tag}</span>
+      <div className="flex-1 p-4 sm:p-5">
+        <h3 className="font-display text-heading-xs text-fg">
+          <SmartLink href={project.href} className="after:absolute after:inset-0 after:rounded-xl">
+            {project.name}
+          </SmartLink>
+        </h3>
+        <span className="mt-1 block text-sm text-fg-subtle sm:text-base">{project.tag}</span>
         {project.previewPassword ? (
           <span className="mt-2 block text-sm text-fg-faint">
             Password <span className="font-medium text-fg-muted">{project.previewPassword}</span>
           </span>
         ) : null}
-        {project.tech ? (
-          <span className="mt-4 flex flex-wrap gap-2">
-            {project.tech.map((item) => (
-              <Tag key={item}>{item}</Tag>
-            ))}
-          </span>
-        ) : null}
-      </span>
-    </SmartLink>
+        <span className="mt-3 hidden text-sm text-fg-faint sm:block">{project.tech.join(", ")}</span>
+      </div>
+    </li>
   );
 }

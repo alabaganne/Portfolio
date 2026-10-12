@@ -6,7 +6,7 @@ import { site, socialLinks } from "@/lib/site";
 export const metadata = {
   title: "Contact | Ala Baganne — Full-Stack Software Engineer",
   description:
-    "Get in touch with Ala Baganne about full-time roles, contracts or freelance projects by email, phone, LinkedIn, GitHub or Upwork.",
+    "Get in touch with Ala Baganne about full-time engineering roles, contracts or freelance projects by email, phone, LinkedIn, GitHub or Upwork.",
   alternates: {
     canonical: "/contact",
   },
@@ -21,7 +21,7 @@ export const metadata = {
 const contactLinks = [
   { href: `mailto:${site.email}`, label: site.email },
   { href: site.phone.href, label: site.phone.label },
-  { href: site.resume, label: "Resume (PDF)" },
+  { href: site.resume, label: "CV (PDF)" },
 ];
 
 function LinkList({ links }) {
@@ -50,8 +50,8 @@ export default function ContactPage() {
         }
         description={
           <>
-            I’m always happy to talk about ideas, projects and collaborations. Tell me what you’re working on, or just
-            say hi.
+            I’m open to full-time engineering roles, remote or on-site. Email me about a role, a contract or a project, or find me
+            on LinkedIn.
           </>
         }
       />

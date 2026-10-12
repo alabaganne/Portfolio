@@ -1,132 +1,104 @@
-import { ProjectMarquee } from "@/components/home/project-marquee";
+import Image from "next/image";
+
+import { ProjectCard } from "@/components/home/project-card";
+import { ArrowLink } from "@/components/ui/arrow-link";
+import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { SectionLabel } from "@/components/ui/section";
+import { Section, SplitRow } from "@/components/ui/section";
+import { TagList } from "@/components/ui/tag";
+import { featuredProjects, imageVersion, moreProjects } from "@/content/projects";
 
-// Projects alternate between the two rows, so keep the strongest ones near the top.
-const projects = [
-  {
-    name: "MenuMate",
-    tag: "Digital menus for restaurants",
-    href: "https://menumate.net",
-    image: "/projects/menumate-demo.png",
-    tech: ["Next.js", "React", "Tailwind", "Supabase", "PostgreSQL"],
-  },
-  {
-    name: "Karta",
-    tag: "Gift card store",
-    href: "https://karta.alabaganne.com",
-    image: "/projects/karta-demo.png",
-    tech: ["Next.js", "TypeScript", "Tailwind", "MySQL", "Drizzle"],
-  },
-  {
-    name: "PromptStream",
-    tag: "AI dictation for Mac & Linux",
-    href: "https://promptstream.alabaganne.com",
-    image: "/projects/promptstream-demo.png",
-    tech: ["Electron", "React", "TypeScript", "Next.js", "Supabase"],
-  },
-  {
-    name: "BackupMaster",
-    tag: "iPhone backups on macOS",
-    href: "https://backupmaster.alabaganne.com",
-    image: "/projects/backupmaster-demo.png",
-    tech: ["Swift", "SwiftUI", "libimobiledevice", "Next.js", "SQLite"],
-  },
-  {
-    name: "EXODIA Store",
-    tag: "Custom Shopify theme",
-    href: "https://exodia-preview.myshopify.com/",
-    previewPassword: "paglow",
-    image: "/projects/exodia-demo.png",
-    tech: ["Shopify", "Liquid", "JavaScript", "CSS"],
-  },
-  {
-    name: "Internly",
-    tag: "Internship platform",
-    href: "/projects/internly",
-    image: "/projects/internly-demo.png",
-    tech: ["Laravel", "Vue.js", "Inertia.js", "MySQL", "Pusher"],
-  },
-  {
-    name: "ABSoft",
-    tag: "Agency website",
-    href: "https://absoft.alabaganne.com",
-    image: "/projects/absoft-demo.png",
-    tech: ["Next.js", "React", "TypeScript", "CSS Modules", "Resend"],
-  },
-  {
-    name: "Taroura Arena",
-    tag: "Gym & karate club website",
-    href: "https://taroura-arena.alabaganne.com/",
-    image: "/projects/taroura-arena-demo.png",
-    tech: ["HTML", "CSS", "JavaScript"],
-  },
-  {
-    name: "Martinez Auto Detail",
-    tag: "Booking system",
-    href: "https://booking.martinezautodetailwa.com/",
-    image: "/projects/martinez-demo.png",
-    tech: ["Next.js", "React", "Tailwind", "Square API"],
-  },
-  {
-    name: "Satoripop RH",
-    tag: "HR platform",
-    href: "http://hr-management.alabaganne.com",
-    image: "/projects/satoripop-rh-demo.png",
-    tech: ["Vue.js", "Laravel", "MySQL", "Bootstrap", "Swagger"],
-  },
-  {
-    name: "LeBonBureau",
-    tag: "Office furniture store",
-    href: "https://lebonbureau.alabaganne.com",
-    image: "/projects/lebonbureau-demo.png",
-    tech: ["Next.js", "Medusa", "TypeScript", "Tailwind"],
-  },
-  {
-    name: "Socialura",
-    tag: "WordPress Store with Stripe checkout",
-    href: "http://socialura.alabaganne.com",
-    image: "/projects/socialura-demo.png",
-    tech: ["WordPress", "CSS", "Stripe", "Custom UI"],
-  },
-  {
-    name: "Meet",
-    tag: "Video meeting app",
-    href: "http://jitsi.alabaganne.com",
-    image: "/projects/meet-demo.png",
-    tech: ["React", "TypeScript", "Node.js", "Express.js", "MySQL", "Jitsi SDK"],
-  },
-  {
-    name: "Resume Studio",
-    tag: "Résumés with PDF & Word export",
-    href: "https://react-resume-studio.vercel.app",
-    image: "/projects/resume-studio-demo.png",
-    tech: ["Next.js", "TypeScript", "Tailwind", "jsPDF", "docx"],
-  },
-  {
-    name: "Eyedeal",
-    tag: "Store landing page",
-    href: "http://ecommerce.alabaganne.com",
-    image: "/projects/eyedeal-demo.png",
-    tech: ["HTML", "CSS", "JavaScript", "Bootstrap"],
-  },
-];
+function Fact({ label, children }) {
+  return (
+    <div>
+      <dt className="text-base text-fg-subtle">{label}</dt>
+      <dd className="mt-1 text-body text-fg-muted">{children}</dd>
+    </div>
+  );
+}
 
-const rows = [0, 1].map((row) => projects.filter((_, index) => index % 2 === row));
+function FeaturedProject({ project, index }) {
+  return (
+    <li data-reveal>
+      <article
+        aria-labelledby={`project-${project.slug}`}
+        className="grid items-center gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-14"
+      >
+        <div className="overflow-hidden rounded-xl bg-black">
+          <Image
+            src={`${project.image.src}?v=${imageVersion}`}
+            alt={project.image.alt}
+            width={1448}
+            height={1086}
+            sizes="(min-width: 1400px) 650px, (min-width: 1024px) 50vw, 100vw"
+            className="h-auto w-full"
+          />
+        </div>
+        <div>
+          <p className="text-base text-fg-subtle">
+            <span className="font-display font-medium text-accent">{String(index + 1).padStart(2, "0")}</span>
+            <span className="mx-2 text-fg-faint">/</span>
+            {project.type} <span className="text-fg-faint">·</span> {project.period}{" "}
+            <span className="text-fg-faint">·</span> {project.status}
+          </p>
+          <h3 id={`project-${project.slug}`} className="mt-3 text-label text-fg">
+            {project.name}
+          </h3>
+          <p className="mt-4 text-body text-fg-muted">{project.summary}</p>
+          <dl className="mt-6 grid gap-5">
+            <Fact label="My role">{project.role}</Fact>
+            <Fact label="Key decision">{project.decision}</Fact>
+          </dl>
+          <TagList items={project.tech} className="mt-6" />
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+            <Button href={`/projects/${project.slug}`}>
+              Read case study<span className="sr-only">: {project.name}</span>
+            </Button>
+            {project.links.map((link) => (
+              <ArrowLink key={link.href} href={link.href}>
+                {link.label}
+              </ArrowLink>
+            ))}
+          </div>
+        </div>
+      </article>
+    </li>
+  );
+}
 
 export function ProjectsSection() {
   return (
-    <section id="projects" className="rounded-3xl bg-surface">
-      <Container>
-        <div data-reveal className="grid items-baseline gap-3 pt-16 md:grid-cols-2 md:gap-10 md:pt-24 lg:pt-36">
-          <SectionLabel>Selected work</SectionLabel>
-          <p className="font-display text-heading-xs text-fg-faint md:justify-self-end">2020—2026</p>
-        </div>
-      </Container>
-      <div data-reveal className="mt-10 grid gap-2 pb-16 md:mt-12 md:gap-6 md:pb-24 lg:pb-36">
-        <ProjectMarquee projects={rows[0]} />
-        <ProjectMarquee projects={rows[1]} reverse />
-      </div>
-    </section>
+    <>
+      <section id="work" aria-labelledby="work-title" className="rounded-3xl bg-surface">
+        {/* Older links point to /#projects. */}
+        <span id="projects" aria-hidden />
+        <Container>
+          <SplitRow label="Selected work" labelId="work-title" className="pt-16 md:pt-24 lg:pt-32">
+            <p data-reveal className="text-body text-fg-muted">
+              Four products I built end to end. Each case study covers the problem, my role, the architecture and one
+              real tradeoff.
+            </p>
+          </SplitRow>
+          <ol className="mt-12 grid gap-20 pb-16 md:mt-16 md:pb-24 lg:gap-28 lg:pb-32">
+            {featuredProjects.map((project, index) => (
+              <FeaturedProject key={project.slug} project={project} index={index} />
+            ))}
+          </ol>
+        </Container>
+      </section>
+
+      <Section aria-labelledby="more-projects-title" divider={false} padding="pt-16 pb-4 md:pt-24 lg:pt-32">
+        <SplitRow label="More projects" labelId="more-projects-title">
+          <p data-reveal className="text-body text-fg-muted">
+            Client work, internship projects and smaller products, each with a live site or demo.
+          </p>
+        </SplitRow>
+        <ul data-reveal className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4 lg:gap-6">
+          {moreProjects.map((project) => (
+            <ProjectCard key={project.name} project={project} />
+          ))}
+        </ul>
+      </Section>
+    </>
   );
 }

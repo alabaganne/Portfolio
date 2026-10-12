@@ -28,8 +28,9 @@ npm start
 
 ## Content
 
-- `src/components/home/`: home page sections (hero, work, skills).
-- `src/components/about/`: About page sections (biography, experience, education).
+- `src/components/home/`: home page sections (hero, experience, work, skills, about, education).
+- `src/content/projects.js` and `src/content/experience.js`: project, case study and work history content.
+- `src/components/case-study.jsx`: the case study page layout used under `src/app/(site)/projects/`.
 - `src/app/(site)/contact/page.jsx`: the Contact page.
 - `src/components/site-footer.jsx`: the contact section at the bottom of every page.
 - `src/lib/site.js`: contact details, social links and navigation.

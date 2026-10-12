@@ -25,14 +25,21 @@ export function SectionLabel({ as: Heading = "h2", className, children }) {
   );
 }
 
-// Label on the left half, content on the right: the layout most sections share.
-export function SplitSection({ id, label, divider, className, children }) {
+// Label on the left half, content on the right, aligned on the text baseline. Stacks on phones.
+export function SplitRow({ label, labelId, className, children }) {
   return (
-    <Section id={id} divider={divider} className={className}>
-      <div className="grid items-baseline gap-8 md:grid-cols-2 md:gap-10">
-        <SectionLabel>{label}</SectionLabel>
-        <div>{children}</div>
-      </div>
+    <div className={cn("grid items-baseline gap-8 md:grid-cols-2 md:gap-10", className)}>
+      <SectionLabel>{labelId ? <span id={labelId}>{label}</span> : label}</SectionLabel>
+      <div>{children}</div>
+    </div>
+  );
+}
+
+// A SplitRow in its own section: the layout most sections share.
+export function SplitSection({ id, label, divider, padding, className, children }) {
+  return (
+    <Section id={id} divider={divider} padding={padding} className={className}>
+      <SplitRow label={label}>{children}</SplitRow>
     </Section>
   );
 }
